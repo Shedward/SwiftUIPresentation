@@ -9,7 +9,7 @@ import SwiftUI
 
 struct S01_Introduction: View, Slide {
     var body: some View {
-        ListLayout(title: "Для кого. Для чего.") {
+        ListLayout(title: "0.1 Для кого", subtitle: "Для чего") {
             "Узнаете матчасть SwiftUI"
             "Сможете пройти наш собес"
             "Для тех кому в падлу читать книжку"

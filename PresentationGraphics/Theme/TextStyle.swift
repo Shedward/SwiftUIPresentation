@@ -23,6 +23,7 @@ extension TextStyle: Whithable {
 }
 
 extension TextStyle {
+    static let cover = TextStyle(font: Theme.Font.h0, color: Theme.Color.contentPrimary)
     static let body = TextStyle(font: Theme.Font.body, color: Theme.Color.contentPrimary)
     static let code = TextStyle(font: Theme.Font.code, color: Theme.Color.contentPrimary)
     static let title = TextStyle(font: Theme.Font.h1, color: Theme.Color.contentPrimary)

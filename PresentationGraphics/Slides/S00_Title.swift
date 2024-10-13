@@ -10,7 +10,7 @@ import SwiftUI
 struct S00_Title: View, Slide {
     var body: some View {
         Text("Thinking in SwiftUI")
-            .style(.title)
+            .style(.cover)
     }
 }
 

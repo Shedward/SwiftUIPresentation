@@ -9,6 +9,7 @@ import SwiftUI
 
 enum Theme {
     enum Font {
+        static let h0 = SwiftUI.Font.custom("Helvetica Neue Bold", size: 120)
         static let h1 = SwiftUI.Font.custom("Helvetica Neue Bold", size: 80)
         static let h2 = SwiftUI.Font.custom("Helvetica Neue Bold", size: 40)
         static let body = SwiftUI.Font.custom("Helvetica Neue", size: 24)

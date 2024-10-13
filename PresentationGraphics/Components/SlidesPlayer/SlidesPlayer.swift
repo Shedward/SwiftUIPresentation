@@ -24,21 +24,18 @@ struct SlidesPlayer: View {
                 ErrorView("Slide not found at \(slideshow.currentIndex)")
             }
         }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .focusable(interactions: .edit)
-            .focusEffectDisabled()
-            .onKeysPress(.downArrow, .space) {
-                withAnimation {
-                    slideshow.next()
-                }
-            }
-            .onKeysPress(.upArrow) {
-                withAnimation {
-                    slideshow.previous()
-                }
-            }
-            .onKeysPress(.clear) {
-                slideshow.goToBegining()
-            }
+        .animation(.smooth, value: slideshow.currentIndex)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .focusable(interactions: .edit)
+        .focusEffectDisabled()
+        .onKeysPress(.downArrow, .space) {
+            slideshow.next()
+        }
+        .onKeysPress(.upArrow) {
+            slideshow.previous()
+        }
+        .onKeysPress(.clear) {
+            slideshow.goToBegining()
+        }
     }
 }

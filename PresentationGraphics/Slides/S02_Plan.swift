@@ -9,7 +9,7 @@ import SwiftUI
 
 struct S02_Plan: View, Slide {
     var body: some View {
-        ListLayout(title: "План", style: .enumerated) {
+        ListLayout(title: "0.2 План", subtitle: "О чем расскажу", style: .enumerated) {
             "Структура"
             "Состояния"
             "Анимации"
