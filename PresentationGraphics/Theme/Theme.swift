@@ -11,9 +11,9 @@ enum Theme {
     enum Font {
         static let h1 = SwiftUI.Font.custom("Helvetica Neue Bold", size: 80)
         static let h2 = SwiftUI.Font.custom("Helvetica Neue Bold", size: 40)
-        static let body = SwiftUI.Font.custom("Helvetica Neue", size: 18)
-        static let code = SwiftUI.Font.custom("JetBrains Mono", size: 18)
-        static let caption = SwiftUI.Font.custom("Helvetica Nueue", size: 16)
+        static let body = SwiftUI.Font.custom("Helvetica Neue", size: 24)
+        static let code = SwiftUI.Font.custom("JetBrains Mono", size: 24)
+        static let caption = SwiftUI.Font.custom("Helvetica Nueue", size: 18)
     }
 
     enum Color {
@@ -24,6 +24,7 @@ enum Theme {
         static let contentTertiary = SwiftUI.Color(hex: 0xd2d2d7)
         static let tintPrimary = SwiftUI.Color(hex: 0x0066cc)
         static let tintSecondary = SwiftUI.Color(hex: 0xff610d)
+        static let debug = SwiftUI.Color.purple
     }
 }
 

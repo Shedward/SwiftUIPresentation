@@ -9,10 +9,18 @@ import SwiftUI
 
 @main
 struct PresentationGraphicsApp: App {
+
+    let slideshow = Slideshow {
+        S00_Title()
+        S01_Introduction()
+        S02_Plan()
+        MockSlide(id: "S01_Another")
+        MockSlide(id: "S01_AndAnother")
+    }
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .background(.white)
+            PlayerWindow(slideshow: slideshow)
         }
         .windowStyle(.hiddenTitleBar)
     }

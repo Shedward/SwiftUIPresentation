@@ -7,17 +7,16 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct PlayerWindow: View {
+
+    let slideshow: Slideshow
 
     var body: some View {
-        SlidesPlayer(currentSlide: "S00_Title") {
-
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Theme.Color.backgroundPrimary)
+        SlidesPlayer(slideshow: slideshow)
+            .background(Theme.Color.backgroundPrimary)
     }
 }
 
 #Preview {
-    ContentView()
+    PlayerWindow(slideshow: .mock)
 }

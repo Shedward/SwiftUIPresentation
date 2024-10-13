@@ -8,29 +8,37 @@
 import SwiftUI
 
 struct SlidesPlayer: View {
-    let currentSlide: String
+    let slideshow: Slideshow
 
-    let slides: [Slide]
-
-    init(currentSlide: String, @ArrayBuilder<Slide> slides: () -> [Slide]) {
-        self.currentSlide = currentSlide
-        self.slides = slides()
+    init(slideshow: Slideshow) {
+        self.slideshow = slideshow
     }
 
     var body: some View {
-        if let currentSlide = slides.first(where: { $0.id == currentSlide }) {
-            currentSlide.content
-        } else {
-            SlideNotFound(currentSlide: currentSlide)
+        Group {
+            if let currentSlide = slideshow.currentSlide {
+                currentSlide.content
+                    .id(currentSlide.id)
+                    .transition(.opacity)
+            } else {
+                ErrorView("Slide not found at \(slideshow.currentIndex)")
+            }
         }
-    }
-}
-
-struct SlideNotFound: View {
-    let currentSlide: String
-
-    var body: some View {
-        Text("Slide not found with id: \(currentSlide).")
-            .style(.caption)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .focusable(interactions: .edit)
+            .focusEffectDisabled()
+            .onKeysPress(.downArrow, .space) {
+                withAnimation {
+                    slideshow.next()
+                }
+            }
+            .onKeysPress(.upArrow) {
+                withAnimation {
+                    slideshow.previous()
+                }
+            }
+            .onKeysPress(.clear) {
+                slideshow.goToBegining()
+            }
     }
 }

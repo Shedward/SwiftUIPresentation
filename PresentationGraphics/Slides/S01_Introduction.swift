@@ -1,5 +1,5 @@
 //
-//  S00_Title.swift
+//  S01_Introduction.swift
 //  PresentationGraphics
 //
 //  Created by Vlad Maltsev on 13.10.2024.
@@ -7,13 +7,16 @@
 
 import SwiftUI
 
-struct S00_Title: View, Slide {
+struct S01_Introduction: View, Slide {
     var body: some View {
-        Text("Thinking in SwiftUI")
-            .style(.title)
+        ListLayout(title: "Для кого. Для чего.") {
+            "Узнаете матчасть SwiftUI"
+            "Сможете пройти наш собес"
+            "Для тех кому в падлу читать книжку"
+        }
     }
 }
 
 #Preview {
-    S00_Title()
+    S01_Introduction()
 }
