@@ -11,8 +11,7 @@ struct ContentView: View {
 
     var body: some View {
         SlidesPlayer(currentSlide: "S00_Title") {
-            S00_Title()
-            S99_TestSlide()
+
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Theme.Color.backgroundPrimary)

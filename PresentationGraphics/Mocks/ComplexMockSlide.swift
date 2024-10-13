@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct S99_TestSlide: View, Slide {
+struct MockSlide: View, Slide {
     var body: some View {
         TitleSubtitleLayout(
             title: "Определение RenderTree",
@@ -63,5 +63,5 @@ struct S99_TestSlide: View, Slide {
 }
 
 #Preview {
-    S99_TestSlide()
+    MockSlide()
 }
