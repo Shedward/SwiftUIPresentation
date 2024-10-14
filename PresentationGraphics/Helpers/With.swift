@@ -6,8 +6,6 @@
 //
 
 protocol Whithable {
-    @inlinable
-    func with(_ body: (inout Self) throws -> Void) rethrows -> Self
 }
 
 extension Whithable {
@@ -15,6 +13,13 @@ extension Whithable {
     func with(_ body: (inout Self) throws -> Void) rethrows -> Self {
         var changed = self
         try body(&changed)
+        return changed
+    }
+
+    @inlinable
+    func with<T>(_ keypath: WritableKeyPath<Self, T>, to newValue: T) -> Self {
+        var changed = self
+        changed[keyPath: keypath] = newValue
         return changed
     }
 }

@@ -16,6 +16,8 @@ struct PresentationGraphicsApp: App {
         S02_Plan()
 
         S10_Structure()
+        S11_ViewTrees()
+
         MockSlide(id: "S01_Another")
         MockSlide(id: "S01_AndAnother")
         ComplexMockSlide()
