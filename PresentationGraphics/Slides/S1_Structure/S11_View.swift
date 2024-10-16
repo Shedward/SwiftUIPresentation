@@ -13,7 +13,7 @@ struct S11_View: View, Slide {
     var episode: String
 
     var episodes: [Episode] {
-        "e01_ShowViewTree"
+        "e01-показываем-view-tree"
     }
 
     var body: some View {
@@ -39,7 +39,7 @@ struct S11_View: View, Slide {
                             Tree("Text")
                         }
                     }
-                }.showIf(episode, after: "e01_ShowViewTree")
+                }.showIf(episode, after: "e01-показываем-view-tree")
 
                 Panel.preview {
                     HStack {

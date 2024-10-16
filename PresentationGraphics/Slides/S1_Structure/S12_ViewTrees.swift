@@ -14,8 +14,8 @@ struct S12_ViewTrees: View, Slide {
     var episode: String
 
     var episodes: [Episode] {
-        "e01"
-        "e02"
+        "e01-двигаем-модификатор-выше"
+        "e02-еще-выше"
     }
 
     var body: some View {
@@ -24,9 +24,9 @@ struct S12_ViewTrees: View, Slide {
             subtitle: "Модификаторы заворачивают контент"
         ) {
             switch episode {
-            case "e01":
+            case "e01-двигаем-модификатор-выше":
                 e01
-            case "e02":
+            case "e02-еще-выше":
                 e02
             default:
                 e00
