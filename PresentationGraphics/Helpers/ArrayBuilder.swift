@@ -63,3 +63,9 @@ public enum ArrayBuilder<Element> {
     }
 }
 
+extension Array {
+    init(@ArrayBuilder<Element> _ builder: () -> [Element]) {
+        self.init(builder())
+    }
+}
+

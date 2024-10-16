@@ -7,18 +7,22 @@
 
 import Observation
 
-@Observable
 final class Code: ExpressibleByStringLiteral {
-    let lines: [Line]
+    var lines: [Line]
 
     init(lines: [Line]) {
         self.lines = lines
     }
 
+    init(@LinesBuilder lines: () -> [Line]) {
+        self.lines = lines()
+    }
+
     init(_ text: String) {
-        lines = text.split(separator: "\n").enumerated().map { index, line in
-            Line(index: index + 1, text: String(line))
+        let initialLines = text.split(separator: "\n").enumerated().map { index, line in
+            Line(index: index + 1, part: CodePart(String(line)))
         }
+        lines = initialLines
     }
 
     convenience init(stringLiteral value: String) {
@@ -28,7 +32,14 @@ final class Code: ExpressibleByStringLiteral {
 
 extension Code {
     struct Line {
+        let id: String
         let index: Int
-        let text: String
+        let part: CodePart
+
+        init(index: Int, part: CodePart) {
+            self.id = part.id ?? "\(index)"
+            self.index = index
+            self.part = part
+        }
     }
 }

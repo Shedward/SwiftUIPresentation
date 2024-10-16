@@ -18,6 +18,9 @@ struct ClickerWindow: View {
         VStack {
             Text(slideshow.currentSlide?.id ?? "-")
                 .style(.debug)
+            Text(slideshow.nextStep?.id ?? "-")
+                .style(.debug)
+                .opacity(0.8)
             HStack {
                 Button {
                     slideshow.previous()

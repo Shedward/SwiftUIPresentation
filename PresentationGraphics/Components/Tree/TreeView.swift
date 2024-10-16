@@ -87,6 +87,7 @@ struct TreeView: View {
                         childPosition.relation.color,
                         style: StrokeStyle(lineWidth: childPosition.relation.lineWidth)
                     )
+                    .transition(.opacity)
                 }
             }
         }

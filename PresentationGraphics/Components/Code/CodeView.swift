@@ -22,9 +22,10 @@ struct CodeView: View {
             ForEach(code.lines, id: \.index) { line in
                 HStack(spacing: space.innerValue(2)) {
                     Text("\(line.index)")
-                        .style(.code.color(Theme.Color.contentTertiary))
-                    Text(line.text)
+                        .style(.code.color(line.part.highlight ?? Theme.Color.contentTertiary))
+                    Text(line.part.text)
                         .style(.code)
+                        .background(line.part.highlight ?? .clear)
                 }
             }
         }
@@ -32,20 +33,20 @@ struct CodeView: View {
 }
 
 extension CodeView {
-    
+    init(@LinesBuilder _ lines: () -> [Code.Line]) {
+        self.init(Code(lines: lines))
+    }
 }
 
 #Preview {
-    CodeView(
-        Code("""
-            VStack {
-                Text(text)
-                    .multilineTextAlignment(.leading)
-                    .monospaced()
-                    .padding()
-            }
-            """)
-    )
+    CodeView {
+        "VStack {"
+        "   Text(\"Hello World\")"
+        "       .multilineTextAlignment(.leading)"
+        "       .monospaced()"
+        "       .padding()"
+        "}"
+    }
     .space(.s2)
     .padding()
 }
