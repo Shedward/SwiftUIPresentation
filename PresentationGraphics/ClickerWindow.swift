@@ -18,7 +18,7 @@ struct ClickerWindow: View {
         VStack {
             Text(slideshow.currentSlide?.id ?? "-")
                 .style(.debug)
-            Text(slideshow.nextStep?.id ?? "-")
+            Text(slideshow.nextEpisode?.id ?? "-")
                 .style(.debug)
                 .opacity(0.8)
             HStack {

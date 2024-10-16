@@ -1,5 +1,5 @@
 //
-//  Step.swift
+//  Episode.swift
 //  PresentationGraphics
 //
 //  Created by Vlad Maltsev on 15.10.2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Step: ExpressibleByStringLiteral {
+struct Episode: ExpressibleByStringLiteral {
     let id: String
     let action: @MainActor () -> Void
 
@@ -21,19 +21,19 @@ struct Step: ExpressibleByStringLiteral {
     }
 }
 
-struct StepKey: EnvironmentKey {
+struct EpisodeKey: EnvironmentKey {
     static let defaultValue: String = ""
 }
 
 extension EnvironmentValues {
-    public var step: String {
-        get { self[StepKey.self] }
-        set { self[StepKey.self] = newValue }
+    public var episode: String {
+        get { self[EpisodeKey.self] }
+        set { self[EpisodeKey.self] = newValue }
     }
 }
 
 extension View {
-    public func step(_ id: String) -> some View {
-        environment(\.step, id)
+    public func episode(_ id: String) -> some View {
+        environment(\.episode, id)
     }
 }

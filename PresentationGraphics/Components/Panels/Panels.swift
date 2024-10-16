@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Panel: Identifiable {
+struct Panel: Identifiable, ShowIfable {
     var id: String { title }
 
     let title: String

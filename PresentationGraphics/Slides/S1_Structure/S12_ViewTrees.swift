@@ -10,16 +10,20 @@ import SwiftUI
 
 struct S12_ViewTrees: View, Slide {
 
-    @Environment(\.step)
-    var step: String
+    @Environment(\.episode)
+    var episode: String
 
+    var episodes: [Episode] {
+        "e01"
+        "e02"
+    }
 
     var body: some View {
         TitleSubtitleLayout(
             title: "View Trees",
             subtitle: "Модификаторы заворачивают контент"
         ) {
-            switch step {
+            switch episode {
             case "e01":
                 e01
             case "e02":
@@ -32,21 +36,20 @@ struct S12_ViewTrees: View, Slide {
 
     var e00: some View {
         Panels {
-            Panel("Код") {
-                CodeView {
-                    """
-                    HStack {
-                        Image(systemName: "house")
-                        Text("Hello")
-                            .padding()
-                    }
-                    """.color()
-
-                    ".background(Color.yellow)".highlight()
+            Panel.code {
+                """
+                HStack {
+                    Image(systemName: "house")
+                    Text("Hello")
+                        .padding()
                 }
+                """.color()
+
+                ".background(Color.yellow)".highlight()
             }
-            Panel("View Tree") {
-                TreeView(tree: Tree(".background", highlight: Theme.Color.highlight) {
+
+            Panel.viewTree {
+                Tree(".background", highlight: Theme.Color.highlight) {
                     Tree("HStack", color: Theme.Color.darkHighlight) {
                         Tree("Image", color: Theme.Color.darkHighlight)
                         Tree(".padding", color: Theme.Color.darkHighlight) {
@@ -54,94 +57,85 @@ struct S12_ViewTrees: View, Slide {
                         }
                     }
                     Tree("Color")
-                })
+                }
             }
-            Panel("Preview") {
+
+            Panel.preview {
                 HStack {
                     Image(systemName: "house")
                     Text("Hello")
                         .padding()
                 }
                 .background(Color.yellow)
-                .bordered()
             }
         }
     }
 
     var e01: some View {
         Panels {
-            Panel("Код") {
-                CodeView {
-                    "HStack {"
-                    "    Image(systemName: \"house\")"
-                    "    Text(\"Hello\")".color()
-                    "        .padding()".color()
-                    "        .background(Color.yellow)".highlight()
-                    "}"
+            Panel.code {
+                "HStack {"
+                "    Image(systemName: \"house\")"
+                "    Text(\"Hello\")".color()
+                "        .padding()".color()
+                "        .background(Color.yellow)".highlight()
+                "}"
+            }
+
+            Panel.viewTree {
+                Tree("HStack") {
+                    Tree("Image")
+                    Tree(".background", highlight: Theme.Color.highlight) {
+                        Tree(".padding", color: Theme.Color.darkHighlight) {
+                            Tree("Text", color: Theme.Color.darkHighlight)
+                        }
+                        Tree("Color")
+                    }
                 }
             }
-            Panel("View Tree") {
-                TreeView(tree: Tree("HStack") {
-                        Tree("Image")
-                        Tree(".background", highlight: Theme.Color.highlight) {
-                            Tree(".padding", color: Theme.Color.darkHighlight) {
-                                Tree("Text", color: Theme.Color.darkHighlight)
-                            }
-                            Tree("Color")
-                        }
-                    }
-                )
-            }
-            Panel("Preview") {
+
+            Panel.preview {
                 HStack {
                     Image(systemName: "house")
                     Text("Hello")
                         .padding()
                         .background(Color.yellow)
                 }
-                .bordered()
             }
         }
     }
 
     var e02: some View {
         Panels {
-            Panel("Код") {
-                CodeView {
-                    "HStack {"
-                    "    Image(systemName: \"house\")"
-                    "    Text(\"Hello\")".color()
-                    "        .background(Color.yellow)".highlight()
-                    "        .padding()"
-                    "}"
-                }
+            Panel.code {
+                "HStack {"
+                "    Image(systemName: \"house\")"
+                "    Text(\"Hello\")".color()
+                "        .background(Color.yellow)".highlight()
+                "        .padding()"
+                "}"
             }
-            Panel("View Tree") {
-                TreeView(tree: Tree("HStack") {
-                        Tree("Image")
-                        Tree(".padding") {
-                            Tree(".background", highlight: Theme.Color.highlight) {
-                                Tree("Text", color: Theme.Color.darkHighlight)
-                                Tree("Color")
-                            }
+
+            Panel.viewTree {
+                Tree("HStack") {
+                    Tree("Image")
+                    Tree(".padding") {
+                        Tree(".background", highlight: Theme.Color.highlight) {
+                            Tree("Text", color: Theme.Color.darkHighlight)
+                            Tree("Color")
                         }
                     }
-                )
+                }
             }
-            Panel("Preview") {
+
+            Panel.preview {
                 HStack {
                     Image(systemName: "house")
                     Text("Hello")
                         .background(Color.yellow)
                         .padding()
                 }
-                .bordered()
             }
         }
-    }
-
-    var steps: [Step] {
-        "e01"
-        "e02"
     }
 }

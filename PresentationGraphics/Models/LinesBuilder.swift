@@ -106,11 +106,12 @@ extension String {
 
 #Preview {
     CodeView {
-        "One"
+        "One".color()
         "Two"
             .id("Second Parameter")
         if 10 > 3 {
             "Three".highlight(.yellow)
         }
     }
+    .framed()
 }

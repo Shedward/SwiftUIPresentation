@@ -11,7 +11,7 @@ protocol Slide {
     var id: String { get }
     var content: AnyView { get }
 
-    @ArrayBuilder<Step> var steps: [Step] { get }
+    @ArrayBuilder<Episode> var episodes: [Episode] { get }
 }
 
 extension Slide where Self: View {
@@ -23,7 +23,7 @@ extension Slide where Self: View {
         AnyView(self)
     }
 
-    var steps: [Step] {
+    var episodes: [Episode] {
         []
     }
 }

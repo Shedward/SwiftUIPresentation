@@ -21,12 +21,12 @@ struct SlidesPlayer: View {
                     .background(Theme.Color.backgroundPrimary)
                     .id(currentSlide.id)
                     .transition(.blurReplace)
-                    .step(slideshow.currentStepId ?? "")
+                    .episode(slideshow.currentEpisodeId ?? "")
             } else {
                 ErrorView("Slide not found at \(slideshow.currentIndex)")
             }
         }
-        .animation(.snappy, value: slideshow.currentStepId)
+        .animation(.snappy, value: slideshow.currentEpisodeId)
         .animation(.smooth, value: slideshow.currentIndex)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .focusable(interactions: .edit)

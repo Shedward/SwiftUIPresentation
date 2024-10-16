@@ -12,7 +12,7 @@ final class Slideshow {
 
     let slides: [Slide]
     var currentIndex: Int = 0
-    var nextStepIndex: Int = 0
+    var nextEpisodeIndex: Int = 0
 
     var currentSlide: Slide? {
         guard slides.indices.contains(currentIndex) else {
@@ -21,18 +21,18 @@ final class Slideshow {
         return slides[currentIndex]
     }
 
-    var currentStepId: String? {
-        guard currentSlide?.steps.indices.contains(nextStepIndex - 1) ?? false else {
+    var currentEpisodeId: String? {
+        guard currentSlide?.episodes.indices.contains(nextEpisodeIndex - 1) ?? false else {
             return nil
         }
-        return currentSlide?.steps[nextStepIndex - 1].id
+        return currentSlide?.episodes[nextEpisodeIndex - 1].id
     }
 
-    var nextStep: Step? {
-        guard currentSlide?.steps.indices.contains(nextStepIndex) ?? false else {
+    var nextEpisode: Episode? {
+        guard currentSlide?.episodes.indices.contains(nextEpisodeIndex) ?? false else {
             return nil
         }
-        return currentSlide?.steps[nextStepIndex]
+        return currentSlide?.episodes[nextEpisodeIndex]
     }
 
     init(@ArrayBuilder<Slide> slides: () -> [Slide]) {
@@ -42,13 +42,13 @@ final class Slideshow {
 
     func goToBegining() {
         currentIndex = 0
-        nextStepIndex = 0
+        nextEpisodeIndex = 0
     }
 
     func next() {
-        if currentSlide?.steps.indices.contains(nextStepIndex) ?? false {
-            currentSlide?.steps[nextStepIndex].action()
-            nextStepIndex += 1
+        if currentSlide?.episodes.indices.contains(nextEpisodeIndex) ?? false {
+            currentSlide?.episodes[nextEpisodeIndex].action()
+            nextEpisodeIndex += 1
         } else {
             nextSlide()
         }
@@ -57,14 +57,14 @@ final class Slideshow {
     func nextSlide() {
         if slides.indices.contains(currentIndex + 1) {
             currentIndex += 1
-            nextStepIndex = 0
+            nextEpisodeIndex = 0
         }
     }
 
     func previous() {
-        if currentSlide?.steps.indices.contains(nextStepIndex - 1) ?? false {
-            currentSlide?.steps[nextStepIndex - 1].action()
-            nextStepIndex -= 1
+        if currentSlide?.episodes.indices.contains(nextEpisodeIndex - 1) ?? false {
+            currentSlide?.episodes[nextEpisodeIndex - 1].action()
+            nextEpisodeIndex -= 1
         } else {
             previousSlide()
         }
@@ -73,7 +73,7 @@ final class Slideshow {
     func previousSlide() {
         if slides.indices.contains(currentIndex - 1) {
             currentIndex -= 1
-            nextStepIndex = 0
+            nextEpisodeIndex = 0
         }
     }
 }

@@ -9,8 +9,12 @@ import SwiftUI
 
 struct S11_View: View, Slide {
 
-    @Environment(\.step)
-    var step: String
+    @Environment(\.episode)
+    var episode: String
+
+    var episodes: [Episode] {
+        "e01_ShowViewTree"
+    }
 
     var body: some View {
         TitleSubtitleLayout(
@@ -18,42 +22,33 @@ struct S11_View: View, Slide {
             subtitle: "Вьюхи это деревья"
         ) {
             Panels {
-                Panel("Код") {
-                    CodeView {
-                        """
-                        HStack {
-                            Image(systemName: "house")
-                            Text("Hello")
-                                .padding()
-                        }
-                        """
-                    }
-                }
-                if step >= "e01_ShowViewTree" {
-                    Panel("View Tree") {
-                        TreeView(
-                            tree: Tree("HStack") {
-                                Tree("Image")
-                                Tree(".padding") {
-                                    Tree("Text")
-                                }
-                            }
-                        )
-                    }
-                }
-                Panel("Preview") {
+                Panel.code {
+                    """
                     HStack {
                         Image(systemName: "house")
                         Text("Hello")
                             .padding()
                     }
-                    .bordered()
+                    """
+                }
+
+                Panel.viewTree {
+                    Tree("HStack") {
+                        Tree("Image")
+                        Tree(".padding") {
+                            Tree("Text")
+                        }
+                    }
+                }.showIf(episode, after: "e01_ShowViewTree")
+
+                Panel.preview {
+                    HStack {
+                        Image(systemName: "house")
+                        Text("Hello")
+                            .padding()
+                    }
                 }
             }
         }
-    }
-
-    var steps: [Step] {
-        "e01_ShowViewTree"
     }
 }
