@@ -64,6 +64,7 @@ struct TreeView: View {
         VStack(alignment: .center, spacing: 2 * space.innerValue()) {
             Text(tree.title)
                 .style(.body)
+                .background(tree.highlight ?? Color.clear)
                 .padding(.vertical, space.innerValue(2))
                 .anchorPreference(key: ParrentPositionsKey.self, value: .bottom, transform: { $0 })
             HStack(alignment: .top, spacing: space.innerValue()) {

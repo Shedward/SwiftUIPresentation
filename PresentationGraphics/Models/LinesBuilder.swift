@@ -40,7 +40,7 @@ enum LinesBuilder {
     }
 }
 
-struct CodePart: Whithable {
+struct CodePart: Withable {
     var id: String?
     var text: String
     var highlight: Color?
@@ -50,7 +50,7 @@ struct CodePart: Whithable {
         self.text = text
     }
 
-    func highlight(_ highlight: Color) -> Self {
+    func highlight(_ highlight: Color?) -> Self {
         with { $0.highlight = highlight }
     }
 
@@ -69,7 +69,7 @@ extension String {
             .id(id)
     }
 
-    func highlight(_ color: Color) -> CodePart {
+    func highlight(_ color: Color? = Theme.Color.highlight) -> CodePart {
         CodePart(self)
             .highlight(color)
     }

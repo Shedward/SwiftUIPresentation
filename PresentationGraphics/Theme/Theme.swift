@@ -25,6 +25,7 @@ enum Theme {
         static let contentTertiary = SwiftUI.Color(hex: 0xd2d2d7)
         static let tintPrimary = SwiftUI.Color(hex: 0x0066cc)
         static let tintSecondary = SwiftUI.Color(hex: 0xff610d)
+        static let highlight = SwiftUI.Color.yellow
         static let debug = SwiftUI.Color.purple
     }
 }

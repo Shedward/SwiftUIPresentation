@@ -13,50 +13,79 @@ struct S11_ViewTrees: View, Slide {
     @Environment(\.step)
     var step: String
 
-    var showPadding: Bool {
-        step < "02_RemovePadding"
-    }
 
     var body: some View {
-        TitleSubtitleLayout(title: "View Trees") {
-            Panels {
-                Panel("Код") {
-                    CodeView {
-                        "Text(\"Hello\")"
-                        if showPadding {
-                            "    .padding()"
-                                .highlight(.yellow)
-                        }
-                        "    .background(Color.blue)"
-                    }
-                }
-                if step >= "01_ShowViewTree" {
-                    Panel("View Tree") {
-                        TreeView(tree: Tree(".background") {
-                            if showPadding {
-                                Tree(".padding") {
-                                    Tree("Text")
-                                }
-                            }
-                            Tree("Color")
-                        })
-                    }
-                }
-                Panel("Preview") {
-                    Text("Hello")
-                        .if(showPadding) {
-                            $0.padding()
-                        }
-                        .background(Color.blue)
+        TitleSubtitleLayout(
+            title: "View Trees",
+            subtitle: "Вьюхи это деревья"
+        ) {
+            Group {
+                switch step {
+                case "e01":
+                    e01
+                default:
+                    e00
                 }
             }
-            .animation(.snappy, value: step)
+        }
+    }
+
+    var e00: some View {
+        Panels {
+            Panel("Код") {
+                CodeView {
+                    "Text(\"Hello\")"
+                    "    .padding()"
+                        .highlight()
+                    "    .background(Color.blue)"
+                }
+            }
+            Panel("View Tree") {
+                TreeView(tree: Tree(".background") {
+                    Tree(".padding", highlight: Theme.Color.highlight) {
+                        Tree("Text")
+                    }
+                    Tree("Color")
+                })
+            }
+            Panel("Preview") {
+                Text("Hello")
+                    .padding()
+                    .background(Color.blue)
+                    .bordered()
+            }
+        }
+    }
+
+    var e01: some View {
+        Panels {
+            Panel("Код") {
+                CodeView {
+                    "Text(\"Hello\")"
+                    "    .background(Color.blue)"
+                    "    .padding()"
+                        .highlight()
+                }
+            }
+            Panel("View Tree") {
+                TreeView(tree: Tree(".padding", highlight: Theme.Color.highlight) {
+                    Tree(".background") {
+                        Tree("Text")
+                        Tree("Color")
+                    }
+                })
+            }
+            Panel("Preview") {
+                Text("Hello")
+                    .background(Color.blue)
+                    .padding()
+                    .bordered()
+            }
         }
     }
 
     var steps: [Step] {
-        "01_ShowViewTree"
-        "02_RemovePadding"
+        "e01"
     }
 }
 

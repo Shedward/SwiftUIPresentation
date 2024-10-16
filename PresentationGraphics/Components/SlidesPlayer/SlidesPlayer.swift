@@ -18,8 +18,9 @@ struct SlidesPlayer: View {
         Group {
             if let currentSlide = slideshow.currentSlide {
                 currentSlide.content
+                    .background(Theme.Color.backgroundPrimary)
                     .id(currentSlide.id)
-                    .transition(.opacity)
+                    .transition(.blurReplace)
                     .step(slideshow.currentStepId ?? "")
             } else {
                 ErrorView("Slide not found at \(slideshow.currentIndex)")

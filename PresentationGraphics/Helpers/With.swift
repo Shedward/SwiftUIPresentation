@@ -5,10 +5,10 @@
 //  Created by Vlad Maltsev on 13.10.2024.
 //
 
-protocol Whithable {
+protocol Withable {
 }
 
-extension Whithable {
+extension Withable {
     @inlinable
     func with(_ body: (inout Self) throws -> Void) rethrows -> Self {
         var changed = self

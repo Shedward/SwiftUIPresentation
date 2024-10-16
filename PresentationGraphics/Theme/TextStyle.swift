@@ -12,7 +12,7 @@ struct TextStyle {
     var color: Color
 }
 
-extension TextStyle: Whithable {
+extension TextStyle: Withable {
     func color(_ color: Color) -> Self {
         with { $0.color = color }
     }

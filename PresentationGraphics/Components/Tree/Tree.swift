@@ -8,27 +8,38 @@
 import Foundation
 import SwiftUI
 
-struct Tree: Identifiable {
-    let id: String
-    let title: String
-    let relation: Relation
+struct Tree: Identifiable, Withable {
+    var id: String
+    var title: String
+    var relation: Relation
+    var highlight: Color?
 
-    let children: [Tree]
+    var children: [Tree]
 
     init(
         _ id: String = UUID().uuidString,
         title: String? = nil,
         relation: Relation = Relation(),
+        highlight: Color? = nil,
         @ArrayBuilder<Tree> buildChildrens: () -> [Tree] = { [] }
     ) {
         self.id = id
         self.title = title ?? id
         self.relation = relation
         self.children = buildChildrens()
+        self.highlight = highlight
+    }
+
+    func highlight(_ highlight: Color = Theme.Color.highlight) -> Self {
+        with { $0.highlight = highlight }
+    }
+
+    func relation(_ relation: Relation) -> Self {
+        with { $0.relation = relation }
     }
 }
 
-struct  Relation: Equatable {
+struct  Relation: Equatable, Withable {
     let id: String
     let title: String?
     let color: Color
