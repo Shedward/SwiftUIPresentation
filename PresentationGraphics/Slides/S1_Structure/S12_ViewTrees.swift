@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct S11_ViewTrees: View, Slide {
+struct S12_ViewTrees: View, Slide {
 
     @Environment(\.step)
     var step: String
@@ -17,15 +17,13 @@ struct S11_ViewTrees: View, Slide {
     var body: some View {
         TitleSubtitleLayout(
             title: "View Trees",
-            subtitle: "Вьюхи это деревья"
+            subtitle: "Модификаторы заворачивают контент"
         ) {
             switch step {
             case "e01":
                 e01
             case "e02":
                 e02
-            case "e03":
-                e03
             default:
                 e00
             }
@@ -33,40 +31,6 @@ struct S11_ViewTrees: View, Slide {
     }
 
     var e00: some View {
-        Panels {
-            Panel("Код") {
-                CodeView {
-                    """
-                    HStack {
-                        Image(systemName: "house")
-                        Text("Hello")
-                            .padding()
-                    }
-                    """
-                }
-            }
-            Panel("View Tree") {
-                TreeView(
-                    tree: Tree("HStack") {
-                        Tree("Image")
-                        Tree(".padding") {
-                            Tree("Text")
-                        }
-                    }
-                )
-            }
-            Panel("Preview") {
-                HStack {
-                    Image(systemName: "house")
-                    Text("Hello")
-                        .padding()
-                }
-                .bordered()
-            }
-        }
-    }
-
-    var e01: some View {
         Panels {
             Panel("Код") {
                 CodeView {
@@ -104,7 +68,7 @@ struct S11_ViewTrees: View, Slide {
         }
     }
 
-    var e02: some View {
+    var e01: some View {
         Panels {
             Panel("Код") {
                 CodeView {
@@ -140,7 +104,7 @@ struct S11_ViewTrees: View, Slide {
         }
     }
 
-    var e03: some View {
+    var e02: some View {
         Panels {
             Panel("Код") {
                 CodeView {
@@ -179,10 +143,5 @@ struct S11_ViewTrees: View, Slide {
     var steps: [Step] {
         "e01"
         "e02"
-        "e03"
     }
-}
-
-#Preview {
-    S11_ViewTrees()
 }

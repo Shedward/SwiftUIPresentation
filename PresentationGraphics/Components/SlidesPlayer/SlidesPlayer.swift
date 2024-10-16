@@ -26,7 +26,8 @@ struct SlidesPlayer: View {
                 ErrorView("Slide not found at \(slideshow.currentIndex)")
             }
         }
-        .animation(.snappy, value: slideshow.currentIndex)
+        .animation(.snappy, value: slideshow.currentStepId)
+        .animation(.smooth, value: slideshow.currentIndex)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .focusable(interactions: .edit)
         .focusEffectDisabled()
