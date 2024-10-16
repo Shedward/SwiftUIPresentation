@@ -24,7 +24,7 @@ struct CodeView: View {
                     Text("\(line.index)")
                         .style(.code.color(line.part.highlight ?? Theme.Color.contentTertiary))
                     Text(line.part.text)
-                        .style(.code)
+                        .style(.code.color(line.part.color ?? Theme.Color.contentPrimary))
                         .background(line.part.highlight ?? .clear)
                 }
             }

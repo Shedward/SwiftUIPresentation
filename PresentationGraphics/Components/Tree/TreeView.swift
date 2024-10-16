@@ -63,7 +63,7 @@ struct TreeView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 2 * space.innerValue()) {
             Text(tree.title)
-                .style(.body)
+                .style(.body.color(tree.color ?? Theme.Color.contentPrimary))
                 .background(tree.highlight ?? Color.clear)
                 .padding(.vertical, space.innerValue(2))
                 .anchorPreference(key: ParrentPositionsKey.self, value: .bottom, transform: { $0 })

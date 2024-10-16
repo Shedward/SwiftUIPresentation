@@ -19,13 +19,15 @@ struct S11_ViewTrees: View, Slide {
             title: "View Trees",
             subtitle: "Вьюхи это деревья"
         ) {
-            Group {
-                switch step {
-                case "e01":
-                    e01
-                default:
-                    e00
-                }
+            switch step {
+            case "e01":
+                e01
+            case "e02":
+                e02
+            case "e03":
+                e03
+            default:
+                e00
             }
         }
     }
@@ -34,25 +36,32 @@ struct S11_ViewTrees: View, Slide {
         Panels {
             Panel("Код") {
                 CodeView {
-                    "Text(\"Hello\")"
-                    "    .padding()"
-                        .highlight()
-                    "    .background(Color.blue)"
+                    """
+                    HStack {
+                        Image(systemName: "house")
+                        Text("Hello")
+                            .padding()
+                    }
+                    """
                 }
             }
             Panel("View Tree") {
-                TreeView(tree: Tree(".background") {
-                    Tree(".padding", highlight: Theme.Color.highlight) {
-                        Tree("Text")
+                TreeView(
+                    tree: Tree("HStack") {
+                        Tree("Image")
+                        Tree(".padding") {
+                            Tree("Text")
+                        }
                     }
-                    Tree("Color")
-                })
+                )
             }
             Panel("Preview") {
-                Text("Hello")
-                    .padding()
-                    .background(Color.blue)
-                    .bordered()
+                HStack {
+                    Image(systemName: "house")
+                    Text("Hello")
+                        .padding()
+                }
+                .bordered()
             }
         }
     }
@@ -61,31 +70,116 @@ struct S11_ViewTrees: View, Slide {
         Panels {
             Panel("Код") {
                 CodeView {
-                    "Text(\"Hello\")"
-                    "    .background(Color.blue)"
-                    "    .padding()"
-                        .highlight()
+                    """
+                    HStack {
+                        Image(systemName: "house")
+                        Text("Hello")
+                            .padding()
+                    }
+                    """.color()
+
+                    ".background(Color.yellow)".highlight()
                 }
             }
             Panel("View Tree") {
-                TreeView(tree: Tree(".padding", highlight: Theme.Color.highlight) {
-                    Tree(".background") {
-                        Tree("Text")
-                        Tree("Color")
+                TreeView(tree: Tree(".background", highlight: Theme.Color.highlight) {
+                    Tree("HStack", color: Theme.Color.darkHighlight) {
+                        Tree("Image", color: Theme.Color.darkHighlight)
+                        Tree(".padding", color: Theme.Color.darkHighlight) {
+                            Tree("Text", color: Theme.Color.darkHighlight)
+                        }
                     }
+                    Tree("Color")
                 })
             }
             Panel("Preview") {
-                Text("Hello")
-                    .background(Color.blue)
-                    .padding()
-                    .bordered()
+                HStack {
+                    Image(systemName: "house")
+                    Text("Hello")
+                        .padding()
+                }
+                .background(Color.yellow)
+                .bordered()
+            }
+        }
+    }
+
+    var e02: some View {
+        Panels {
+            Panel("Код") {
+                CodeView {
+                    "HStack {"
+                    "    Image(systemName: \"house\")"
+                    "    Text(\"Hello\")".color()
+                    "        .padding()".color()
+                    "        .background(Color.yellow)".highlight()
+                    "}"
+                }
+            }
+            Panel("View Tree") {
+                TreeView(tree: Tree("HStack") {
+                        Tree("Image")
+                        Tree(".background", highlight: Theme.Color.highlight) {
+                            Tree(".padding", color: Theme.Color.darkHighlight) {
+                                Tree("Text", color: Theme.Color.darkHighlight)
+                            }
+                            Tree("Color")
+                        }
+                    }
+                )
+            }
+            Panel("Preview") {
+                HStack {
+                    Image(systemName: "house")
+                    Text("Hello")
+                        .padding()
+                        .background(Color.yellow)
+                }
+                .bordered()
+            }
+        }
+    }
+
+    var e03: some View {
+        Panels {
+            Panel("Код") {
+                CodeView {
+                    "HStack {"
+                    "    Image(systemName: \"house\")"
+                    "    Text(\"Hello\")".color()
+                    "        .background(Color.yellow)".highlight()
+                    "        .padding()"
+                    "}"
+                }
+            }
+            Panel("View Tree") {
+                TreeView(tree: Tree("HStack") {
+                        Tree("Image")
+                        Tree(".padding") {
+                            Tree(".background", highlight: Theme.Color.highlight) {
+                                Tree("Text", color: Theme.Color.darkHighlight)
+                                Tree("Color")
+                            }
+                        }
+                    }
+                )
+            }
+            Panel("Preview") {
+                HStack {
+                    Image(systemName: "house")
+                    Text("Hello")
+                        .background(Color.yellow)
+                        .padding()
+                }
+                .bordered()
             }
         }
     }
 
     var steps: [Step] {
         "e01"
+        "e02"
+        "e03"
     }
 }
 

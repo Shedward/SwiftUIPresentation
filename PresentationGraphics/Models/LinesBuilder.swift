@@ -9,8 +9,13 @@ import SwiftUI
 
 @resultBuilder
 enum LinesBuilder {
+
+    static func buildExpression(_ expression: [CodePart]) -> [CodePart] {
+        expression
+    }
+
     static func buildExpression(_ expression: String) -> [CodePart] {
-        [CodePart(expression)]
+        expression.split(separator: "\n").map { CodePart(String($0)) }
     }
 
     static func buildExpression(_ expression: CodePart) -> [CodePart] {
@@ -44,6 +49,7 @@ struct CodePart: Withable {
     var id: String?
     var text: String
     var highlight: Color?
+    var color: Color?
     var anotationID: String?
 
     init(_ text: String) {
@@ -52,6 +58,10 @@ struct CodePart: Withable {
 
     func highlight(_ highlight: Color?) -> Self {
         with { $0.highlight = highlight }
+    }
+
+    func color(_ color: Color?) -> Self {
+        with { $0.color = color }
     }
 
     func anotationID(_ anotationID: String?) -> Self {
@@ -63,20 +73,34 @@ struct CodePart: Withable {
     }
 }
 
+func color(_ color: Color? = Theme.Color.darkHighlight, @LinesBuilder _ lines: () -> [CodePart]) -> [CodePart] {
+    lines().map { $0.color(color) }
+}
+
+func highlight(_ highlight: Color? = Theme.Color.highlight, @LinesBuilder _ lines: () -> [CodePart]) -> [CodePart] {
+    lines().map { $0.highlight(highlight) }
+}
+
 extension String {
-    func id(_ id: String) -> CodePart {
-        CodePart(self)
-            .id(id)
+    func id(_ id: String) -> [CodePart] {
+        LinesBuilder.buildExpression(self)
+            .enumerated()
+            .map { index, part in part.id("\(id)-\(index)") }
     }
 
-    func highlight(_ color: Color? = Theme.Color.highlight) -> CodePart {
-        CodePart(self)
-            .highlight(color)
+    func highlight(_ color: Color? = Theme.Color.highlight) -> [CodePart] {
+        LinesBuilder.buildExpression(self)
+            .map { $0.highlight(color) }
     }
 
-    func anotationId(_ anotationID: String?) -> CodePart {
-        CodePart(self)
-            .anotationID(anotationID)
+    func anotationId(_ anotationID: String?) -> [CodePart] {
+        LinesBuilder.buildExpression(self)
+            .map { $0.anotationID(anotationID) }
+    }
+
+    func color(_ color: Color? = Theme.Color.darkHighlight) -> [CodePart] {
+        LinesBuilder.buildExpression(self)
+            .map { $0.color(color) }
     }
 }
 

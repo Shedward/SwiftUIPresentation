@@ -13,6 +13,7 @@ struct Tree: Identifiable, Withable {
     var title: String
     var relation: Relation
     var highlight: Color?
+    var color: Color?
 
     var children: [Tree]
 
@@ -21,6 +22,7 @@ struct Tree: Identifiable, Withable {
         title: String? = nil,
         relation: Relation = Relation(),
         highlight: Color? = nil,
+        color: Color? = nil,
         @ArrayBuilder<Tree> buildChildrens: () -> [Tree] = { [] }
     ) {
         self.id = id
@@ -28,10 +30,15 @@ struct Tree: Identifiable, Withable {
         self.relation = relation
         self.children = buildChildrens()
         self.highlight = highlight
+        self.color = color
     }
 
     func highlight(_ highlight: Color = Theme.Color.highlight) -> Self {
         with { $0.highlight = highlight }
+    }
+
+    func color(_ color: Color = Theme.Color.darkHighlight) -> Self {
+        with { $0.color = color }
     }
 
     func relation(_ relation: Relation) -> Self {
