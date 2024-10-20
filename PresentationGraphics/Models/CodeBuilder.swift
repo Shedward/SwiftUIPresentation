@@ -1,5 +1,5 @@
 //
-//  LinesBuilder.swift
+//  CodeBuilder.swift
 //  PresentationGraphics
 //
 //  Created by Vlad Maltsev on 16.10.2024.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @resultBuilder
-enum LinesBuilder {
+enum CodeBuilder {
 
     static func buildExpression(_ expression: [CodePart]) -> [CodePart] {
         expression
@@ -23,7 +23,7 @@ enum LinesBuilder {
     }
 
     static func buildExpression(_ expression: String?, file: StaticString = #fileID, line: UInt = #line) -> [CodePart] {
-        expression.map { LinesBuilder.buildExpression($0, file: file, line: line) } ?? []
+        expression.map { CodeBuilder.buildExpression($0, file: file, line: line) } ?? []
     }
 
     static func buildExpression(_ expression: CodePart) -> [CodePart] {
@@ -68,6 +68,10 @@ struct CodePart: Withable {
         with { $0.highlight = highlight }
     }
 
+    func highlight(_ isHighlighted: Bool) -> Self {
+        highlight(isHighlighted ? Theme.Color.highlight : nil)
+    }
+
     func color(_ color: Color?) -> Self {
         with { $0.color = color }
     }
@@ -79,11 +83,11 @@ struct CodePart: Withable {
     }
 }
 
-func color(_ color: Color? = Theme.Color.darkHighlight, @LinesBuilder _ lines: () -> [CodePart]) -> [CodePart] {
+func color(_ color: Color? = Theme.Color.darkHighlight, @CodeBuilder _ lines: () -> [CodePart]) -> [CodePart] {
     lines().map { $0.color(color) }
 }
 
-func highlight(_ highlight: Color? = Theme.Color.highlight, @LinesBuilder _ lines: () -> [CodePart]) -> [CodePart] {
+func highlight(_ highlight: Color? = Theme.Color.highlight, @CodeBuilder _ lines: () -> [CodePart]) -> [CodePart] {
     lines().map { $0.highlight(highlight) }
 }
 
@@ -109,12 +113,16 @@ struct LineId: Hashable, Withable {
 
 extension String {
     func highlight(_ color: Color? = Theme.Color.highlight, file: StaticString = #fileID, line: UInt = #line) -> [CodePart] {
-        LinesBuilder.buildExpression(self, file: file, line: line)
+        CodeBuilder.buildExpression(self, file: file, line: line)
             .map { $0.highlight(color) }
     }
 
+    func highlight(_ isHighlighted: Bool, file: StaticString = #fileID, line: UInt = #line) -> [CodePart] {
+        highlight(isHighlighted ? Theme.Color.highlight : nil, file: file, line: line)
+    }
+
     func color(_ color: Color? = Theme.Color.darkHighlight, file: StaticString = #fileID, line: UInt = #line) -> [CodePart] {
-        LinesBuilder.buildExpression(self, file: file, line: line)
+        CodeBuilder.buildExpression(self, file: file, line: line)
             .map { $0.color(color) }
     }
 }

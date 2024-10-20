@@ -37,7 +37,7 @@ struct CodeView: View {
 }
 
 extension CodeView {
-    init(@LinesBuilder _ lines: () -> [Code.Line]) {
+    init(@CodeBuilder _ lines: () -> [Code.Line]) {
         self.init(Code(lines: lines))
     }
 }

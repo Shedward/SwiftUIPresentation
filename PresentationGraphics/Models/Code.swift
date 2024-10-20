@@ -14,12 +14,12 @@ final class Code {
         self.lines = lines
     }
 
-    init(@LinesBuilder lines: () -> [Line]) {
+    init(@CodeBuilder lines: () -> [Line]) {
         self.lines = lines()
     }
 
     init(_ text: String, file: StaticString = #fileID, line: UInt = #line) {
-        lines = LinesBuilder.buildFinalResult(CodePart.split(text, lineId: .init(file: file, line: line)))
+        lines = CodeBuilder.buildFinalResult(CodePart.split(text, lineId: .init(file: file, line: line)))
     }
 }
 

@@ -33,8 +33,12 @@ struct Tree: Identifiable, Withable {
         self.color = color
     }
 
-    func highlight(_ highlight: Color = Theme.Color.highlight) -> Self {
+    func highlight(_ highlight: Color? = Theme.Color.highlight) -> Self {
         with { $0.highlight = highlight }
+    }
+
+    func highlight(_ isHightlighted: Bool) -> Self {
+        highlight(isHightlighted ? Theme.Color.highlight : nil)
     }
 
     func color(_ color: Color = Theme.Color.darkHighlight) -> Self {

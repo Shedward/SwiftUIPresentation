@@ -31,21 +31,17 @@ struct S14_TuppleView: View, Slide {
         e03 - И справедливости ради на самом деле тут есть еще один тупл
             - И вообще любое использования @ViewBuild'ер а создает тупл
         e04 - Но в независимости от вложенности - туплы вложенные в туплы семантически схлопываются в один список
+            - Поэтому в дальнейшем само наличие списка подвьюх подразумевает наличие тупла в дереве
         """
     }
 
-    var contentTuppleViewHightlihgt: Color? {
-        episode == "e01-tupple-view"
-            ? Theme.Color.highlight
-            : nil
-    }
-
     var body: some View {
-        TitleSubtitleLayout(title: "TuppleView") {
+        TitleSubtitleLayout(title: "Список") {
             Panels {
                 Panel.code {
                     "var body: some View {"
                     "    VStack {"
+                        .highlight(episode == "e03-тупл-над-туплами")
                     "        content"
                     "        content2"
                         .showIf(episode, after: "e02-комбинация-туплов")
@@ -66,7 +62,7 @@ struct S14_TuppleView: View, Slide {
                     var content: TuppleView<(Image, Text, Image)> {
                     """
                         .showIf(episode, after: "e01-tupple-view")?
-                        .highlight(contentTuppleViewHightlihgt)
+                        .highlight(episode == "e01-tupple-view")
 
                     """
                         Image(systemName: "house")
@@ -92,13 +88,13 @@ struct S14_TuppleView: View, Slide {
                                 episode >= "e01-tupple-view"
                                     ? "TuppleView"
                                     : "...",
-                                id: "content-tupple",
-                                highlight: contentTuppleViewHightlihgt
+                                id: "content-tupple"
                             ) {
                                 Tree("Image", id: "home-image")
                                 Tree("Text", id: "hello-text")
                                 Tree("Image", id: "wave-image")
                             }
+                            .highlight(episode == "e01-tupple-view")
                         }
                     } else if episode < "e03-тупл-над-туплами" {
                         Tree("VStack") {
@@ -124,7 +120,7 @@ struct S14_TuppleView: View, Slide {
                                     Tree("Text", id: "world-text")
                                     Tree("Image", id: "globe-image")
                                 }
-                            }
+                            }.highlight(episode == "e03-тупл-над-туплами")
                         }
                     } else {
                         Tree("VStack") {

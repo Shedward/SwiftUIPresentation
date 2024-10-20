@@ -10,6 +10,6 @@ import SwiftUI
 struct S10_Structure: View, Slide {
 
     var body: some View {
-        SectionTitleLayout(text: "1. Структура")
+        SectionTitleLayout(text: "Структура")
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 extension Panel {
 
-    static func code(_ title: String = "Code", @LinesBuilder _ lines: @escaping () -> [Code.Line]) -> Panel {
+    static func code(_ title: String = "Code", @CodeBuilder _ lines: @escaping () -> [Code.Line]) -> Panel {
         Panel(title) {
             CodeView(lines)
         }
