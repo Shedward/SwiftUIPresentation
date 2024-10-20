@@ -56,14 +56,14 @@ struct Panels: View {
 #Preview {
     Panels {
         Panel("Code") {
-            CodeView("""
+            CodeView(Code("""
                 VStack {
                     Text("Hello")
                     Text("World")
                         .fixedSize()
                         .padding()
                 }
-                """)
+                """))
         }
         Panel("ViewTree") {
             TreeView(

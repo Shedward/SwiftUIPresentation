@@ -14,8 +14,16 @@ enum LinesBuilder {
         expression
     }
 
-    static func buildExpression(_ expression: String) -> [CodePart] {
-        expression.split(separator: "\n").map { CodePart(String($0)) }
+    static func buildExpression(_ expression: [CodePart]?) -> [CodePart] {
+        expression ?? []
+    }
+
+    static func buildExpression(_ expression: String, file: StaticString = #fileID, line: UInt = #line) -> [CodePart] {
+        CodePart.split(expression, lineId: .init(file: file, line: line))
+    }
+
+    static func buildExpression(_ expression: String?, file: StaticString = #fileID, line: UInt = #line) -> [CodePart] {
+        expression.map { LinesBuilder.buildExpression($0, file: file, line: line) } ?? []
     }
 
     static func buildExpression(_ expression: CodePart) -> [CodePart] {
@@ -46,14 +54,14 @@ enum LinesBuilder {
 }
 
 struct CodePart: Withable {
-    var id: String?
+    var lineId: LineId
     var text: String
     var highlight: Color?
     var color: Color?
-    var anotationID: String?
 
-    init(_ text: String) {
+    private init(_ text: String, lineId: LineId) {
         self.text = text
+        self.lineId = lineId
     }
 
     func highlight(_ highlight: Color?) -> Self {
@@ -64,12 +72,10 @@ struct CodePart: Withable {
         with { $0.color = color }
     }
 
-    func anotationID(_ anotationID: String?) -> Self {
-        with { $0.anotationID = anotationID }
-    }
-
-    func id(_ id: String) -> Self {
-        with { $0.id = id }
+    static func split(_ text: String, lineId: LineId) -> [Self] {
+        text.split(separator: "\n").enumerated().map { index, text in
+            CodePart(String(text), lineId: lineId.innerLineIndex(index))
+        }
     }
 }
 
@@ -81,25 +87,34 @@ func highlight(_ highlight: Color? = Theme.Color.highlight, @LinesBuilder _ line
     lines().map { $0.highlight(highlight) }
 }
 
-extension String {
-    func id(_ id: String) -> [CodePart] {
-        LinesBuilder.buildExpression(self)
-            .enumerated()
-            .map { index, part in part.id("\(id)-\(index)") }
+struct LineId: Hashable, Withable {
+    let file: String
+    let line: UInt
+    var innerLineIndex: Int
+
+    init(file: StaticString, line: UInt, innerLineIndex: Int = 0) {
+        self.file = "\(file)"
+        self.line = line
+        self.innerLineIndex = innerLineIndex
     }
 
-    func highlight(_ color: Color? = Theme.Color.highlight) -> [CodePart] {
-        LinesBuilder.buildExpression(self)
+    var id: String {
+        "\(file):\(line)+\(innerLineIndex)"
+    }
+
+    func innerLineIndex(_ index: Int) -> Self {
+        with { $0.innerLineIndex = index }
+    }
+}
+
+extension String {
+    func highlight(_ color: Color? = Theme.Color.highlight, file: StaticString = #fileID, line: UInt = #line) -> [CodePart] {
+        LinesBuilder.buildExpression(self, file: file, line: line)
             .map { $0.highlight(color) }
     }
 
-    func anotationId(_ anotationID: String?) -> [CodePart] {
-        LinesBuilder.buildExpression(self)
-            .map { $0.anotationID(anotationID) }
-    }
-
-    func color(_ color: Color? = Theme.Color.darkHighlight) -> [CodePart] {
-        LinesBuilder.buildExpression(self)
+    func color(_ color: Color? = Theme.Color.darkHighlight, file: StaticString = #fileID, line: UInt = #line) -> [CodePart] {
+        LinesBuilder.buildExpression(self, file: file, line: line)
             .map { $0.color(color) }
     }
 }
@@ -108,7 +123,6 @@ extension String {
     CodeView {
         "One".color()
         "Two"
-            .id("Second Parameter")
         if 10 > 3 {
             "Three".highlight(.yellow)
         }

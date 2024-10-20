@@ -18,11 +18,15 @@ struct CodeView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading) {
-            ForEach(code.lines, id: \.index) { line in
-                HStack(spacing: space.innerValue(2)) {
+        HStack(alignment: .top, spacing: space.innerValue(2)) {
+            VStack(alignment: .trailing, spacing: 0) {
+                ForEach(code.lines, id: \.index) { line in
                     Text("\(line.index)")
-                        .style(.code.color(line.part.highlight ?? Theme.Color.contentTertiary))
+                        .style(.code.color(Theme.Color.contentTertiary))
+                }
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                ForEach(code.lines, id: \.part.lineId) { line in
                     Text(line.part.text)
                         .style(.code.color(line.part.color ?? Theme.Color.contentPrimary))
                         .background(line.part.highlight ?? .clear)

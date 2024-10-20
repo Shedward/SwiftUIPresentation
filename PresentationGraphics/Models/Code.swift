@@ -7,7 +7,7 @@
 
 import Observation
 
-final class Code: ExpressibleByStringLiteral {
+final class Code {
     var lines: [Line]
 
     init(lines: [Line]) {
@@ -18,26 +18,17 @@ final class Code: ExpressibleByStringLiteral {
         self.lines = lines()
     }
 
-    init(_ text: String) {
-        let initialLines = text.split(separator: "\n").enumerated().map { index, line in
-            Line(index: index + 1, part: CodePart(String(line)))
-        }
-        lines = initialLines
-    }
-
-    convenience init(stringLiteral value: String) {
-        self.init(value)
+    init(_ text: String, file: StaticString = #fileID, line: UInt = #line) {
+        lines = LinesBuilder.buildFinalResult(CodePart.split(text, lineId: .init(file: file, line: line)))
     }
 }
 
 extension Code {
     struct Line {
-        let id: String
         let index: Int
         let part: CodePart
 
         init(index: Int, part: CodePart) {
-            self.id = part.id ?? "\(index)"
             self.index = index
             self.part = part
         }

@@ -19,6 +19,7 @@ struct PresentationGraphicsApp: App {
         S11_View()
         S12_ViewTrees()
         S13_ViewBuilder()
+        S14_TuppleView()
 
         MockSlide(id: "S01_Another")
         MockSlide(id: "S01_AndAnother")

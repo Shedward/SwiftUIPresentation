@@ -14,8 +14,8 @@ struct ComplexMockSlide: View, Slide {
             subtitle: "Что это такое?"
         ) {
             Panels {
-                Panel("Код") {
-                    CodeView("""
+                Panel.code {
+                    """
                     struct ContentView: View {
 
                         var body: some View {
@@ -39,7 +39,7 @@ struct ComplexMockSlide: View, Slide {
                             }
                         }
                     }
-                    """)
+                    """
                 }
                 Panel("RenderTree") {
                     TreeView(tree: Tree("ContentView") {
