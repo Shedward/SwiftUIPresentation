@@ -50,19 +50,22 @@ struct Tree: Identifiable, Withable {
     }
 }
 
-struct  Relation: Equatable, Withable {
+struct Relation: Equatable, Withable {
     let id: String
     let title: String?
     let color: Color
     let lineWidth: CGFloat
+    let dashed: Bool
 
-    init(_ id: String = UUID().uuidString, title: String? = nil, color: Color = .blue, lineWidth: CGFloat = 1) {
+    init(_ id: String = UUID().uuidString, title: String? = nil, color: Color = .blue, lineWidth: CGFloat = 1, dashed: Bool = false) {
         self.id = id
         self.title = title ?? id
         self.color = color
         self.lineWidth = lineWidth
+        self.dashed = dashed
     }
 
+    static let none = Relation(lineWidth: 0)
     static let normal = Relation()
     static let bold = Relation(lineWidth: 2)
 }

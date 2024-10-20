@@ -21,6 +21,7 @@ struct PresentationGraphicsApp: App {
         S13_ViewBuilder()
         S14_TuppleView()
         S15_ConditionalContent()
+        S16_ForEachView()
 
         MockSlide(id: "S01_Another")
         MockSlide(id: "S01_AndAnother")

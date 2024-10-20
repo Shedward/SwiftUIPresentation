@@ -63,6 +63,7 @@ struct S15_ConditionalContent: View, Slide {
                         default:
                             "        }"
                         }
+                        "     }"
                     } else {
                         """
                             switch status {
@@ -73,10 +74,11 @@ struct S15_ConditionalContent: View, Slide {
                                     Text("Offline")
                                 case .unavailable:
                                     Text("Unavailable")
+                                case .banned
+                                    Text("Banned")
                             }
                         """
                     }
-                    "     }"
                     "}"
                 }
 
@@ -136,7 +138,10 @@ struct S15_ConditionalContent: View, Slide {
                                 }
                                 Tree("_ConditionalContent", id: "inner-condition") {
                                     Tree("Text", id: "offline-text")
-                                    Tree("Text", id: "unavailable-text")
+                                    Tree("_ConditionalContent", id: "inner-inner-condition") {
+                                        Tree("Text", id: "unavailable-text")
+                                        Tree("Text", id: "banned-text")
+                                    }
                                 }
                             }
                         }

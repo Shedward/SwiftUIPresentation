@@ -86,7 +86,10 @@ struct TreeView: View {
                     )
                     .stroke(
                         childPosition.relation.color,
-                        style: StrokeStyle(lineWidth: childPosition.relation.lineWidth)
+                        style: StrokeStyle(
+                            lineWidth: childPosition.relation.lineWidth,
+                            dash: childPosition.relation.dashed ? [5, 5] : []
+                        )
                     )
                     .transition(.opacity)
                 }
