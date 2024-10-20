@@ -33,12 +33,14 @@ struct S12_ViewTrees: View, Slide {
             subtitle: "Модификаторы заворачивают контент"
         ) {
             switch episode {
+            case "e00":
+                e00
             case "e01-двигаем-модификатор-выше":
                 e01
             case "e02-еще-выше":
                 e02
             default:
-                e00
+                EmptyView()
             }
         }
     }

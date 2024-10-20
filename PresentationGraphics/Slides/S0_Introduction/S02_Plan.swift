@@ -12,7 +12,7 @@ struct S02_Plan: View, Slide {
     var body: some View {
         ListLayout(title: "План", subtitle: "О чем расскажу", style: .enumerated) {
             "Структура"
-            "Состояния"
+            "Состояние"
             "Анимации"
             "Потоки данных"
             "Лайаут"

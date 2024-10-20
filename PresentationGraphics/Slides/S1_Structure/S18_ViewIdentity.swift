@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct S17_ViewBuilderIsNotACode: View, Slide {
+struct S18_ViewIdentity: View, Slide {
 
     var body: some View {
-        TitleSubtitleLayout(title: "Тело ViewBuilder - не код") {
+        TitleSubtitleLayout(title: "View Identity") {
         }
     }
 }

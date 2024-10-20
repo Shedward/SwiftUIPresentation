@@ -17,6 +17,10 @@ struct CodeView: View {
         self.code = code
     }
 
+    init(@CodeBuilder _ lines: () -> [Code.Line]) {
+        self.code = Code(lines: lines)
+    }
+
     var body: some View {
         HStack(alignment: .top, spacing: space.innerValue(2)) {
             VStack(alignment: .trailing, spacing: 0) {
@@ -33,12 +37,6 @@ struct CodeView: View {
                 }
             }
         }
-    }
-}
-
-extension CodeView {
-    init(@CodeBuilder _ lines: () -> [Code.Line]) {
-        self.init(Code(lines: lines))
     }
 }
 

@@ -21,7 +21,7 @@ struct SlidesPlayer: View {
                     .background(Theme.Color.backgroundPrimary)
                     .id(currentSlide.id)
                     .transition(.blurReplace)
-                    .episode(slideshow.currentEpisodeId ?? "")
+                    .episode(slideshow.currentEpisodeId ?? "e00")
             } else {
                 ErrorView("Slide not found at \(slideshow.currentIndex)")
             }
