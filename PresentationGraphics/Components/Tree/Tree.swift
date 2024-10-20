@@ -18,15 +18,15 @@ struct Tree: Identifiable, Withable {
     var children: [Tree]
 
     init(
-        _ id: String = UUID().uuidString,
-        title: String? = nil,
+        _ title: String,
+        id: String? = nil,
         relation: Relation = Relation(),
         highlight: Color? = nil,
         color: Color? = nil,
         @ArrayBuilder<Tree> buildChildrens: () -> [Tree] = { [] }
     ) {
-        self.id = id
-        self.title = title ?? id
+        self.id = id ?? title
+        self.title = title
         self.relation = relation
         self.children = buildChildrens()
         self.highlight = highlight

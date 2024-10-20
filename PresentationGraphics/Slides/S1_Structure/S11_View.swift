@@ -16,6 +16,13 @@ struct S11_View: View, Slide {
         "e01-показываем-view-tree"
     }
 
+    var notes: String? {
+        """
+        e00 - Мы версаем обычным свифтовым кодом
+        e01 - Этот код описывает дерево вьюх
+        """
+    }
+
     var body: some View {
         TitleSubtitleLayout(
             title: "View Trees",

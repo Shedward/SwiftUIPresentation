@@ -16,8 +16,20 @@ struct S13_ViewBuilder: View, Slide {
         "e01-определение-vstack"
     }
 
+    var notes: String? {
+        """
+        e00 - Для того чтобы описывать деревья вьюх мы постоянно используем конструкции такого вида
+            - Как будто HStack принимает список вьюх.
+        e01 - Но если посмотреть на определение VStack'а можно увидеть что тело HStack - @ViewBuilder
+            - @ViewBuilder это по своей сути функция которая возрвращает ОДНУ вьюху.
+            - Не массив, а одну.
+        """
+    }
+
     var body: some View {
-        TitleSubtitleLayout(title: "@ViewBuilder") {
+        TitleSubtitleLayout(
+            title: "@ViewBuilder"
+        ) {
             Panels {
                 Panel.code("VStack.swift") {
                     """
@@ -29,6 +41,7 @@ struct S13_ViewBuilder: View, Slide {
                     """
                             @ViewBuilder content: () -> Content
                     """.highlight()
+
                     """
                         ) {
                             ...
@@ -40,6 +53,9 @@ struct S13_ViewBuilder: View, Slide {
                 Panel.code {
                     """
                     VStack {
+                    """
+
+                    """
                         Image(systemName: "house")
                         Text("Hello")
                         Image(systemName: "hand.wave")
@@ -49,6 +65,7 @@ struct S13_ViewBuilder: View, Slide {
                             ? Theme.Color.highlight
                             : nil
                         )
+
                     """
                     }
                     """

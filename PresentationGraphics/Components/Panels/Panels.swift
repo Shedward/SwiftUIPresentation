@@ -68,10 +68,10 @@ struct Panels: View {
         Panel("ViewTree") {
             TreeView(
                 tree: Tree("VStack") {
-                    Tree("helloText", title: "Text")
+                    Tree("Text", id: "hello-text")
                     Tree(".padding") {
                         Tree(".fixedSize") {
-                            Tree("worldText", title: "Text")
+                            Tree("Text", id: "world-text")
                         }
                     }
                 }

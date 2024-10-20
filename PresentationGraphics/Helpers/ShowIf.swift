@@ -5,6 +5,8 @@
 //  Created by Vlad Maltsev on 17.10.2024.
 //
 
+import SwiftUI
+
 protocol ShowIfable {
     func showIf(_ episode: String, after: String) -> Self?
     func hideIf(_ episode: String, after: String) -> Self?
@@ -43,7 +45,6 @@ extension ShowIfable {
 }
 
 extension String: ShowIfable { }
-
 
 func showIf<T>(_ episode: String, after: String, _ block: () -> T) -> T? {
     if episode >= after {

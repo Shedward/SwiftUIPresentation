@@ -105,9 +105,9 @@ struct TreeView: View {
             Tree("HStack") {
                 Tree("Icon")
                 Tree("VStack") {
-                    Tree("Title Text", title: "Text")
+                    Tree("Text", id: "title-text")
                     Tree("Font") {
-                        Tree("Subtitle Text", title: "Text")
+                        Tree("Text", id: "subtitle-text")
                     }
                 }
             }
