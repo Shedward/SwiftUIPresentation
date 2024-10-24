@@ -9,16 +9,20 @@ import SwiftUI
 
 struct S18_RenderTree: View, Slide {
 
+    @Environment(\.episode)
+    var episode: String
+
     var notes: String? {
         """
-        e00 - Итак, у нас есть дерево вьюх описывающее все возможные состояния
+        e00 - Итак, у нас есть вот такая вьюха
+            - И View Tree, описывающее все его состояния, выглядит так
         """
     }
 
     var body: some View {
         TitleSubtitleLayout(title: "Render Tree") {
             Panels {
-                Panel.code(font: Theme.Font.codeExtraSmall) {
+                Panel.code {
                     """
                     struct ArticleView: View {
                         
@@ -28,56 +32,36 @@ struct S18_RenderTree: View, Slide {
                         let authors: [String]
                         
                         var body: some View {
-                            VStack(spacing: 8) {
+                            VStack {
                                 Text(title)
-                                    .font(.title)
                                 Text(text)
-                                    .font(.body)
                                 if showAuthors {
                                     ForEach(authors, id: \\.self) { author in
                                         Text(author)
-                                            .font(.caption)
                                     }
                                 } else {
                                     Text("Authors: \\(authors.count)")
-                                        .font(.caption)
-                                        .foregroundStyle(Color.white)
-                                        .padding([.leading, .trailing], 8)
-                                        .background(Color.black)
-                                        .clipShape(Capsule())
                                 }
                             }
-                            .padding()
-                            .frame(width: 200)
                         }
                     }
                     """
                 }
 
                 Panel.viewTree {
-                    Tree(".frame(width: 200)") {
-                        Tree(".padding") {
-                            Tree("VStack") {
-                                Tree(".font(.title)") {
-                                    Tree("Text", id: "title-text")
-                                }
-                                Tree(".font(.body)") {
-                                    Tree("Text", id: "body-text")
-                                }
-                                Tree("_ConditionalContent") {
-                                    Tree("ForEach") {
-                                        Tree(".font(.caption)", id: "foreach-font-start") {
-                                            Tree("Text", id: "foreach-text-start")
-                                        }.relation(Relation(dashed: true))
-                                        Tree(".font(.caption)", id: "foreach-font-end") {
-                                            Tree("Text", id: "foreach-text-end")
-                                        }.relation(Relation(dashed: true))
-                                    }
-                                    Tree("<5>", color: Theme.Color.tintPrimary) {
-                                        Tree("Text", id: "author-text")
-                                    }
-                                }
+                    Tree("VStack") {
+                        Tree("Text", id: "title-text")
+                        Tree("Text", id: "body-text")
+                        Tree("_ConditionalContent") {
+                            Tree("ForEach") {
+                                Tree("Text", id: "foreach-text-start")
+                                    .relation(Relation(dashed: true))
+                                Tree("...", id: "foreach-text-mid")
+                                    .relation(Relation(dashed: true))
+                                Tree("Text", id: "foreach-text-end")
+                                    .relation(Relation(dashed: true))
                             }
+                            Tree("Text", id: "author-text")
                         }
                     }
                 }
@@ -113,6 +97,7 @@ struct ArticleView: View {
                     .clipShape(Capsule())
             }
         }
+        .foregroundStyle(.black)
         .padding()
         .frame(width: 200)
     }

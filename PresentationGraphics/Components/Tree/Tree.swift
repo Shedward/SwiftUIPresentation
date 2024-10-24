@@ -10,6 +10,7 @@ import SwiftUI
 
 struct Tree: Identifiable, Withable {
     var id: String
+    var caption: String?
     var title: String
     var relation: Relation
     var highlight: Color?
@@ -47,6 +48,10 @@ struct Tree: Identifiable, Withable {
 
     func relation(_ relation: Relation) -> Self {
         with { $0.relation = relation }
+    }
+
+    func caption(_ caption: String?) -> Self {
+        with { $0.caption = caption }
     }
 }
 

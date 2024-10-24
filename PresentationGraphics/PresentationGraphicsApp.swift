@@ -12,6 +12,7 @@ struct PresentationGraphicsApp: App {
 
     let slideshow = Slideshow {
         S18_RenderTree()
+        S18_RenderTree2()
 
         S00_Title()
         S01_Introduction()
@@ -26,6 +27,7 @@ struct PresentationGraphicsApp: App {
         S16_ForEachView()
         S17_ViewBuilderDSL()
         S18_RenderTree()
+        S18_RenderTree2()
 
         MockSlide(id: "S01_Another")
         MockSlide(id: "S01_AndAnother")

@@ -61,12 +61,19 @@ struct TreeView: View {
     var space: Space
 
     var body: some View {
-        VStack(alignment: .center, spacing: 2 * space.innerValue()) {
-            Text(tree.title)
-                .style(.body.color(tree.color ?? Theme.Color.contentPrimary))
-                .background(tree.highlight ?? Color.clear)
-                .padding(.vertical, space.innerValue(2))
-                .anchorPreference(key: ParrentPositionsKey.self, value: .bottom, transform: { $0 })
+        VStack(alignment: .center, spacing: space.innerValue()) {
+            VStack(spacing: 0) {
+                Text(tree.title)
+                    .style(.body.color(tree.color ?? Theme.Color.contentPrimary))
+                    .background(tree.highlight ?? Color.clear)
+                if let caption = tree.caption {
+                    Text(caption)
+                        .style(.caption.color(Theme.Color.contentSecondary))
+                }
+            }
+            .padding(.vertical, space.innerValue(2))
+            .anchorPreference(key: ParrentPositionsKey.self, value: .bottom, transform: { $0 })
+
             HStack(alignment: .top, spacing: space.innerValue()) {
                 ForEach(tree.children) { children in
                     TreeView(tree: children)
