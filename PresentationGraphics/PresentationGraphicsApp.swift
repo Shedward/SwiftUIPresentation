@@ -11,7 +11,7 @@ import SwiftUI
 struct PresentationGraphicsApp: App {
 
     let slideshow = Slideshow {
-        S17_ViewBuilderDSL()
+        S18_RenderTree()
 
         S00_Title()
         S01_Introduction()
@@ -25,6 +25,7 @@ struct PresentationGraphicsApp: App {
         S15_ConditionalContent()
         S16_ForEachView()
         S17_ViewBuilderDSL()
+        S18_RenderTree()
 
         MockSlide(id: "S01_Another")
         MockSlide(id: "S01_AndAnother")

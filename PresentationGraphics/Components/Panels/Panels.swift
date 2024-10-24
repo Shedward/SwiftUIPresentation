@@ -56,7 +56,7 @@ struct Panels: View {
 #Preview {
     Panels {
         Panel("Code") {
-            CodeView(Code("""
+            CodeView(code: Code("""
                 VStack {
                     Text("Hello")
                     Text("World")

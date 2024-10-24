@@ -12,9 +12,11 @@ struct CodeView: View {
     var space: Space
 
     let code: Code
+    var font: Font = Theme.Font.code
 
-    init(_ code: Code) {
+    init(code: Code, font: Font = Theme.Font.code) {
         self.code = code
+        self.font = font
     }
 
     init(@CodeBuilder _ lines: () -> [Code.Line]) {
@@ -26,13 +28,13 @@ struct CodeView: View {
             VStack(alignment: .trailing, spacing: 0) {
                 ForEach(code.lines, id: \.index) { line in
                     Text("\(line.index)")
-                        .style(.code.color(Theme.Color.contentTertiary))
+                        .style(TextStyle(font: font, color: Theme.Color.contentTertiary))
                 }
             }
             VStack(alignment: .leading, spacing: 0) {
                 ForEach(code.lines, id: \.part.lineId) { line in
                     Text(line.part.text)
-                        .style(.code.color(line.part.color ?? Theme.Color.contentPrimary))
+                        .style(TextStyle(font: font, color: Theme.Color.contentPrimary))
                         .background(line.part.highlight ?? .clear)
                 }
             }
