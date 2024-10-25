@@ -62,6 +62,10 @@ struct Tree: Identifiable, Withable {
     func disabled() -> Self {
         color(Theme.Color.contentTertiary)
     }
+
+    func diff(_ diffKind: DiffKind) -> Self {
+        highlight(diffKind.color.opacity(0.3))
+    }
 }
 
 struct Relation: Equatable, Withable {

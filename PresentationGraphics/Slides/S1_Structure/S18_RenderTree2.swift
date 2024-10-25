@@ -21,7 +21,7 @@ struct S18_RenderTree2: View, Slide {
     }
 
     var body: some View {
-        TitleSubtitleLayout(title: "Render Tree") {
+        TitleSubtitleLayout(title: "Render Tree", subtitle: "Изначальное состояние") {
             Panels {
                 Panel.viewTree {
                     Tree("VStack") {
@@ -53,7 +53,7 @@ struct S18_RenderTree2: View, Slide {
                     }
                 }
 
-                Panel("Render View") {
+                Panel("Render Tree") {
                     SpacedVStack {
                         CodeView {
                             """
@@ -65,21 +65,7 @@ struct S18_RenderTree2: View, Slide {
                         }
 
                         TreeView(
-                            tree: Tree("VStack") {
-                                Tree("Text", id: "title-text")
-                                    .caption("\"Что такое\nSwiftUI?\"")
-                                    .overline("0")
-                                Tree("Text", id: "body-text")
-                                    .caption("\"SwiftUI\n– это инструмент,\nкоторый...\"")
-                                    .overline("1")
-                                Tree("_ConditionalContent") {
-                                    Tree("Text", id: "author-text")
-                                        .caption("\"Authors: 3\"")
-                                        .overline("false")
-                                }
-                                .caption("false")
-                                .overline("2")
-                            }
+                            tree: Self.renderTree
                         )
                     }
                 }
@@ -93,6 +79,24 @@ struct S18_RenderTree2: View, Slide {
                     )
                 }
             }
+        }
+    }
+
+    static var renderTree: Tree {
+        Tree("VStack") {
+            Tree("Text", id: "title-text")
+                .caption("\"Что такое\nSwiftUI?\"")
+                .overline("0")
+            Tree("Text", id: "body-text")
+                .caption("\"SwiftUI\n– это инструмент,\nкоторый...\"")
+                .overline("1")
+            Tree("_ConditionalContent") {
+                Tree("Text", id: "author-text")
+                    .caption("\"Authors: 3\"")
+                    .overline("false")
+            }
+            .caption("false")
+            .overline("2")
         }
     }
 }

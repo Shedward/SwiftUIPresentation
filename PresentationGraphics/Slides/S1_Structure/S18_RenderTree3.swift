@@ -19,7 +19,7 @@ struct S18_RenderTree3: View, Slide {
     }
 
     var body: some View {
-        TitleSubtitleLayout(title: "Render Tree") {
+        TitleSubtitleLayout(title: "Render Tree", subtitle: "После изменения состояния") {
             Panels {
                 Panel.viewTree {
                     Tree("VStack") {
@@ -59,32 +59,7 @@ struct S18_RenderTree3: View, Slide {
                             "authors = [\"Алиса\", \"Боб\", \"Ева\"]"
                         }
 
-                        TreeView(
-                            tree: Tree("VStack") {
-                                Tree("Text", id: "title-text")
-                                    .caption("\"Что такое\nSwiftUI?\"")
-                                    .overline("0")
-                                Tree("Text", id: "body-text")
-                                    .caption("\"SwiftUI\n– это UI фреймворк\"")
-                                    .overline("1")
-                                Tree("_ConditionalContent") {
-                                    Tree("ForEach") {
-                                        Tree("Text", id: "alice-text")
-                                            .caption("\"Алиса\"")
-                                            .overline("Алиса")
-                                        Tree("Text", id: "bob-text")
-                                            .caption("\"Боб\"")
-                                            .overline("Боб")
-                                        Tree("Text", id: "eve-text")
-                                            .caption("\"Ева\"")
-                                            .overline("Ева")
-                                    }
-                                    .overline("true")
-                                }
-                                .caption("true")
-                                .overline("2")
-                            }
-                        )
+                        TreeView(tree: Self.renderTree)
                     }
                 }
 
@@ -97,6 +72,33 @@ struct S18_RenderTree3: View, Slide {
                     )
                 }
             }
+        }
+    }
+
+    static var renderTree: Tree {
+        Tree("VStack") {
+            Tree("Text", id: "title-text")
+                .caption("\"Что такое\nSwiftUI?\"")
+                .overline("0")
+            Tree("Text", id: "body-text")
+                .caption("\"SwiftUI\n– это UI фреймворк\"")
+                .overline("1")
+            Tree("_ConditionalContent") {
+                Tree("ForEach") {
+                    Tree("Text", id: "alice-text")
+                        .caption("\"Алиса\"")
+                        .overline("Алиса")
+                    Tree("Text", id: "bob-text")
+                        .caption("\"Боб\"")
+                        .overline("Боб")
+                    Tree("Text", id: "eve-text")
+                        .caption("\"Ева\"")
+                        .overline("Ева")
+                }
+                .overline("true")
+            }
+            .caption("true")
+            .overline("2")
         }
     }
 }

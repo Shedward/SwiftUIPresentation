@@ -21,6 +21,12 @@ extension Panel {
         }
     }
 
+    static func renderTree(_ title: String = "Render Tree", content: @escaping () -> Tree) -> Panel {
+        Panel(title) {
+            TreeView(tree: content())
+        }
+    }
+
     static func preview<Content: View>(_ title: String = "Preview", @ViewBuilder _ content: @escaping () -> Content) -> Panel {
         Panel(title) {
             content()

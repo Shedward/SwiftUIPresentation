@@ -19,81 +19,76 @@ struct S18_RenderTree4: View, Slide {
     }
 
     var body: some View {
-        TitleSubtitleLayout(title: "Render Tree") {
-            Panels {
-                Panel.viewTree {
-                    Tree("VStack") {
-                        Tree("Text", id: "title-text")
-                            .overline("0")
-                        Tree("Text", id: "body-text")
-                            .overline("1")
-                        Tree("_ConditionalContent") {
-                            Tree("ForEach") {
-                                Tree("Text", id: "foreach-text-start")
-                                    .relation(Relation(dashed: true))
-                                    .overline("authors[0]")
-                                Tree("...", id: "foreach-text-mid")
-                                    .relation(Relation(dashed: true))
-                                    .overline("")
-                                Tree("Text", id: "foreach-text-end")
-                                    .relation(Relation(dashed: true))
-                                    .overline("authors[n]")
+        TitleSubtitleLayout(title: "Render Tree", subtitle: "Строим diff") {
+            SpacedVStack {
+                Panels {
+                    Panel.renderTree("На экране") {
+                        Tree("VStack") {
+                            Tree("Text", id: "title-text")
+                                .caption("\"Что такое\nSwiftUI?\"")
+                                .overline("0")
+                            Tree("Text", id: "body-text")
+                                .caption("\"SwiftUI\n– это инструмент,\nкоторый...\"")
+                                .overline("1")
+                                .diff(.changed)
+                            Tree("_ConditionalContent") {
+                                Tree("Text", id: "author-text")
+                                    .caption("\"Authors: 3\"")
+                                    .overline("false")
+                                    .diff(.removed)
                             }
-                            .overline("true")
-                            Tree("Text", id: "author-text")
-                                .overline("false")
-                                .disabled()
+                            .caption("false")
+                            .overline("2")
                         }
-                        .overline("2")
                     }
-                }
 
-                Panel("Render View") {
-                    SpacedVStack {
-                        CodeView {
-                            "title = \"Что такое SwiftUI?\""
-                            "text = \"SwiftUI – это UI фреймворк\""
-                                .highlight()
-                            "showAuthors = true"
-                                .highlight()
-                            "authors = [\"Алиса\", \"Боб\", \"Ева\"]"
-                        }
-
-                        TreeView(
-                            tree: Tree("VStack") {
-                                Tree("Text", id: "title-text")
-                                    .caption("\"Что такое\nSwiftUI?\"")
-                                    .overline("0")
-                                Tree("Text", id: "body-text")
-                                    .caption("\"SwiftUI\n– это UI фреймворк\"")
-                                    .overline("1")
-                                Tree("_ConditionalContent") {
-                                    Tree("ForEach") {
-                                        Tree("Text", id: "alice-text")
-                                            .caption("\"Алиса\"")
-                                            .overline("Алиса")
-                                        Tree("Text", id: "bob-text")
-                                            .caption("\"Боб\"")
-                                            .overline("Боб")
-                                        Tree("Text", id: "eve-text")
-                                            .caption("\"Ева\"")
-                                            .overline("Ева")
-                                    }
-                                    .overline("true")
+                    Panel.renderTree("После апдейта") {
+                        Tree("VStack") {
+                            Tree("Text", id: "title-text")
+                                .caption("\"Что такое\nSwiftUI?\"")
+                                .overline("0")
+                            Tree("Text", id: "body-text")
+                                .caption("\"SwiftUI\n– это UI фреймворк\"")
+                                .overline("1")
+                                .diff(.changed)
+                            Tree("_ConditionalContent") {
+                                Tree("ForEach") {
+                                    Tree("Text", id: "alice-text")
+                                        .caption("\"Алиса\"")
+                                        .overline("Алиса")
+                                        .diff(.added)
+                                    Tree("Text", id: "bob-text")
+                                        .caption("\"Боб\"")
+                                        .overline("Боб")
+                                        .diff(.added)
+                                    Tree("Text", id: "eve-text")
+                                        .caption("\"Ева\"")
+                                        .overline("Ева")
+                                        .diff(.added)
                                 }
-                                .caption("true")
-                                .overline("2")
+                                .overline("true")
+                                .diff(.added)
                             }
-                        )
+                            .caption("true")
+                            .overline("2")
+                        }
                     }
                 }
 
-                Panel.preview {
-                    ArticleView(
-                        title: "Что такое SwiftUI?",
-                        text: "SwiftUI – это UI фреймворк",
-                        showAuthors: true,
-                        authors: ["Алиса", "Боб", "Ева"]
+                DiffView {
+                    DiffRow(
+                        kind: .removed,
+                        path: ["VStack", "2", "_ConditionalContent", "true", "Text"],
+                        content: "\"Authors: 3\""
+                    )
+                    DiffRow(
+                        kind: .added,
+                        path: ["VStack", "2", "_ConditionalContent", "false", "ForEach"]
+                    )
+                    DiffRow(
+                        kind: .changed,
+                        path: ["VStack", "1", "Text"],
+                        content: "\"SwiftUI– это инструмент, который...\" → \"SwiftUI – это UI фреймворк\""
                     )
                 }
             }

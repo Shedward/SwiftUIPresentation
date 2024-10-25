@@ -70,7 +70,7 @@ extension View {
             .reduceSpacing(by: step)
     }
 
-    func space(minSpace: Space? , maxSpace: Space?) -> some View {
+    func space(minSpace: Space? = nil , maxSpace: Space? = nil) -> some View {
         modifier(MinMaxSpaceModifier(minSpace: minSpace, maxSpace: maxSpace))
     }
 }
