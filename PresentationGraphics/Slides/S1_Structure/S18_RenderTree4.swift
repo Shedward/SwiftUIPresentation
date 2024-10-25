@@ -7,16 +7,14 @@
 
 import SwiftUI
 
-struct S18_RenderTree2: View, Slide {
+struct S18_RenderTree4: View, Slide {
 
     @Environment(\.episode)
     var episode: String
 
     var notes: String? {
         """
-        e00 - Чтобы отрисовать эту вьюху мы инстанциируем ее с определенным состоянием, допустим ... 
-            - Дальше мы вычисляем body с выбранными значениями и получаем Render Tree
-            - На основе этого render tree, SwiftUI рисует на экране соответствующий интерфейс
+        e00 - SwiftUI под капотом сравнит новое и отрисованное дерево и составит дифф
         """
     }
 
@@ -34,20 +32,17 @@ struct S18_RenderTree2: View, Slide {
                                 Tree("Text", id: "foreach-text-start")
                                     .relation(Relation(dashed: true))
                                     .overline("authors[0]")
-                                    .disabled()
                                 Tree("...", id: "foreach-text-mid")
                                     .relation(Relation(dashed: true))
                                     .overline("")
-                                    .disabled()
                                 Tree("Text", id: "foreach-text-end")
                                     .relation(Relation(dashed: true))
                                     .overline("authors[n]")
-                                    .disabled()
                             }
                             .overline("true")
-                            .disabled()
                             Tree("Text", id: "author-text")
                                 .overline("false")
+                                .disabled()
                         }
                         .overline("2")
                     }
@@ -56,12 +51,12 @@ struct S18_RenderTree2: View, Slide {
                 Panel("Render View") {
                     SpacedVStack {
                         CodeView {
-                            """
-                            title = "Что такое SwiftUI?"
-                            text = "SwiftUI – это инструмент, который..."
-                            showAuthors = false
-                            authors = ["Алиса", "Боб", "Ева"]
-                            """
+                            "title = \"Что такое SwiftUI?\""
+                            "text = \"SwiftUI – это UI фреймворк\""
+                                .highlight()
+                            "showAuthors = true"
+                                .highlight()
+                            "authors = [\"Алиса\", \"Боб\", \"Ева\"]"
                         }
 
                         TreeView(
@@ -70,14 +65,23 @@ struct S18_RenderTree2: View, Slide {
                                     .caption("\"Что такое\nSwiftUI?\"")
                                     .overline("0")
                                 Tree("Text", id: "body-text")
-                                    .caption("\"SwiftUI\n– это инструмент,\nкоторый...\"")
+                                    .caption("\"SwiftUI\n– это UI фреймворк\"")
                                     .overline("1")
                                 Tree("_ConditionalContent") {
-                                    Tree("Text", id: "author-text")
-                                        .caption("\"Authors: 3\"")
-                                        .overline("false")
+                                    Tree("ForEach") {
+                                        Tree("Text", id: "alice-text")
+                                            .caption("\"Алиса\"")
+                                            .overline("Алиса")
+                                        Tree("Text", id: "bob-text")
+                                            .caption("\"Боб\"")
+                                            .overline("Боб")
+                                        Tree("Text", id: "eve-text")
+                                            .caption("\"Ева\"")
+                                            .overline("Ева")
+                                    }
+                                    .overline("true")
                                 }
-                                .caption("false")
+                                .caption("true")
                                 .overline("2")
                             }
                         )
@@ -87,8 +91,8 @@ struct S18_RenderTree2: View, Slide {
                 Panel.preview {
                     ArticleView(
                         title: "Что такое SwiftUI?",
-                        text: "SwiftUI – это инструмент, который...",
-                        showAuthors: false,
+                        text: "SwiftUI – это UI фреймворк",
+                        showAuthors: true,
                         authors: ["Алиса", "Боб", "Ева"]
                     )
                 }

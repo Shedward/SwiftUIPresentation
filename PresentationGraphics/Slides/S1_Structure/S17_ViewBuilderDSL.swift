@@ -27,7 +27,7 @@ struct S17_ViewBuilderDSL: View, Slide {
     }
 
     var body: some View {
-        TitleSubtitleLayout(title: "Что такое ViewBuilder", subtitle: "Код") {
+        TitleSubtitleLayout(title: "Что такое ViewBuilder", subtitle: "Не код, а DSL") {
             switch episode {
             case "e00":
                 e00

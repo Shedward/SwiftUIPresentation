@@ -24,20 +24,27 @@ struct S18_RenderTree3: View, Slide {
                 Panel.viewTree {
                     Tree("VStack") {
                         Tree("Text", id: "title-text")
+                            .overline("0")
                         Tree("Text", id: "body-text")
-                            .highlight()
+                            .overline("1")
                         Tree("_ConditionalContent") {
                             Tree("ForEach") {
                                 Tree("Text", id: "foreach-text-start")
                                     .relation(Relation(dashed: true))
+                                    .overline("authors[0]")
                                 Tree("...", id: "foreach-text-mid")
                                     .relation(Relation(dashed: true))
+                                    .overline("")
                                 Tree("Text", id: "foreach-text-end")
                                     .relation(Relation(dashed: true))
+                                    .overline("authors[n]")
                             }
+                            .overline("true")
                             Tree("Text", id: "author-text")
+                                .overline("false")
                                 .disabled()
-                        }.highlight()
+                        }
+                        .overline("2")
                     }
                 }
 
@@ -56,17 +63,26 @@ struct S18_RenderTree3: View, Slide {
                             tree: Tree("VStack") {
                                 Tree("Text", id: "title-text")
                                     .caption("\"Что такое\nSwiftUI?\"")
+                                    .overline("0")
                                 Tree("Text", id: "body-text")
                                     .caption("\"SwiftUI\n– это UI фреймворк\"")
+                                    .overline("1")
                                 Tree("_ConditionalContent") {
-                                    Tree("Text", id: "alice-text")
-                                        .caption("\"Алиса\"")
-                                    Tree("Text", id: "bob-text")
-                                        .caption("\"Боб\"")
-                                    Tree("Text", id: "eve-text")
-                                        .caption("\"Ева\"")
+                                    Tree("ForEach") {
+                                        Tree("Text", id: "alice-text")
+                                            .caption("\"Алиса\"")
+                                            .overline("Алиса")
+                                        Tree("Text", id: "bob-text")
+                                            .caption("\"Боб\"")
+                                            .overline("Боб")
+                                        Tree("Text", id: "eve-text")
+                                            .caption("\"Ева\"")
+                                            .overline("Ева")
+                                    }
+                                    .overline("true")
                                 }
                                 .caption("true")
+                                .overline("2")
                             }
                         )
                     }
