@@ -15,6 +15,11 @@ struct S18_RenderTree4: View, Slide {
     var notes: String? {
         """
         e00 - SwiftUI под капотом сравнит новое и отрисованное дерево и составит дифф
+            - Обратите внимание что этот дифф составляется по айдишникам
+            - Путь из айдишников и типов по которому мы идем от рута до вьюхи - определяет ее
+            - Если путь сохранен - вьюха та же самая и обновляется, 
+            - Если путь отличается - то старая вьюха удаляется, новая добавляется
+            - Даже если структура вьюх 
         """
     }
 
@@ -22,7 +27,7 @@ struct S18_RenderTree4: View, Slide {
         TitleSubtitleLayout(title: "Render Tree", subtitle: "Строим diff") {
             SpacedVStack {
                 Panels {
-                    Panel.renderTree("На экране") {
+                    Panel.renderTree("До") {
                         Tree("VStack") {
                             Tree("Text", id: "title-text")
                                 .caption("\"Что такое\nSwiftUI?\"")
@@ -42,7 +47,7 @@ struct S18_RenderTree4: View, Slide {
                         }
                     }
 
-                    Panel.renderTree("После апдейта") {
+                    Panel.renderTree("После") {
                         Tree("VStack") {
                             Tree("Text", id: "title-text")
                                 .caption("\"Что такое\nSwiftUI?\"")
@@ -78,16 +83,31 @@ struct S18_RenderTree4: View, Slide {
                 DiffView {
                     DiffRow(
                         kind: .removed,
-                        path: ["VStack", "2", "_ConditionalContent", "true", "Text"],
+                        path: ["VStack[2]", "_ConditionalContent[true]", "Text"],
                         content: "\"Authors: 3\""
                     )
                     DiffRow(
                         kind: .added,
-                        path: ["VStack", "2", "_ConditionalContent", "false", "ForEach"]
+                        path: ["VStack[2]", "_ConditionalContent[false]", "ForEach"]
+                    )
+                    DiffRow(
+                        kind: .added,
+                        path: ["VStack[2]", "_ConditionalContent[false]", "ForEach[Алиса]", "Text"],
+                        content: "Алиса"
+                    )
+                    DiffRow(
+                        kind: .added,
+                        path: ["VStack[2]", "_ConditionalContent[false]", "ForEach[Боб]", "Text"],
+                        content: "Боб"
+                    )
+                    DiffRow(
+                        kind: .added,
+                        path: ["VStack[2]", "_ConditionalContent[false]", "ForEach[Ева]", "Text"],
+                        content: "Ева"
                     )
                     DiffRow(
                         kind: .changed,
-                        path: ["VStack", "1", "Text"],
+                        path: ["VStack[1]", "Text"],
                         content: "\"SwiftUI– это инструмент, который...\" → \"SwiftUI – это UI фреймворк\""
                     )
                 }
