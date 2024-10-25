@@ -27,6 +27,7 @@ struct PresentationGraphicsApp: App {
         S18_RenderTree2()
         S18_RenderTree3()
         S18_RenderTree4()
+        S18_RenderTree5()
     }
 
     var body: some Scene {

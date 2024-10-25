@@ -7,15 +7,21 @@
 
 import SwiftUI
 
-struct Panel: Identifiable, ShowIfable {
+struct Panel: Identifiable, ShowIfable, Withable {
     var id: String { title }
 
     let title: String
     let content: AnyView
+    var background: Color?
 
-    init<Content: View>(_ title: String, @ViewBuilder content: @escaping () -> Content) {
+    init<Content: View>(_ title: String, background: Color? = nil, @ViewBuilder content: @escaping () -> Content) {
         self.title = title
+        self.background = background
         self.content = AnyView(content())
+    }
+
+    func background(_ color: Color?) -> Self {
+        with { $0.background = color }
     }
 }
 
@@ -46,7 +52,7 @@ struct Panels: View {
                 ForEach(panels) { panel in
                     panel.content
                         .frame(maxHeight: .infinity)
-                        .framed(fill: Theme.Color.backgroundSecondary)
+                        .framed(fill: panel.background ?? Theme.Color.backgroundSecondary)
                 }
             }
         }

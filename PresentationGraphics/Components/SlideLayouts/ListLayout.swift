@@ -12,9 +12,9 @@ struct ListLayout: View {
     let subtitle: String?
     let items: [String]
 
-    let style: Style
+    let style: PointsList.Style
 
-    init(title: String, subtitle: String? = nil, style: Style = .bullet, @ArrayBuilder<String> items: () -> [String]) {
+    init(title: String, subtitle: String? = nil, style: PointsList.Style = .bullet, @ArrayBuilder<String> items: () -> [String]) {
         self.title = title
         self.subtitle = subtitle
         self.style = style
@@ -23,30 +23,9 @@ struct ListLayout: View {
 
     var body: some View {
         TitleSubtitleLayout(title: title, subtitle: subtitle) {
-            SpacedVStack(alignment: .leading) {
-                ForEach(Array(items.enumerated()), id: \.element.self) { item in
-                    Text(description(for: item.offset, content: item.element))
-                        .style(.body)
-                }
-            }
-            .frame(maxWidth: .infinity)
+            PointsList(style: style, items: items)
+                .frame(maxWidth: .infinity)
         }
-    }
-
-    private func description(for index: Int, content: String) -> String {
-        switch style {
-            case .bullet:
-                "• \(content)"
-            case .enumerated:
-                "\(index + 1). \(content)"
-        }
-    }
-}
-
-extension ListLayout {
-    enum Style {
-        case bullet
-        case enumerated
     }
 }
 
