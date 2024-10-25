@@ -14,6 +14,8 @@ struct S15_ConditionalContent: View, Slide {
 
     var episodes: [Episode] {
         "e01-if-без-else"
+        "e02-if-let"
+        "e02-optional"
         "e02-if-с-else"
         "e03-if-с-else-if"
         "e04-несколько-if"

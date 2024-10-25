@@ -49,15 +49,12 @@ struct S16_ForEachView: View, Slide {
                 Panel.viewTree {
                     Tree("List") {
                         Tree("ForEach<String>") {
-                            Tree("id[0]", id: "first-id", relation: .init(dashed: true)) {
-                                Tree("Text", id: "first-text")
-                            }
-                            Tree("...", id: "mid-id", relation: .init(dashed: true)) {
-                                Tree("Text", id: "mid-text")
-                            }
-                            Tree("id[n]", id: "last-id", relation: .init(dashed: true)) {
-                                Tree("Text", id: "first-text")
-                            }
+                            Tree("Text", id: "first-text")
+                                .overline("id[0]")
+                            Tree("...", id: "mid-text")
+                                .overline("")
+                            Tree("Text", id: "last-text")
+                                .overline("id[n]")
                         }
                     }
                 }.showIf(episode, after: "e01-ForEach")

@@ -62,12 +62,22 @@ struct TreeView: View {
 
     var body: some View {
         VStack(alignment: .center, spacing: space.innerValue()) {
-            VStack(spacing: 0) {
+            VStack(spacing: Space.min.value) {
+                if let overline = tree.overline {
+                    Text(overline)
+                        .style(
+                            font: Theme.Font.captionExtraSmall,
+                            color: Theme.Color.tintPrimary
+                        )
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(Theme.Color.highlight)
+                }
                 Text(tree.title)
                     .style(.body.color(tree.color ?? Theme.Color.contentPrimary))
                     .background(tree.highlight ?? Color.clear)
                 if let caption = tree.caption {
                     Text(caption)
+                        .multilineTextAlignment(.center)
                         .style(.caption.color(Theme.Color.contentSecondary))
                 }
             }

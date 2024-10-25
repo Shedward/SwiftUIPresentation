@@ -10,6 +10,7 @@ import SwiftUI
 
 struct Tree: Identifiable, Withable {
     var id: String
+    var overline: String?
     var caption: String?
     var title: String
     var relation: Relation
@@ -50,8 +51,16 @@ struct Tree: Identifiable, Withable {
         with { $0.relation = relation }
     }
 
+    func overline(_ overline: String?) -> Self {
+        with { $0.overline = overline }
+    }
+
     func caption(_ caption: String?) -> Self {
         with { $0.caption = caption }
+    }
+
+    func disabled() -> Self {
+        color(Theme.Color.contentTertiary)
     }
 }
 
@@ -62,7 +71,13 @@ struct Relation: Equatable, Withable {
     let lineWidth: CGFloat
     let dashed: Bool
 
-    init(_ id: String = UUID().uuidString, title: String? = nil, color: Color = .blue, lineWidth: CGFloat = 1, dashed: Bool = false) {
+    init(
+        id: String = UUID().uuidString,
+        title: String? = nil,
+        color: Color = Theme.Color.tintPrimary,
+        lineWidth: CGFloat = 1,
+        dashed: Bool = false
+    ) {
         self.id = id
         self.title = title ?? id
         self.color = color

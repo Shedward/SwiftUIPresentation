@@ -34,7 +34,7 @@ struct Space: Comparable, Equatable {
     }
 
     static let max: Space = .init(value: 80)
-    static let min: Space = .init(value: step)
+    static let min: Space = .init(value: 8)
 
     static let s0: Space = max
     static let s1: Space = s0.down()

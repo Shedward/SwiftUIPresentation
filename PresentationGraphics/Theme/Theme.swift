@@ -17,6 +17,8 @@ enum Theme {
         static let codeSmall = SwiftUI.Font.custom("JetBrains Mono", size: 16)
         static let codeExtraSmall = SwiftUI.Font.custom("JetBrains Mono", size: 14)
         static let caption = SwiftUI.Font.custom("Helvetica Nueue", size: 16)
+        static let captionSmall = SwiftUI.Font.custom("Helvetica Nueue", size: 14)
+        static let captionExtraSmall = SwiftUI.Font.custom("Helvetica Nueue", size: 12)
     }
 
     enum Color {

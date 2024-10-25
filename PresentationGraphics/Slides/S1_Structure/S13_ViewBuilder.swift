@@ -29,7 +29,8 @@ struct S13_ViewBuilder: View, Slide {
 
     var body: some View {
         TitleSubtitleLayout(
-            title: "@ViewBuilder"
+            title: "@ViewBuilder",
+            subtitle: "Самая база описания вьюх"
         ) {
             Panels {
                 Panel.code("VStack.swift") {

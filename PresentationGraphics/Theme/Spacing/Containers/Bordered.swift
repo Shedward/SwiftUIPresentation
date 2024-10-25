@@ -12,7 +12,7 @@ struct BorderedViewModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .background {
+            .overlay {
                 Rectangle()
                     .fill(Color.clear)
                     .strokeBorder(style: .init(lineWidth: strokeWidth, dash: [10, 5]))

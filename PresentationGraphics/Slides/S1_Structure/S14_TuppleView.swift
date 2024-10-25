@@ -36,7 +36,7 @@ struct S14_TuppleView: View, Slide {
     }
 
     var body: some View {
-        TitleSubtitleLayout(title: "Список") {
+        TitleSubtitleLayout(title: "Список", subtitle: "Перечисление вьюх") {
             Panels {
                 Panel.code {
                     "var body: some View {"

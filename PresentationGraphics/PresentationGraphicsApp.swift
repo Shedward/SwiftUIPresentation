@@ -11,16 +11,13 @@ import SwiftUI
 struct PresentationGraphicsApp: App {
 
     let slideshow = Slideshow {
-        S18_RenderTree()
-        S18_RenderTree2()
-
-        S00_Title()
-        S01_Introduction()
-        S02_Plan()
-
-        S10_Structure()
-        S11_View()
-        S12_ViewTrees()
+//        S00_Title()
+//        S01_Introduction()
+//        S02_Plan()
+//
+//        S10_Structure()
+//        S11_View()
+//        S12_ViewTrees()
         S13_ViewBuilder()
         S14_TuppleView()
         S15_ConditionalContent()
@@ -28,20 +25,20 @@ struct PresentationGraphicsApp: App {
         S17_ViewBuilderDSL()
         S18_RenderTree()
         S18_RenderTree2()
-
-        MockSlide(id: "S01_Another")
-        MockSlide(id: "S01_AndAnother")
-        ComplexMockSlide()
+        S18_RenderTree3()
     }
 
     var body: some Scene {
         WindowGroup {
             PlayerWindow(slideshow: slideshow)
+                .colorScheme(.light)
         }
         .windowStyle(.hiddenTitleBar)
+
         Window("Clicker", id: "clicker") {
             ClickerWindow(slideshow: slideshow)
                 .fixedSize()
+                .colorScheme(.light)
         }
         .windowStyle(.hiddenTitleBar)
     }

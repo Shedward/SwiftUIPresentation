@@ -27,7 +27,7 @@ struct S17_ViewBuilderDSL: View, Slide {
     }
 
     var body: some View {
-        TitleSubtitleLayout(title: "ViewBuilder это DSL") {
+        TitleSubtitleLayout(title: "Что такое ViewBuilder", subtitle: "Код") {
             switch episode {
             case "e00":
                 e00
@@ -42,7 +42,7 @@ struct S17_ViewBuilderDSL: View, Slide {
     @ViewBuilder
     var e00: some View {
         Table(
-            header: Table.Header("", "Как мы пишем", "Как бы мы писали\n без @ViewBuilder"),
+            header: Table.Header("", "Код", "Смысл", "type(of: body)"),
             alignment: .leading
         ) {
             Table.Row {
@@ -50,27 +50,30 @@ struct S17_ViewBuilderDSL: View, Slide {
                     Text("Выражения")
                         .style(.caption)
                 }
-                Table.Cell {
-                    CodeView {
-                        """
+                Table.Cell.code {
+                    """
+                    FirstView()
+                    SecondView()
+                    ThirdView()
+                    """
+                }
+                Table.Cell.code {
+                    """
+                    TuppleView(
                         FirstView()
                         SecondView()
                         ThirdView()
-                        """
-                    }
-                    .framed(fill: Theme.Color.backgroundSecondary)
+                    )
+                    """
                 }
-                Table.Cell {
-                    CodeView {
-                        """
-                        TuppleView(
-                            FirstView(),
-                            SecondView(),
-                            ThirdView()
-                        )
-                        """
-                    }
-                    .framed(fill: Theme.Color.backgroundSecondary)
+                Table.Cell.code {
+                    """
+                    TuppleView<(
+                        FirstView,
+                        SecondView,
+                        ThirdView
+                    )>
+                    """
                 }
             }
 
@@ -79,28 +82,60 @@ struct S17_ViewBuilderDSL: View, Slide {
                     Text("Условия")
                         .style(.caption)
                 }
-                Table.Cell {
-                    CodeView {
-                        """
-                        if test {
-                            TrueView()
-                        } else {
-                            FalseView()
-                        }
-                        """
+                Table.Cell.code {
+                    """
+                    if test {
+                        TrueView()
+                    } else {
+                        FalseView()
                     }
-                    .framed(fill: Theme.Color.backgroundSecondary)
+                    """
                 }
+                Table.Cell.code {
+                    """
+                    _ConditionalContent(
+                        condition,
+                        TrueView(),
+                        FalseView()
+                    )
+                    """
+                }
+                Table.Cell.code {
+                    """
+                    _ConditionalContent<
+                        TrueView,
+                        FalseView
+                    >
+                    """
+                }
+            }
+
+            Table.Row {
                 Table.Cell {
-                    CodeView {
-                        """
-                        _ConditionalContent(
-                            TrueView(),
-                            FalseView()
-                        )
-                        """
+                    Text("Опциональность")
+                        .style(.caption)
+                }
+                Table.Cell.code {
+                    """
+                    if test {
+                        TrueView()
                     }
-                    .framed(fill: Theme.Color.backgroundSecondary)
+                    
+                    if let optional {
+                        ContentView(optional)
+                    }
+                    """
+                }
+                Table.Cell.code {
+                    """
+                    test ? TrueView() : nil
+                    optional.map { ContentView($0) }
+                    """
+                }
+                Table.Cell.code {
+                    """
+                    Optional<TrueView>
+                    """
                 }
             }
 
@@ -109,28 +144,50 @@ struct S17_ViewBuilderDSL: View, Slide {
                     Text("Циклы")
                         .style(.caption)
                 }
-                Table.Cell {
-                    CodeView {
-                        """
-                        ForEach(data) { dataItem in
-                            CellView(dataItem)
-                        }
-                        """
+                Table.Cell.code {
+                    """
+                    ForEach(data) { dataItem in
+                        CellView(dataItem)
                     }
-                    .framed(fill: Theme.Color.backgroundSecondary)
+                    """
                 }
-                Table.Cell {
-                    CodeView {
-                        """
-                        ForEach(data) { dataItem in
-                            CellView(dataItem)
-                        }
-                        """
+                Table.Cell.code {
+                    """
+                    ForEach(data) { dataItem in
+                        CellView(dataItem)
                     }
-                    .framed(fill: Theme.Color.backgroundSecondary)
+                    """
+                }
+                Table.Cell.code {
+                    """
+                    ForEach<Data, DataId, Cell>
+                    """
+                }
+            }
+
+            Table.Row {
+                Table.Cell {
+                    Text("Пустое выражение")
+                        .style(.caption)
+                }
+                Table.Cell.code {
+                    """
+                     
+                    """
+                }
+                Table.Cell.code {
+                    """
+                    EmptyView()
+                    """
+                }
+                Table.Cell.code {
+                    """
+                    EmptyView
+                    """
                 }
             }
         }
+        .reduceSpacing()
     }
 
     @ViewBuilder

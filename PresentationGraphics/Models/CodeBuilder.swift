@@ -51,6 +51,14 @@ enum CodeBuilder {
             Code.Line(index: index + 1, part: part)
         }
     }
+
+    static func buildFinalResult(_ component: [CodePart]) -> Code {
+        let lines = component.enumerated().map { index, part in
+            Code.Line(index: index + 1, part: part)
+        }
+
+        return Code(lines: lines)
+    }
 }
 
 struct CodePart: Withable {

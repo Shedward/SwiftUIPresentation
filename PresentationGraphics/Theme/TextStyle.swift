@@ -46,4 +46,8 @@ extension View {
     func style(_ style: TextStyle) -> some View {
         modifier(TextStyleModifier(style: style))
     }
+
+    func style(font: Font = Theme.Font.body, color: Color = Theme.Color.contentPrimary) -> some View {
+        modifier(TextStyleModifier(style: TextStyle(font: font, color: color)))
+    }
 }
