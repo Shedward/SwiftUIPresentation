@@ -16,6 +16,7 @@ struct Tree: Identifiable, Withable {
     var relation: Relation
     var highlight: Color?
     var color: Color?
+    var body: AnyView?
 
     var children: [Tree]
 
@@ -65,6 +66,10 @@ struct Tree: Identifiable, Withable {
 
     func diff(_ diffKind: DiffKind) -> Self {
         highlight(diffKind.color.opacity(0.3))
+    }
+
+    func body<Content: View>(@ViewBuilder body: () -> Content) -> Self {
+        with { $0.body = AnyView(body()) }
     }
 }
 

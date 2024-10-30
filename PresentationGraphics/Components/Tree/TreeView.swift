@@ -80,6 +80,9 @@ struct TreeView: View {
                         .multilineTextAlignment(.center)
                         .style(.caption.color(Theme.Color.contentSecondary))
                 }
+                if let body = tree.body {
+                    body
+                }
             }
             .padding(.vertical, space.innerValue(2))
             .anchorPreference(key: ParrentPositionsKey.self, value: .bottom, transform: { $0 })
