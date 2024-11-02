@@ -17,13 +17,13 @@ extension Panel {
 
     static func viewTree(_ title: String = "View Tree", content: @escaping () -> Tree) -> Panel {
         Panel(title) {
-            TreeView(tree: content())
+            TreeView(content())
         }
     }
 
     static func renderTree(_ title: String = "Render Tree", content: @escaping () -> Tree) -> Panel {
         Panel(title) {
-            TreeView(tree: content())
+            TreeView(content())
                 .relation(.renderTree)
         }
     }

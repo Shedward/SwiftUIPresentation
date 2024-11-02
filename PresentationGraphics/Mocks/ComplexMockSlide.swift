@@ -42,16 +42,18 @@ struct ComplexMockSlide: View, Slide {
                     """
                 }
                 Panel("RenderTree") {
-                    TreeView(tree: Tree("ContentView") {
-                        Tree("Panels") {
-                            Tree("Panel(\"Код\")") {
-                                Tree("CodeView")
-                            }
-                            Tree("Panel(\"Панель 2\")") {
-                                Tree("Text")
+                    TreeView(
+                        Tree("ContentView") {
+                            Tree("Panels") {
+                                Tree("Panel(\"Код\")") {
+                                    Tree("CodeView")
+                                }
+                                Tree("Panel(\"Панель 2\")") {
+                                    Tree("Text")
+                                }
                             }
                         }
-                    })
+                    )
                 }
                 Panel("Результат") {
                     Rectangle()

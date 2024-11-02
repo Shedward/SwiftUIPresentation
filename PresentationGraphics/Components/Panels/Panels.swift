@@ -73,7 +73,7 @@ struct Panels: View {
         }
         Panel("ViewTree") {
             TreeView(
-                tree: Tree("VStack") {
+                Tree("VStack") {
                     Tree("Text", id: "hello-text")
                     Tree(".padding") {
                         Tree(".fixedSize") {

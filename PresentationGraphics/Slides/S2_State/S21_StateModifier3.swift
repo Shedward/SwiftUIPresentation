@@ -107,24 +107,21 @@ struct S21_StateModifier3: View, Slide {
                 Panel("Деревья") {
                     SpacedVStack {
                         TreeView(
-                            tree: Tree("") {
-                                Tree("Counter")
-                                    .body {
-                                        InitialStateLabel(name: "count", initialValue: "0")
-                                    }
-                            }
+                            Tree("Counter")
+                                .body {
+                                    InitialStateLabel(name: "count", initialValue: "0")
+                                }
                         )
-                        .relation(.viewTree)
+                        .framed(fill: Theme.Color.tintPrimary.opacity(0.3))
+
 
                         TreeView(
-                            tree: Tree("") {
-                                Tree("Counter")
-                                    .body {
-                                        CurrentStateLabel(name: "count", initialValue: "0")
-                                    }
-                            }
+                            Tree("Counter")
+                                .body {
+                                    CurrentStateLabel(name: "count", initialValue: "0")
+                                }
                         )
-                        .relation(.renderTree)
+                        .framed(fill: Theme.Color.tintSecondary.opacity(0.3))
                     }
                 }
                 .showIf(episode, after: e01)

@@ -58,7 +58,7 @@ struct S18_RenderTree3: View, Slide {
                             "authors = [\"Алиса\", \"Боб\", \"Ева\"]"
                         }
 
-                        TreeView(tree: Self.renderTree)
+                        TreeView(Self.renderTree)
                             .relation(.renderTree)
                     }
                 }

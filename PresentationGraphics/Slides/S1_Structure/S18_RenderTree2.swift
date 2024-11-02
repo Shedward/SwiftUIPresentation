@@ -63,10 +63,8 @@ struct S18_RenderTree2: View, Slide {
                             """
                         }
 
-                        TreeView(
-                            tree: Self.renderTree
-                        )
-                        .relation(.renderTree)
+                        TreeView(Self.renderTree)
+                            .relation(.renderTree)
                     }
                 }
 

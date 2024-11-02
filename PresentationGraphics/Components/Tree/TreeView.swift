@@ -93,7 +93,7 @@ struct TreeView: View {
 
             HStack(alignment: .top, spacing: space.innerValue()) {
                 ForEach(tree.children) { children in
-                    TreeView(tree: children)
+                    TreeView(children)
                         .anchorPreference(key: ChildPositionsKey.self, value: .top) {
                             [ChildPosition(position: $0, relation: children.relation)]
                         }
@@ -124,11 +124,15 @@ struct TreeView: View {
         .onPreferenceChange(ChildPositionsKey.self) { childPositions = $0 }
         .id(tree.id)
     }
+
+    init(_ tree: Tree) {
+        self.tree = tree
+    }
 }
 
 #Preview {
     TreeView(
-        tree: Tree("Background") {
+        Tree("Background") {
             Tree("Color")
             Tree("HStack") {
                 Tree("Icon")
