@@ -9,14 +9,13 @@ import SwiftUI
 
 struct S18_RenderTree5: View, Slide {
 
-    @Environment(\.episode)
-    var episode: String
-
-    var notes: String? {
-        """
-        e00 - Затем SwiftUI применит этот диф
+    var episodes: [Episode] {
+        e00(
+            """
+            - Затем SwiftUI применит этот диф
             - Ну и в целом жизненный цикл любой вьюхи 
-        """
+            """
+        )
     }
 
     var body: some View {

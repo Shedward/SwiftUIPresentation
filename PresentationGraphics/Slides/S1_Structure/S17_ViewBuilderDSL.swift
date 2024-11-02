@@ -10,29 +10,31 @@ import SwiftUI
 struct S17_ViewBuilderDSL: View, Slide {
 
     @Environment(\.episode)
-    var episode: String
+    var episode: Episode
 
     var episodes: [Episode] {
-        "e01-код-это-дерево"
-    }
-
-    var notes: String? {
-        """
-        e00 - Мы знаем ViewBuilder по сути превращает выражения в коде в древовидные структуры
+        e00(
+            """
+            - Мы знаем ViewBuilder по сути превращает выражения в коде в древовидные структуры
             - Поэтому тело body и любого ViewBuilder'а это не код в привычном нам понимании
-        e01 - Тело ViewBuilder'а это описание дерева которое ВЫГЛЯДИТ КАК КОД
+            """
+        )
+        e01(
+            """
+            - Тело ViewBuilder'а это описание дерева которое ВЫГЛЯДИТ КАК КОД
             - Поэтому в нем положение и структура каждого элемента имеют важное значение
-            - Поэтому вещи одинаковые по смыслу в обычном коде - тут будут иметь разное поведение 
-        """
+            - Поэтому вещи одинаковые по смыслу в обычном коде - тут будут иметь разное поведение
+            """
+        )
     }
 
     var body: some View {
         TitleSubtitleLayout(title: "Что такое ViewBuilder", subtitle: "Не код, а DSL") {
             switch episode {
-            case "e00":
-                e00
-            case "e01-код-это-дерево":
-                e01
+            case e00:
+                e00_body
+            case e01:
+                e01_body
             default:
                 EmptyView()
             }
@@ -40,7 +42,7 @@ struct S17_ViewBuilderDSL: View, Slide {
     }
 
     @ViewBuilder
-    var e00: some View {
+    var e00_body: some View {
         Table(
             header: Table.Header("", "Код", "Смысл", "type(of: body)"),
             alignment: .leading
@@ -191,7 +193,7 @@ struct S17_ViewBuilderDSL: View, Slide {
     }
 
     @ViewBuilder
-    var e01: some View {
+    var e01_body: some View {
         Panels {
             Panel.code("C DSL") {
                 """

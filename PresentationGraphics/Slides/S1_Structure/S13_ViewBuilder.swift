@@ -10,21 +10,22 @@ import SwiftUI
 struct S13_ViewBuilder: View, Slide {
 
     @Environment(\.episode)
-    var episode: String
+    var episode: Episode
 
     var episodes: [Episode] {
-        "e01-определение-vstack"
-    }
-
-    var notes: String? {
-        """
-        e00 - Для того чтобы описывать деревья вьюх мы постоянно используем конструкции такого вида
+        e00(
+            """
+            - Для того чтобы описывать деревья вьюх мы постоянно используем конструкции такого вида
             - Выглядит это как будто HStack принимает список вьюх.
-        e01 - Но если посмотреть на определение VStack'а можно увидеть что тело HStack - @ViewBuilder
+            """
+        )
+        e01(
+            """
+            - Но если посмотреть на определение VStack'а можно увидеть что тело HStack - @ViewBuilder
             - @ViewBuilder это по своей сути функция которая возрвращает ОДНУ вьюху.
             - Не массив, а одну.
-            [следующий слайд]
-        """
+            """
+        )
     }
 
     var body: some View {
@@ -50,7 +51,7 @@ struct S13_ViewBuilder: View, Slide {
                         }
                     }
                     """
-                }.showIf(episode, at: "e01-определение-vstack")
+                }.showIf(episode, at: e01)
 
                 Panel.code {
                     """
@@ -63,7 +64,7 @@ struct S13_ViewBuilder: View, Slide {
                         Image(systemName: "hand.wave")
                     """
                         .highlight(
-                            episode >= "e01-определение-vstack"
+                            episode >= e01
                             ? Theme.Color.highlight
                             : nil
                         )

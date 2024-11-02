@@ -9,13 +9,12 @@ import SwiftUI
 
 struct S18_RenderTree3: View, Slide {
 
-    @Environment(\.episode)
-    var episode: String
-
-    var notes: String? {
-        """
-        e00 - Теперь когда мы поменяем любое значение состояния, то SwiftUI создаст новое Render Tree
-        """
+    var episodes: [Episode] {
+        e00(
+            """
+            - Теперь когда мы поменяем любое значение состояния, то SwiftUI создаст новое Render Tree
+            """
+        )
     }
 
     var body: some View {

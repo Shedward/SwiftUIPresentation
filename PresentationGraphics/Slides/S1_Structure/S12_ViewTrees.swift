@@ -11,20 +11,17 @@ import SwiftUI
 struct S12_ViewTrees: View, Slide {
 
     @Environment(\.episode)
-    var episode: String
+    var episode: Episode
 
     var episodes: [Episode] {
-        "e01-двигаем-модификатор-выше"
-        "e02-еще-выше"
-    }
-
-    var notes: String? {
-        """
-        e00 - Большинство настроек у нас описывается модификаторами
+        e00(
+            """
+            - Большинство настроек у нас описывается модификаторами
             - Модификатор это такой же лист в дереве вьюх
-        e01 - Модификаторы заворачивают контент в себя контент на который он навешан
-        e02 - Двигая модификатор по дереву - мы уменьшаем или увеличиваем скоуп влияния
-        """
+            """
+        )
+        e01("- Модификатор заворачивает контент")
+        e02("- Двигая модификатор модификатор мы меняем область его действия")
     }
 
     var body: some View {
@@ -33,19 +30,19 @@ struct S12_ViewTrees: View, Slide {
             subtitle: "Модификаторы заворачивают контент"
         ) {
             switch episode {
-            case "e00":
-                e00
-            case "e01-двигаем-модификатор-выше":
-                e01
-            case "e02-еще-выше":
-                e02
+            case e00:
+                e00_modifiersView
+            case e01:
+                e01_modifierMovedUp
+            case e02:
+                e02_modifiersMovesUp
             default:
                 EmptyView()
             }
         }
     }
 
-    var e00: some View {
+    var e00_modifiersView: some View {
         Panels {
             Panel.code {
                 """
@@ -82,7 +79,7 @@ struct S12_ViewTrees: View, Slide {
         }
     }
 
-    var e01: some View {
+    var e01_modifierMovedUp: some View {
         Panels {
             Panel.code {
                 "HStack {"
@@ -116,7 +113,7 @@ struct S12_ViewTrees: View, Slide {
         }
     }
 
-    var e02: some View {
+    var e02_modifiersMovesUp: some View {
         Panels {
             Panel.code {
                 "HStack {"

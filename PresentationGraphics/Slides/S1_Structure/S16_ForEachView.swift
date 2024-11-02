@@ -10,21 +10,23 @@ import SwiftUI
 struct S16_ForEachView: View, Slide {
 
     @Environment(\.episode)
-    var episode: String
+    var episode: Episode
 
     var episodes: [Episode] {
-        "e01-ForEach"
-    }
-
-    var notes: String? {
-        """
-        e00 - И последнее что мы хотели бы делать в билдере - циклы
+        e00(
+            """
+            - И последнее что мы хотели бы делать в билдере - циклы
             - Для того чтобы мапить коллекции в элементы экрана
             - Но for нам недоступен и доступен только ForEach
-        e01 - ForEach подразумевает динамическое дерево, элементы которого напрямую зависят от модели к которой ForEach привязан
+            """
+        )
+        e01(
+            """
+            - ForEach подразумевает динамическое дерево, элементы которого напрямую зависят от модели к которой ForEach привязан
             - Не просто так мы ограничены использованием ForEach вместо стандартных циклов for/while/и т.д.
             - Для работы с коллекциями нам нужен уникальный идентификатор для каждого элемента
-        """
+            """
+        )
     }
 
     var body: some View {
@@ -60,7 +62,7 @@ struct S16_ForEachView: View, Slide {
                                 .relation(.viewTree.dashed())
                         }
                     }
-                }.showIf(episode, after: "e01-ForEach")
+                }.showIf(episode, after: e01)
             }
         }
     }

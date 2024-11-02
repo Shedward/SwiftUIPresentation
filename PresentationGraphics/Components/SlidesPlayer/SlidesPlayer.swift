@@ -21,13 +21,13 @@ struct SlidesPlayer: View {
                     .background(Theme.Color.backgroundPrimary)
                     .id(currentSlide.id)
                     .transition(.opacity)
-                    .episode(slideshow.currentEpisodeId ?? "e00")
+                    .episode(slideshow.currentEpisode ?? e00)
             } else {
-                ErrorView("Slide not found at \(slideshow.currentIndex)")
+                ErrorView("Slide not found at \(slideshow.currentSlideIndex)")
             }
         }
-        .animation(.snappy, value: slideshow.currentEpisodeId)
-        .animation(.smooth, value: slideshow.currentIndex)
+        .animation(.snappy, value: slideshow.currentEpisode)
+        .animation(.smooth, value: slideshow.currentSlideIndex)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .focusable(interactions: .edit)
         .focusEffectDisabled()

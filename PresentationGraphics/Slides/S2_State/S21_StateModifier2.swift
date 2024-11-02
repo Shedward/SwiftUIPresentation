@@ -15,18 +15,27 @@ struct S21_StateModifier2: View, Slide {
     @State
     var count: Int = 0
 
-    var notes: String? {
-        """
-        e00 - Давайте теперь посмотрим на классически ловушки State\
-            - Для начала давайте прокинем значение извне через инит
-            - Иии, ничего работать не будет
-            - Прям совсем ничего. У нас даже начальное состояние выставляться не будет
-        e01 - Поменяли присвоение на инициализацию
-        """
-    }
-
     @Environment(\.episode)
-    var episode: String
+    var episode: Episode
+
+    var episodes: [Episode] {
+        e00(
+            """
+            - Давайте теперь посмотрим на классически ловушки State
+            - Для начала давайте прокинем значение извне через инит
+            - Ничего работать не будет
+            - Значение не меняется ни во вью три ни в рендер три
+            """
+        )
+        e01(
+            """
+            - Вспомним что у нас тут проперти враппер
+            - И поменяем обновление его значение на инит
+            - Теперь у нас меняется значение во вью три, но рендер три все равно ничего не делает
+            - Чтобы понять почему - давайте глянем на сам State
+            """
+        )
+    }
 
     var body: some View {
         TitleSubtitleLayout(
@@ -44,7 +53,12 @@ struct S21_StateModifier2: View, Slide {
                 """
                 """
                         self.count = externalCount
+                """.showIf(episode, at: e00)
                 """
+                        self._count = State(
+                            initialValue: externalCount
+                        )
+                """.showIf(episode, at: e01)
                 """
                     }
                     
@@ -96,7 +110,7 @@ struct S21_StateModifier2: View, Slide {
                     .body {
                         CurrentStateLabel(name: "externalCount", initialValue: "\(externalCount)")
                     }
-                }.hideIf(episode, at:  "e01-что-такое-state")
+                }
 
                 Panel.preview {
                     SpacedVStack {

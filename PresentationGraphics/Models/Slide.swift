@@ -13,8 +13,6 @@ protocol Slide {
 
     @ArrayBuilder<Episode>
     var episodes: [Episode] { get }
-
-    var notes: String? { get }
 }
 
 extension Slide where Self: View {
@@ -27,10 +25,6 @@ extension Slide where Self: View {
     }
 
     var episodes: [Episode] {
-        []
-    }
-
-    var notes: String? {
-        nil
+        [ e00 ]
     }
 }

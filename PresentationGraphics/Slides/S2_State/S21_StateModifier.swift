@@ -9,10 +9,12 @@ import SwiftUI
 
 struct S21_StateModifier: View, Slide {
 
-    var notes: String? {
-        """
-        e00 - Начнем с самого базового варианта хранения состояния, модификатора @State
-        """
+    var episodes: [Episode] {
+        e00(
+            """
+            - Начнем с самого базового варианта хранения состояния, модификатора @State
+            """
+        )
     }
 
     @State

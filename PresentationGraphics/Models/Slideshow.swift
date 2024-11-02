@@ -11,28 +11,29 @@ import Observation
 final class Slideshow {
 
     let slides: [Slide]
-    var currentIndex: Int = 0
-    var nextEpisodeIndex: Int = 0
+    var currentSlideIndex: Int = 0 {
+        didSet {
+            logState()
+        }
+    }
+    var currentEpisodeIndex: Int = 0 {
+        didSet {
+            logState()
+        }
+    }
 
     var currentSlide: Slide? {
-        guard slides.indices.contains(currentIndex) else {
+        guard slides.indices.contains(currentSlideIndex) else {
             return nil
         }
-        return slides[currentIndex]
+        return slides[currentSlideIndex]
     }
 
-    var currentEpisodeId: String? {
-        guard currentSlide?.episodes.indices.contains(nextEpisodeIndex - 1) ?? false else {
+    var currentEpisode: Episode? {
+        guard currentSlide?.episodes.indices.contains(currentEpisodeIndex) ?? false else {
             return nil
         }
-        return currentSlide?.episodes[nextEpisodeIndex - 1].id
-    }
-
-    var nextEpisode: Episode? {
-        guard currentSlide?.episodes.indices.contains(nextEpisodeIndex) ?? false else {
-            return nil
-        }
-        return currentSlide?.episodes[nextEpisodeIndex]
+        return currentSlide?.episodes[currentEpisodeIndex]
     }
 
     init(@ArrayBuilder<Slide> slides: () -> [Slide]) {
@@ -41,39 +42,42 @@ final class Slideshow {
     }
 
     func goToBegining() {
-        currentIndex = 0
-        nextEpisodeIndex = 0
+        currentSlideIndex = 0
+        currentEpisodeIndex = 0
     }
 
     func next() {
-        if currentSlide?.episodes.indices.contains(nextEpisodeIndex) ?? false {
-            currentSlide?.episodes[nextEpisodeIndex].action()
-            nextEpisodeIndex += 1
+        if currentSlide?.episodes.indices.contains(currentEpisodeIndex + 1) ?? false {
+            currentEpisodeIndex += 1
         } else {
             nextSlide()
         }
     }
 
     func nextSlide() {
-        if slides.indices.contains(currentIndex + 1) {
-            currentIndex += 1
-            nextEpisodeIndex = 0
+        if slides.indices.contains(currentSlideIndex + 1) {
+            currentSlideIndex += 1
+            currentEpisodeIndex = 0
         }
     }
 
     func previous() {
-        if currentSlide?.episodes.indices.contains(nextEpisodeIndex - 1) ?? false {
-            currentSlide?.episodes[nextEpisodeIndex - 1].action()
-            nextEpisodeIndex -= 1
+        if currentSlide?.episodes.indices.contains(currentEpisodeIndex - 1) ?? false {
+            currentEpisodeIndex -= 1
         } else {
             previousSlide()
         }
     }
 
     func previousSlide() {
-        if slides.indices.contains(currentIndex - 1) {
-            currentIndex -= 1
-            nextEpisodeIndex = 0
+        let previousSlideIndex = currentSlideIndex - 1
+        if slides.indices.contains(previousSlideIndex) {
+            currentSlideIndex = previousSlideIndex
+            currentEpisodeIndex = slides[previousSlideIndex].episodes.count - 1
         }
+    }
+
+    private func logState() {
+        print("slideIndex = \(currentSlideIndex), episodeIndex = \(currentEpisodeIndex)")
     }
 }

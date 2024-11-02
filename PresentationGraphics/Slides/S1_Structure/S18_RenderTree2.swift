@@ -9,15 +9,14 @@ import SwiftUI
 
 struct S18_RenderTree2: View, Slide {
 
-    @Environment(\.episode)
-    var episode: String
-
-    var notes: String? {
-        """
-        e00 - Чтобы отрисовать эту вьюху мы инстанциируем ее с определенным состоянием, допустим ... 
+    var episodes: [Episode] {
+        e00(
+            """
+            - Чтобы отрисовать эту вьюху мы инстанциируем ее с определенным состоянием, допустим ...
             - Дальше мы вычисляем body с выбранными значениями и получаем Render Tree
             - На основе этого render tree, SwiftUI рисует на экране соответствующий интерфейс
-        """
+            """
+        )
     }
 
     var body: some View {

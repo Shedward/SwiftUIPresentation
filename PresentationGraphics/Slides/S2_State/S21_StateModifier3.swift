@@ -15,20 +15,18 @@ struct S21_StateModifier3: View, Slide {
     @State
     var count: Int = 0
 
-    var notes: String? {
-        """
-        e00 - Чтобы понять почему - глянем на то как State реализован
-            - State это проперти враппер, который под капотом транслирует внешнее хранилице состояния
-            - (аналогия с чертежом дома и жителями дома)
-        e01 - Инит - это чертеж, State - это уже построенная вьюха
-        """
-    }
-
     @Environment(\.episode)
-    var episode: String
+    var episode: Episode
 
     var episodes: [Episode] {
-        "e01-two-domains"
+        e00(
+            """
+            - Чтобы понять почему - глянем на то как State реализован
+            - State это проперти враппер, который под капотом транслирует внешнее хранилице состояния
+            - (аналогия с чертежом дома и жителями дома)
+            """
+        )
+        e01("- Инит - это чертеж, State - это уже построенная вьюха")
     }
 
     var body: some View {
@@ -42,13 +40,13 @@ struct S21_StateModifier3: View, Slide {
                 @propertyWrapper
                 struct State<Value> {
                     let initialValue: Value
-                    private let valueStorage: _SwiftUIValueStorage
+                    private let valueStorage: _Storage
                     
                 """
                 """
                     init(wrappedValue: Value) {
                         self.initialValue = wrappedValue
-                        self.valueStorage = _SwiftUIValueStorage(
+                        self.valueStorage = _Storage(
                             initialValue: wrappedValue
                         )
                     }
@@ -57,7 +55,7 @@ struct S21_StateModifier3: View, Slide {
                         self.init(wrappedValue: initialValue)
                     }
                 """
-                        .highlight(episode >= "e01-two-domains" ? Theme.Color.tintPrimary.opacity(0.3) : nil)
+                        .highlight(episode >= e01 ? Theme.Color.tintPrimary.opacity(0.3) : nil)
                 " "
                 """
                     var wrappedValue: Value {
@@ -67,7 +65,7 @@ struct S21_StateModifier3: View, Slide {
                         }
                     }
                 """
-                        .highlight(episode >= "e01-two-domains" ? Theme.Color.tintSecondary.opacity(0.3) : nil)
+                        .highlight(episode >= e01 ? Theme.Color.tintSecondary.opacity(0.3) : nil)
                 """
                 }
                 """
@@ -82,10 +80,12 @@ struct S21_StateModifier3: View, Slide {
                 """
                 """
                     init(externalCount: Int) {
-                        self._count = .init(initialValue: externalCount)
+                        self._count = .init(
+                            initialValue: externalCount
+                        )
                     }
                 """
-                    .highlight(episode >= "e01-two-domains" ? Theme.Color.tintPrimary.opacity(0.3) : nil)
+                    .highlight(episode >= e01 ? Theme.Color.tintPrimary.opacity(0.3) : nil)
                 " "
                 """
                     var body: some View {
@@ -101,7 +101,7 @@ struct S21_StateModifier3: View, Slide {
                     }
                 }
                 """
-                    .highlight(episode >= "e01-two-domains" ? Theme.Color.tintSecondary.opacity(0.3) : nil)
+                    .highlight(episode >= e01 ? Theme.Color.tintSecondary.opacity(0.3) : nil)
                 }
 
                 Panel("Деревья") {
@@ -127,7 +127,7 @@ struct S21_StateModifier3: View, Slide {
                         .relation(.renderTree)
                     }
                 }
-                .showIf(episode, after: "e01-two-domains")
+                .showIf(episode, after: e01)
             }
         }
     }

@@ -10,17 +10,11 @@ import SwiftUI
 struct S11_View: View, Slide {
 
     @Environment(\.episode)
-    var episode: String
+    var episode: Episode
 
     var episodes: [Episode] {
-        "e01-показываем-view-tree"
-    }
-
-    var notes: String? {
-        """
-        e00 - Мы версаем обычным свифтовым кодом
-        e01 - Этот код описывает дерево вьюх
-        """
+        e00("- Верстаем мы обычным свифтовым кодом")
+        e01("- Этот код описывает дерево вьюх")
     }
 
     var body: some View {
@@ -46,7 +40,7 @@ struct S11_View: View, Slide {
                             Tree("Text")
                         }
                     }
-                }.showIf(episode, after: "e01-показываем-view-tree")
+                }.showIf(episode, at: e01)
 
                 Panel.preview {
                     HStack {

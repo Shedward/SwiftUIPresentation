@@ -7,33 +7,37 @@
 
 import SwiftUI
 
-struct Episode: ExpressibleByStringLiteral {
+struct Episode: Comparable, Equatable {
     let id: String
-    let action: @MainActor () -> Void
+    let notes: String?
 
-    init(_ id: String, action: @escaping @MainActor () -> Void = { }) {
+    init(_ id: String, notes: String? = nil) {
         self.id = id
-        self.action = action
+        self.notes = notes
     }
 
-    init(stringLiteral value: String) {
-        self.init(value)
+    static func < (lhs: Episode, rhs: Episode) -> Bool {
+        lhs.id < rhs.id
+    }
+
+    static func == (lhs: Episode, rhs: Episode) -> Bool {
+        lhs.id == rhs.id
     }
 }
 
 struct EpisodeKey: EnvironmentKey {
-    static let defaultValue: String = ""
+    static let defaultValue: Episode = e00
 }
 
 extension EnvironmentValues {
-    public var episode: String {
+    var episode: Episode {
         get { self[EpisodeKey.self] }
         set { self[EpisodeKey.self] = newValue }
     }
 }
 
 extension View {
-    public func episode(_ id: String) -> some View {
-        environment(\.episode, id)
+    func episode(_ episode: Episode) -> some View {
+        environment(\.episode, episode)
     }
 }
