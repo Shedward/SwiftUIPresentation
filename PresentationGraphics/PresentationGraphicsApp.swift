@@ -11,24 +11,24 @@ import SwiftUI
 struct PresentationGraphicsApp: App {
 
     let slideshow = Slideshow {
-        S00_Title()
-        S01_Introduction()
-        S02_Plan()
-
-        S10_Structure()
-        S11_View()
-        S12_ViewTrees()
-        S13_ViewBuilder()
-        S14_TuppleView()
-        S15_ConditionalContent()
-        S16_ForEachView()
-        S17_ViewBuilderDSL()
-        S18_RenderTree()
-        S18_RenderTree2()
-        S18_RenderTree3()
-        S18_RenderTree4()
-        S18_RenderTree5()
-        S19_Recap()
+//        S00_Title()
+//        S01_Introduction()
+//        S02_Plan()
+//
+//        S10_Structure()
+//        S11_View()
+//        S12_ViewTrees()
+//        S13_ViewBuilder()
+//        S14_TuppleView()
+//        S15_ConditionalContent()
+//        S16_ForEachView()
+//        S17_ViewBuilderDSL()
+//        S18_RenderTree()
+//        S18_RenderTree2()
+//        S18_RenderTree3()
+//        S18_RenderTree4()
+//        S18_RenderTree5()
+//        S19_Recap()
 
         S20_State()
         S21_StateModifier()
@@ -49,6 +49,32 @@ struct PresentationGraphicsApp: App {
                 .colorScheme(.light)
         }
         .windowStyle(.hiddenTitleBar)
+
+        Window("Debugger", id: "debugger") {
+            HStack {
+                VStack {
+                    Rectangle()
+                        .fill(Color.red)
+                        .annotatable("red")
+                    Rectangle()
+                        .fill(Color.blue)
+                        .annotatable("blue")
+                }
+                VStack {
+                    Rectangle()
+                        .fill(Color.green)
+                        .annotatable("green")
+                    Rectangle()
+                        .fill(Color.yellow)
+                        .annotatable("yellow")
+                }
+            }
+            .annotate {
+                Annotation(from: "red", to: "green")
+                Annotation(from: "red", to: "blue")
+                Annotation(from: "red", to: "yellow")
+            }
+        }
     }
 }
 

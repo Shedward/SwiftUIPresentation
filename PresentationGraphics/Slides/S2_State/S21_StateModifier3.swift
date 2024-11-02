@@ -21,9 +21,8 @@ struct S21_StateModifier3: View, Slide {
     var episodes: [Episode] {
         e00(
             """
-            - Чтобы понять почему - глянем на то как State реализован
-            - State это проперти враппер, который под капотом транслирует внешнее хранилице состояния
-            - (аналогия с чертежом дома и жителями дома)
+            - State это проперти враппер, который под капотом транслирует внешнее хранилище состояния
+            - При этом само состояние хранится не 
             """
         )
         e01("- Инит - это чертеж, State - это уже построенная вьюха")
@@ -103,28 +102,6 @@ struct S21_StateModifier3: View, Slide {
                 """
                     .highlight(episode >= e01 ? Theme.Color.tintSecondary.opacity(0.3) : nil)
                 }
-
-                Panel("Деревья") {
-                    SpacedVStack {
-                        TreeView(
-                            Tree("Counter")
-                                .body {
-                                    InitialStateLabel(name: "count", initialValue: "0")
-                                }
-                        )
-                        .framed(fill: Theme.Color.tintPrimary.opacity(0.3))
-
-
-                        TreeView(
-                            Tree("Counter")
-                                .body {
-                                    CurrentStateLabel(name: "count", initialValue: "0")
-                                }
-                        )
-                        .framed(fill: Theme.Color.tintSecondary.opacity(0.3))
-                    }
-                }
-                .showIf(episode, after: e01)
             }
         }
     }
