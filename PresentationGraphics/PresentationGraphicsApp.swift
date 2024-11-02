@@ -12,6 +12,8 @@ struct PresentationGraphicsApp: App {
 
     let slideshow = Slideshow {
         S21_StateModifier()
+        S21_StateModifier2()
+        S21_StateModifier3()
 
 
         S00_Title()
@@ -34,6 +36,9 @@ struct PresentationGraphicsApp: App {
         S19_Recap()
 
         S20_State()
+        S21_StateModifier()
+        S21_StateModifier2()
+        S21_StateModifier3()
     }
 
     var body: some Scene {

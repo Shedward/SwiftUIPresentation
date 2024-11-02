@@ -24,6 +24,7 @@ extension Panel {
     static func renderTree(_ title: String = "Render Tree", content: @escaping () -> Tree) -> Panel {
         Panel(title) {
             TreeView(tree: content())
+                .relation(.renderTree)
         }
     }
 

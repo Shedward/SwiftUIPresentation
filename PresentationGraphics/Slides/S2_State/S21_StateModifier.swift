@@ -9,6 +9,12 @@ import SwiftUI
 
 struct S21_StateModifier: View, Slide {
 
+    var notes: String? {
+        """
+        e00 - Начнем с самого базового варианта хранения состояния, модификатора @State
+        """
+    }
+
     @State
     var count: Int = 0
 
@@ -23,14 +29,14 @@ struct S21_StateModifier: View, Slide {
                 struct Counter: View {
                     @State
                     var count: Int = 0
-
+                    
                     var body: some View {
                         HStack {
                             Text("\\(count)")
-                            Button(systemName: "minus") {
+                            Button("minus") {
                                 count -= 1
                             }
-                            Button(systemName: "plus") {
+                            Button("plus") {
                                 count += 1
                             }
                         }

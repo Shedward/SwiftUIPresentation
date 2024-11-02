@@ -75,17 +75,17 @@ struct Tree: Identifiable, Withable {
 
 struct Relation: Equatable, Withable {
     let id: String
-    let title: String?
-    let color: Color
-    let lineWidth: CGFloat
-    let dashed: Bool
+    var title: String?
+    var color: Color?
+    var lineWidth: CGFloat?
+    var dashed: Bool?
 
     init(
         id: String = UUID().uuidString,
         title: String? = nil,
-        color: Color = Theme.Color.tintPrimary,
-        lineWidth: CGFloat = 1,
-        dashed: Bool = false
+        color: Color? = nil,
+        lineWidth: CGFloat? = nil,
+        dashed: Bool? = nil
     ) {
         self.id = id
         self.title = title ?? id
@@ -94,7 +94,27 @@ struct Relation: Equatable, Withable {
         self.dashed = dashed
     }
 
-    static let none = Relation(lineWidth: 0)
-    static let normal = Relation()
-    static let bold = Relation(lineWidth: 2)
+    func color(_ color: Color) -> Self {
+        with { $0.color = color }
+    }
+
+    func lineWidth(_ lineWidth: CGFloat) -> Self {
+        with { $0.lineWidth = lineWidth }
+    }
+
+    func dashed(_ dashed: Bool = true) -> Self {
+        with { $0.dashed = dashed }
+    }
+
+    static var none: Relation {
+        Relation(lineWidth: 0)
+    }
+
+    static var viewTree: Relation {
+        Relation()
+    }
+
+    static var renderTree: Relation {
+        Relation(color: Theme.Color.tintSecondary)
+    }
 }

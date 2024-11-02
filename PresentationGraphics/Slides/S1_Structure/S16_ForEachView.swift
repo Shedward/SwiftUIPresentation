@@ -51,10 +51,13 @@ struct S16_ForEachView: View, Slide {
                         Tree("ForEach<String>") {
                             Tree("Text", id: "first-text")
                                 .overline("id[0]")
+                                .relation(.viewTree.dashed())
                             Tree("...", id: "mid-text")
                                 .overline("")
+                                .relation(.viewTree.dashed())
                             Tree("Text", id: "last-text")
                                 .overline("id[n]")
+                                .relation(.viewTree.dashed())
                         }
                     }
                 }.showIf(episode, after: "e01-ForEach")

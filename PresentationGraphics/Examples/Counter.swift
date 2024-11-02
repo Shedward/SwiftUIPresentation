@@ -11,18 +11,26 @@ struct Counter: View {
     @Binding
     var count: Int
 
+    var title: String?
+
     var body: some View {
-        HStack {
-            Text("\(count)")
-            Button {
-                count -= 1
-            } label: {
-                Image(systemName: "minus")
+        VStack {
+            if let title {
+                Text(title)
+                    .style(.caption)
             }
-            Button {
-                count += 1
-            } label: {
-                Image(systemName: "plus")
+            HStack {
+                Text("\(count)")
+                Button {
+                    count -= 1
+                } label: {
+                    Image(systemName: "minus")
+                }
+                Button {
+                    count += 1
+                } label: {
+                    Image(systemName: "plus")
+                }
             }
         }
         .padding()

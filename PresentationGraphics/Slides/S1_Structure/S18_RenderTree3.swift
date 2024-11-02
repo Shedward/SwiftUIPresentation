@@ -60,6 +60,7 @@ struct S18_RenderTree3: View, Slide {
                         }
 
                         TreeView(tree: Self.renderTree)
+                            .relation(.renderTree)
                     }
                 }
 

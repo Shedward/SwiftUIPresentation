@@ -60,6 +60,9 @@ struct TreeView: View {
     @Environment(\.space)
     var space: Space
 
+    @Environment(\.relation)
+    var relation: Relation
+
     var body: some View {
         VStack(alignment: .center, spacing: space.innerValue()) {
             VStack(spacing: Space.min.value) {
@@ -67,14 +70,15 @@ struct TreeView: View {
                     Text(overline)
                         .style(
                             font: Theme.Font.captionExtraSmall,
-                            color: Theme.Color.tintPrimary
+                            color: relation.color ?? Theme.Color.tintPrimary
                         )
                         .multilineTextAlignment(.center)
-                        .foregroundColor(Theme.Color.highlight)
                 }
-                Text(tree.title)
-                    .style(.body.color(tree.color ?? Theme.Color.contentPrimary))
-                    .background(tree.highlight ?? Color.clear)
+                if !tree.title.isEmpty {
+                    Text(tree.title)
+                        .style(.body.color(tree.color ?? Theme.Color.contentPrimary))
+                        .background(tree.highlight ?? Color.clear)
+                }
                 if let caption = tree.caption {
                     Text(caption)
                         .multilineTextAlignment(.center)
@@ -105,10 +109,11 @@ struct TreeView: View {
                         middleLinePadding: 0.5 * space.innerValue(2)
                     )
                     .stroke(
-                        childPosition.relation.color,
+                        childPosition.relation.color ?? relation.color ?? Theme.Color.tintPrimary,
                         style: StrokeStyle(
-                            lineWidth: childPosition.relation.lineWidth,
-                            dash: childPosition.relation.dashed ? [5, 5] : []
+                            lineWidth: childPosition.relation.lineWidth ?? relation.lineWidth ?? 1,
+                            dash: (childPosition.relation.dashed ?? relation.dashed ?? false)
+                                ? [5, 5] : []
                         )
                     )
                     .transition(.opacity)
