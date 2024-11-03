@@ -76,11 +76,11 @@ enum DiffKind {
     var color: Color {
         switch self {
         case .added:
-            Color.green
+            Theme.Color.lifecycleAppear
         case .removed:
-            Color.red
+            Theme.Color.lifecycleDisappear
         case .changed:
-            Color.yellow
+            Theme.Color.lifecycleChange
         }
     }
 }

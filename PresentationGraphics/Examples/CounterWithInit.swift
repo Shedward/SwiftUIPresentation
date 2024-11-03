@@ -30,6 +30,8 @@ struct CounterWithInit: View {
             }
         }
         .padding()
+        .debugLifecycle()
+        .debugOnChange(count)
     }
 }
 

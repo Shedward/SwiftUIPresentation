@@ -11,16 +11,8 @@ import Observation
 final class Slideshow {
 
     let slides: [Slide]
-    var currentSlideIndex: Int = 0 {
-        didSet {
-            logState()
-        }
-    }
-    var currentEpisodeIndex: Int = 0 {
-        didSet {
-            logState()
-        }
-    }
+    var currentSlideIndex: Int = 0
+    var currentEpisodeIndex: Int = 0
 
     var currentSlide: Slide? {
         guard slides.indices.contains(currentSlideIndex) else {
@@ -75,9 +67,5 @@ final class Slideshow {
             currentSlideIndex = previousSlideIndex
             currentEpisodeIndex = slides[previousSlideIndex].episodes.count - 1
         }
-    }
-
-    private func logState() {
-        print("slideIndex = \(currentSlideIndex), episodeIndex = \(currentEpisodeIndex)")
     }
 }

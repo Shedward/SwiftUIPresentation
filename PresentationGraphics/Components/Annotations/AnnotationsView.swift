@@ -49,6 +49,13 @@ struct AnnotationShape {
         }
         .stroke(style: StrokeStyle(lineWidth: 1))
     }
+
+    func stroke(style: StrokeStyle) -> Self {
+        AnnotationShape { from, to in
+            shape(from, to)
+                .stroke(style: style)
+        }
+    }
 }
 
 struct AnnotationsView: View {

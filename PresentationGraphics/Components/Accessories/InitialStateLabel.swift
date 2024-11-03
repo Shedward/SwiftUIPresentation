@@ -22,7 +22,7 @@ struct InitialStateLabel: View {
                     )
             }
         } icon: {
-            Image("shippingbox.open")
+            Image(systemName: "hexagon")
         }
         .style(.caption)
     }

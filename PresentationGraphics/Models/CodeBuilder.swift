@@ -99,7 +99,7 @@ func highlight(_ highlight: Color? = Theme.Color.highlight, @CodeBuilder _ lines
     lines().map { $0.highlight(highlight) }
 }
 
-struct LineId: Hashable, Withable {
+struct LineId: Hashable, Withable, CustomStringConvertible {
     let file: String
     let line: UInt
     var innerLineIndex: Int
@@ -116,6 +116,10 @@ struct LineId: Hashable, Withable {
 
     func innerLineIndex(_ index: Int) -> Self {
         with { $0.innerLineIndex = index }
+    }
+
+    var description: String {
+        id
     }
 }
 

@@ -32,6 +32,10 @@ enum Theme {
         static let highlight = SwiftUI.Color.yellow
         static let darkHighlight = SwiftUI.Color(hex: 0xc59f19)
         static let debug = SwiftUI.Color.purple
+
+        static let lifecycleAppear = SwiftUI.Color.green
+        static let lifecycleChange = SwiftUI.Color.yellow
+        static let lifecycleDisappear = SwiftUI.Color.red
     }
 }
 

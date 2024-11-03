@@ -11,6 +11,7 @@ import SwiftUI
 struct PresentationGraphicsApp: App {
 
     let slideshow = Slideshow {
+//
 //        S00_Title()
 //        S01_Introduction()
 //        S02_Plan()
@@ -28,12 +29,15 @@ struct PresentationGraphicsApp: App {
 //        S18_RenderTree3()
 //        S18_RenderTree4()
 //        S18_RenderTree5()
+//        S18_RenderTree6()
 //        S19_Recap()
 
         S20_State()
         S21_StateModifier()
         S21_StateModifier2()
         S21_StateModifier3()
+        S21_StateModifier4()
+        S22_Binding()
     }
 
     var body: some Scene {
@@ -51,29 +55,7 @@ struct PresentationGraphicsApp: App {
         .windowStyle(.hiddenTitleBar)
 
         Window("Debugger", id: "debugger") {
-            HStack {
-                VStack {
-                    Rectangle()
-                        .fill(Color.red)
-                        .annotatable("red")
-                    Rectangle()
-                        .fill(Color.blue)
-                        .annotatable("blue")
-                }
-                VStack {
-                    Rectangle()
-                        .fill(Color.green)
-                        .annotatable("green")
-                    Rectangle()
-                        .fill(Color.yellow)
-                        .annotatable("yellow")
-                }
-            }
-            .annotate {
-                Annotation(from: "red", to: "green")
-                Annotation(from: "red", to: "blue")
-                Annotation(from: "red", to: "yellow")
-            }
+            DebugWindow()
         }
     }
 }
