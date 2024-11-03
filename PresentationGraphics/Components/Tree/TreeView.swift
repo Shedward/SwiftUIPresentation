@@ -78,6 +78,7 @@ struct TreeView: View {
                     Text(tree.title)
                         .style(.body.color(tree.color ?? Theme.Color.contentPrimary))
                         .background(tree.highlight ?? Color.clear)
+                        .fixedSize()
                 }
                 if let caption = tree.caption {
                     Text(caption)

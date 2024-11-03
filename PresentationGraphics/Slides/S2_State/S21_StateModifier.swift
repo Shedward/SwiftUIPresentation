@@ -70,7 +70,7 @@ struct S21_StateModifier: View, Slide {
                                 .caption("+")
                         }
                     }.body {
-                        CurrentStateLabel(name: "count", initialValue: "\(count)")
+                        CurrentStateLabel(name: "count", value: "\(count)")
                     }
                 }
 

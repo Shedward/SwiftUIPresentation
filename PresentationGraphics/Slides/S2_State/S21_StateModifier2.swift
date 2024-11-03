@@ -104,11 +104,11 @@ struct S21_StateModifier2: View, Slide {
                             }
                         }
                         .body {
-                            CurrentStateLabel(name: "count", initialValue: "\(count)")
+                            CurrentStateLabel(name: "count", value: "\(count)")
                         }
                     }
                     .body {
-                        CurrentStateLabel(name: "externalCount", initialValue: "\(externalCount)")
+                        CurrentStateLabel(name: "externalCount", value: "\(externalCount)")
                     }
                 }
 

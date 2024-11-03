@@ -12,6 +12,8 @@ struct Annotation: Identifiable, Withable {
     let from: AnnotationId
     let to: AnnotationId
     var shape: AnnotationShape?
+    var stroke: Color = .clear
+    var fill: Color = Theme.Color.annotation.opacity(0.8)
 
     init(id: String, from: AnnotationId, to: AnnotationId) {
         self.id = id
@@ -24,15 +26,18 @@ struct Annotation: Identifiable, Withable {
         self.from = from
         self.to = to
     }
-}
 
-extension CGRect: Withable {
-    var midRight: CGPoint {
-        CGPoint(x: maxX, y: midY)
+    func shape(_ shape: AnnotationShape) -> Self {
+        with { $0.shape = shape }
     }
-}
 
-extension CGPoint: Withable {
+    func fill(_ fill: Color) -> Self {
+        with { $0.fill = fill }
+    }
+
+    func stroke(_ stroke: Color) -> Self {
+        with { $0.stroke = stroke }
+    }
 }
 
 struct AnnotationShape {
@@ -63,6 +68,7 @@ struct AnnotationsView: View {
     let proxy: GeometryProxy
     let anchors: [AnnotationAnchor]
     let annotations: [Annotation]
+    let padding = 0.5 * Space.min.value
 
     var body: some View {
         ForEach(annotations) { (annotation: Annotation) in
@@ -70,10 +76,12 @@ struct AnnotationsView: View {
                 let fromAnchor = anchors.first(where: { $0.id == annotation.from }),
                 let toAnchor = anchors.first(where: {$0.id == annotation.to })
             {
-                let fromRect = proxy[fromAnchor.bounds]
-                let toRect = proxy[toAnchor.bounds]
+                let fromRect = proxy[fromAnchor.bounds].insetBy(dx: -padding, dy: -padding)
+                let toRect = proxy[toAnchor.bounds].insetBy(dx: -padding, dy: -padding)
 
                 (annotation.shape ?? .line)(from: fromRect, to: toRect)
+                    .stroke(annotation.stroke)
+                    .fill(annotation.fill)
             }
         }
     }
@@ -84,6 +92,7 @@ extension View {
         overlayPreferenceValue(AnnotationAnchorsKey.self) { anchors in
             GeometryReader { proxy in
                 AnnotationsView(proxy: proxy, anchors: anchors, annotations: annotations())
+                    .transition(.opacity)
             }
         }
     }

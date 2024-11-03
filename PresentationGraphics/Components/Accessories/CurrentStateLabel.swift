@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CurrentStateLabel: View {
     let name: String
-    let initialValue: String
+    let value: String
 
     var body: some View {
         Label {
@@ -20,7 +20,7 @@ struct CurrentStateLabel: View {
                         font: Theme.Font.captionSmall,
                         color: Theme.Color.contentSecondary
                     )
-                Text("\(initialValue)")
+                Text("\(value)")
             }
         } icon: {
             Image(systemName: "shippingbox")
@@ -30,6 +30,6 @@ struct CurrentStateLabel: View {
 }
 
 #Preview {
-    CurrentStateLabel(name: "count", initialValue: "0")
+    CurrentStateLabel(name: "count", value: "0")
         .padding()
 }

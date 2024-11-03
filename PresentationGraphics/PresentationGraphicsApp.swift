@@ -32,11 +32,11 @@ struct PresentationGraphicsApp: App {
 //        S18_RenderTree6()
 //        S19_Recap()
 
-        S20_State()
-        S21_StateModifier()
-        S21_StateModifier2()
-        S21_StateModifier3()
-        S21_StateModifier4()
+//        S20_State()
+//        S21_StateModifier()
+//        S21_StateModifier2()
+//        S21_StateModifier3()
+//        S21_StateModifier4()
         S22_Binding()
     }
 
