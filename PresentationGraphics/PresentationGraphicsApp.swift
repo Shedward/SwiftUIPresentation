@@ -10,8 +10,8 @@ import SwiftUI
 @main
 struct PresentationGraphicsApp: App {
 
-    let slideshow = Slideshow {
-//
+    @State
+    var slideshow = Slideshow {
 //        S00_Title()
 //        S01_Introduction()
 //        S02_Plan()
@@ -31,13 +31,15 @@ struct PresentationGraphicsApp: App {
 //        S18_RenderTree5()
 //        S18_RenderTree6()
 //        S19_Recap()
-
+//
 //        S20_State()
 //        S21_StateModifier()
 //        S21_StateModifier2()
 //        S21_StateModifier3()
 //        S21_StateModifier4()
-        S22_Binding()
+//        S22_Binding()
+        S23_Observable()
+        S23_Observable2()
     }
 
     var body: some Scene {

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 @resultBuilder
 enum CodeBuilder {
@@ -18,12 +19,31 @@ enum CodeBuilder {
         expression ?? []
     }
 
+    static func buildExpression(_ expression: ()) -> [CodePart] {
+        []
+    }
+
     static func buildExpression(_ expression: String, file: StaticString = #fileID, line: UInt = #line) -> [CodePart] {
         CodePart.split(expression, lineId: .init(file: file, line: line))
     }
 
     static func buildExpression(_ expression: String?, file: StaticString = #fileID, line: UInt = #line) -> [CodePart] {
         expression.map { CodeBuilder.buildExpression($0, file: file, line: line) } ?? []
+    }
+
+    static func buildExpression(_ lines: [String], file: StaticString = #fileID, line: UInt = #line) -> [CodePart] {
+        lines
+            .flatMap { string in
+                string
+                    .split(separator: "\n")
+            }
+            .enumerated()
+            .map { index, string in
+                CodePart(
+                    String(string),
+                    lineId: LineId(file: file, line: line, innerLineIndex: index)
+                )
+            }
     }
 
     static func buildExpression(_ expression: CodePart) -> [CodePart] {
@@ -59,6 +79,10 @@ enum CodeBuilder {
 
         return Code(lines: lines)
     }
+
+    static func buildFinalResult(_ component: [CodePart]) -> [CodePart] {
+        component
+    }
 }
 
 struct CodePart: Withable {
@@ -67,7 +91,7 @@ struct CodePart: Withable {
     var highlight: Color?
     var color: Color?
 
-    private init(_ text: String, lineId: LineId) {
+    init(_ text: String, lineId: LineId) {
         self.text = text
         self.lineId = lineId
     }

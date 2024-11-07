@@ -16,6 +16,8 @@ protocol ShowIfable {
 
     func showIf(_ episode: Episode, in: ClosedRange<Episode>) -> Self?
     func hideIf(_ episode: Episode, in: ClosedRange<Episode>) -> Self?
+
+    func showIf(_ episode: Episode, in episodes: Episode...) -> Self?
 }
 
 extension ShowIfable {
@@ -42,6 +44,14 @@ extension ShowIfable {
     func hideIf(_ episode: Episode, in range: ClosedRange<Episode>) -> Self? {
         PresentationGraphics.hideIf(episode, in: range) { self }
     }
+
+    func showIf(_ episode: Episode, in episodes: Episode...) -> Self? {
+        if episodes.contains(episode) {
+            self
+        } else {
+            nil
+        }
+    }
 }
 
 extension String: ShowIfable { }
@@ -62,11 +72,27 @@ func hideIf<T>(_ episode: Episode, after: Episode, _ block: () -> T) -> T? {
     }
 }
 
+func showIf<T>(_ episode: Episode, after: Episode, @ArrayBuilder<T> _ block: () -> [T]) -> [T] {
+    if episode >= after {
+        block()
+    } else {
+        []
+    }
+}
+
 func showIf<T>(_ episode: Episode, at: Episode, _ block: () -> T) -> T? {
     if episode == at {
         block()
     } else {
         nil
+    }
+}
+
+func showIf<T>(_ episode: Episode, at: Episode, @ArrayBuilder<T> _ block: () -> [T]) -> [T] {
+    if episode == at {
+        block()
+    } else {
+        []
     }
 }
 
@@ -83,6 +109,22 @@ func showIf<T>(_ episode: Episode, in range: ClosedRange<Episode>, _ block: () -
         block()
     } else {
         nil
+    }
+}
+
+func showIf<T>(_ episode: Episode, in range: ClosedRange<Episode>, @ArrayBuilder<T> _ block: () -> [T]) -> [T] {
+    if range.contains(episode) {
+        block()
+    } else {
+        []
+    }
+}
+
+func showIf<T>(_ episode: Episode, in episodes: Episode..., @ArrayBuilder<T> block: () -> [T]) -> [T] {
+    if episodes.contains(episode) {
+        block()
+    } else {
+        []
     }
 }
 

@@ -13,25 +13,25 @@ struct S22_Binding: View, Slide {
     var episode: Episode
 
     var episodes: [Episode] {
-        e00(
-            """
+        e00("""
             - Дальше биндинг
             - Биндинг мы используем когда у нас есть состояние которое приходит снаружи и изменяется из нутри
-            """
-        )
+            """)
 
-        e01(
-            """
+        e01("""
             - Биндинг не хранит значение
             - Биндинг по своей сути это ссылка на значение хранящееся где-то еще
-            """
-        )
+            """)
 
-        e02(
-            """
-            - В нашем случае источных этих данных хранится в @State родительской вьюхи
-            """
-        )
+        e02("""
+            - В нашем случае источник этих данных хранится в @State родительской вьюхи
+            """)
+
+        e03("""
+            - Сам @Binding это просто структура из геттера и сеттера
+            - Он не тригерит обновление вьюхи
+            - Тот кто данными владеет должен обновление тригерить
+            """)
     }
 
     var body: some View {
@@ -56,7 +56,7 @@ struct S22_Binding: View, Slide {
                             }
                         }
                     }
-                    
+                     
                     struct Main: View {
                         
                         @State 
@@ -73,7 +73,21 @@ struct S22_Binding: View, Slide {
                         }
                     }
                     """
-                }
+                }.hideIf(episode, at: e03)
+
+                Panel.code("Binding") {
+                    """
+                    struct MyBinding<Value> {
+                        let getter: () -> Value
+                        let setter: (Value) -> Void
+                         
+                        var wrappedValue: Value {
+                            get { getter() }
+                            set { setter(newValue) }
+                        }
+                    }
+                    """
+                }.showIf(episode, at: e03)
 
                 Panel("Render Tree") {
                     TreeView(

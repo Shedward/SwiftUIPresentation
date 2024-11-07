@@ -9,17 +9,7 @@ import SwiftUI
 
 extension Panel {
 
-    static func code(_ title: String = "Code", @CodeBuilder _ lines: @escaping () -> [Code.Line]) -> Panel {
-        Panel(title) {
-            ViewThatFits {
-                CodeView(code: Code(lines: lines), font: Theme.Font.code)
-                CodeView(code: Code(lines: lines), font: Theme.Font.codeSmall)
-                CodeView(code: Code(lines: lines), font: Theme.Font.codeExtraSmall)
-            }
-        }
-    }
-
-    static func code(_ title: String = "Code", font: Font, @CodeBuilder _ lines: @escaping () -> [Code.Line]) -> Panel {
+    static func code(_ title: String = "Code", font: Font = Theme.Font.codeExtraSmall, @CodeBuilder _ lines: @escaping () -> [Code.Line]) -> Panel {
         Panel(title) {
             CodeView(code: Code(lines: lines), font: font)
         }
