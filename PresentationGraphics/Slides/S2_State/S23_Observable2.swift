@@ -51,7 +51,7 @@ struct S23_Observable2: View, Slide {
     }
 
     var body: some View {
-        TitleSubtitleLayout(title: "@Observable") {
+        TitleSubtitleLayout(title: "@Observable", subtitle: "Пример") {
             Panels {
                 Panel.code("Render Cycle") {
                     """

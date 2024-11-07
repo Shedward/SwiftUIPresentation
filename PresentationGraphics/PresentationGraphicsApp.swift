@@ -40,6 +40,7 @@ struct PresentationGraphicsApp: App {
 //        S22_Binding()
         S23_Observable()
         S23_Observable2()
+        S24_ObservableObject()
     }
 
     var body: some Scene {

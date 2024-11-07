@@ -53,7 +53,7 @@ struct S23_Observable: View, Slide {
     }
 
     var body: some View {
-        TitleSubtitleLayout(title: "@Observable") {
+        TitleSubtitleLayout(title: "@Observable", subtitle: "Определение") {
             Panels {
                 showIf(episode, at: e00) {
                     Panel.code("Внутренняя модель") {

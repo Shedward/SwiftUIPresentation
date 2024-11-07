@@ -17,7 +17,7 @@ struct S24_ObservableObject: View, Slide {
     }
 
     var body: some View {
-        TitleSubtitleLayout(title: "ObservableObject") {
+        TitleSubtitleLayout(title: "ObservableObject", subtitle: "Не актуально") {
             Panels {
                 Panel.code {
                     """
