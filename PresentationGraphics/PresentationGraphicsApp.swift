@@ -38,9 +38,13 @@ struct PresentationGraphicsApp: App {
 //        S21_StateModifier3()
 //        S21_StateModifier4()
 //        S22_Binding()
-        S23_Observable()
-        S23_Observable2()
-        S24_ObservableObject()
+//        S23_Observable()
+//        S23_Observable2()
+//        S23_Observable3()
+//        S24_ObservableObject()
+
+        S30_Animations()
+        S31_WhatIsAnimation()
     }
 
     var body: some Scene {

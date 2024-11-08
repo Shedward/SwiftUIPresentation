@@ -64,6 +64,15 @@ func showIf<T>(_ episode: Episode, after: Episode, _ block: () -> T) -> T? {
     }
 }
 
+@ViewBuilder
+func showIf<T: View>(_ episode: Episode, after: Episode, @ViewBuilder _ block: () -> T) -> some View {
+    if episode >= after {
+        block()
+    } else {
+        EmptyView()
+    }
+}
+
 func hideIf<T>(_ episode: Episode, after: Episode, _ block: () -> T) -> T? {
     if episode >= after {
         nil
