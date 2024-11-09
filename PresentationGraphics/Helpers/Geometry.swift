@@ -31,6 +31,10 @@ extension CGRect: Withable {
     var bottomLeft: CGPoint {
         CGPoint(x: minX, y: maxY)
     }
+
+    var midBottom: CGPoint {
+        CGPoint(x: midX, y: maxY)
+    }
 }
 
 extension CGPoint: Withable {

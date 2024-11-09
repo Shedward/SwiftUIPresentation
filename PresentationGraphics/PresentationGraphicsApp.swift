@@ -45,6 +45,12 @@ struct PresentationGraphicsApp: App {
 
         S30_Animations()
         S31_WhatIsAnimation()
+        S32_Transaction()
+        S33_Animatable()
+        S33_Animatable2()
+        S34_ImplicitExplicit()
+        S34_ImplicitExplicit2()
+        S35_Transitions()
     }
 
     var body: some Scene {

@@ -12,8 +12,8 @@ struct Annotation: Identifiable, Withable {
     let from: AnnotationId
     let to: AnnotationId
     var shape: AnnotationShape?
-    var stroke: Color = .clear
-    var fill: Color = Theme.Color.annotation.opacity(0.8)
+    var stroke: Color = Theme.Color.annotation
+    var fill: Color = .clear
 
     init(id: String, from: AnnotationId, to: AnnotationId) {
         self.id = id
@@ -29,6 +29,10 @@ struct Annotation: Identifiable, Withable {
 
     func shape(_ shape: AnnotationShape) -> Self {
         with { $0.shape = shape }
+    }
+
+    func shape(_ shape: @escaping (_ from: CGRect, _ to: CGRect) -> any Shape) -> Self {
+        with { $0.shape = AnnotationShape(shape: shape) }
     }
 
     func fill(_ fill: Color) -> Self {

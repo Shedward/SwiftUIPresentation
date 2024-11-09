@@ -30,8 +30,9 @@ extension Panel {
 
     static func preview<Content: View>(_ title: String = "Preview", @ViewBuilder _ content: @escaping () -> Content) -> Panel {
         Panel(title) {
-            content()
-                .bordered()
+            PreviewView {
+                content()
+            }
         }
     }
 }
