@@ -38,7 +38,10 @@ struct S34_ImplicitExplicit: View, Slide {
                                     .offset(x: offset)
                                  
                                 Button("Animate") {
-                                    withAnimation(.easeIn(duration: 0.25)) {
+                    """
+                    "                withAnimation(.easeIn(duration: 0.25)) {"
+                        .highlight()
+                    """
                                         offset = 100
                                     }
                                 }

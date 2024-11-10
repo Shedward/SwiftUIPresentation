@@ -35,8 +35,10 @@ struct S34_ImplicitExplicit2: View, Slide {
                                     .imageScale(.large)
                                     .foregroundStyle(.tint)
                                     .offset(x: offset)
-                                    .animation(.easeIn(duration: 0.25), value: offset)
-                                 
+                    """
+                    "                .animation(.easeIn(duration: 0.25), value: offset)"
+                        .highlight()
+                    """
                                 Button("Animate") {
                                     offset = 100
                                 }
