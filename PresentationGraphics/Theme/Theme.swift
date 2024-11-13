@@ -37,7 +37,8 @@ enum Theme {
         static let lifecycleChange = SwiftUI.Color.yellow
         static let lifecycleDisappear = SwiftUI.Color.red
 
-        static let annotation = SwiftUI.Color.purple
+        static let binding = SwiftUI.Color.purple
+        static let animation = tintSecondary
     }
 }
 

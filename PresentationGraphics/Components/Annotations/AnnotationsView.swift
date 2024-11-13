@@ -7,92 +7,22 @@
 
 import SwiftUI
 
-struct Annotation: Identifiable, Withable {
-    let id: String
-    let from: AnnotationId
-    let to: AnnotationId
-    var shape: AnnotationShape?
-    var stroke: Color = Theme.Color.annotation
-    var fill: Color = .clear
-
-    init(id: String, from: AnnotationId, to: AnnotationId) {
-        self.id = id
-        self.from = from
-        self.to = to
-    }
-
-    init(from: AnnotationId, to: AnnotationId, file: StaticString = #fileID, line: UInt = #line) {
-        self.id = LineId(file: file, line: line).id
-        self.from = from
-        self.to = to
-    }
-
-    func shape(_ shape: AnnotationShape) -> Self {
-        with { $0.shape = shape }
-    }
-
-    func shape(_ shape: @escaping (_ from: CGRect, _ to: CGRect) -> any Shape) -> Self {
-        with { $0.shape = AnnotationShape(shape: shape) }
-    }
-
-    func fill(_ fill: Color) -> Self {
-        with { $0.fill = fill }
-    }
-
-    func stroke(_ stroke: Color) -> Self {
-        with { $0.stroke = stroke }
-    }
-}
-
-struct AnnotationShape {
-    let shape: (_ from: CGRect, _ to: CGRect) -> any Shape
-
-    func callAsFunction(from: CGRect, to: CGRect) -> AnyShape {
-        AnyShape(shape(from, to))
-    }
-
-    static let line: AnnotationShape = AnnotationShape { from, to in
-        Path { path in
-            path.move(to: from.midRight)
-            path.addLine(to: to.midRight)
-        }
-        .stroke(style: StrokeStyle(lineWidth: 1))
-    }
-
-    func stroke(style: StrokeStyle) -> Self {
-        AnnotationShape { from, to in
-            shape(from, to)
-                .stroke(style: style)
-        }
-    }
-}
-
 struct AnnotationsView: View {
 
     let proxy: GeometryProxy
     let anchors: [AnnotationAnchor]
-    let annotations: [Annotation]
+    let annotations: [AnyAnnotation]
     let padding = 0.5 * Space.min.value
 
     var body: some View {
-        ForEach(annotations) { (annotation: Annotation) in
-            if
-                let fromAnchor = anchors.first(where: { $0.id == annotation.from }),
-                let toAnchor = anchors.first(where: {$0.id == annotation.to })
-            {
-                let fromRect = proxy[fromAnchor.bounds].insetBy(dx: -padding, dy: -padding)
-                let toRect = proxy[toAnchor.bounds].insetBy(dx: -padding, dy: -padding)
-
-                (annotation.shape ?? .line)(from: fromRect, to: toRect)
-                    .stroke(annotation.stroke)
-                    .fill(annotation.fill)
-            }
+        ForEach(annotations, id: \.id) { annotation in
+            annotation.body(proxy: proxy, anchors: anchors)
         }
     }
 }
 
 extension View {
-    func annotate(@ArrayBuilder<Annotation> _ annotations: @escaping () -> [Annotation]) -> some View {
+    func annotate(@ArrayBuilder<AnyAnnotation> _ annotations: @escaping () -> [AnyAnnotation]) -> some View {
         overlayPreferenceValue(AnnotationAnchorsKey.self) { anchors in
             GeometryReader { proxy in
                 AnnotationsView(proxy: proxy, anchors: anchors, annotations: annotations())
@@ -122,9 +52,9 @@ extension View {
         }
     }
     .annotate {
-        Annotation(id: "A", from: "red", to: "green")
-        Annotation(id: "B", from: "red", to: "blue")
-        Annotation(id: "C", from: "red", to: "yellow")
+        LineAnnotation(id: "A", from: "red", to: "green")
+        LineAnnotation(id: "B", from: "red", to: "blue")
+        LineAnnotation(id: "C", from: "red", to: "yellow")
     }
     .padding(32)
 }

@@ -114,10 +114,8 @@ struct S22_Binding: View, Slide {
                     .relation(.viewTree)
                     .annotate {
                         if episode >= e02 {
-                            Annotation(from: "binding1", to: "source")
-                                .shape(.binding)
-                            Annotation(from: "binding2", to: "source")
-                                .shape(.binding)
+                            BindingAnnotation(from: "binding1", to: "source")
+                            BindingAnnotation(from: "binding2", to: "source")
                         }
                     }
                 }.showIf(episode, after: e01)

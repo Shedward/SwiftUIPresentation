@@ -131,12 +131,8 @@ struct S33_Animatable2: View, Slide {
             }
             .annotate {
                 showIf(episode, at: e03) {
-                    Annotation(from: "fromOpacity", to: "toOpacity")
-                        .shape(.animation)
-                        .stroke(Theme.Color.tintSecondary)
-                    Annotation(from: "fromOffset", to: "toOffset")
-                        .shape(.animation)
-                        .stroke(Theme.Color.tintSecondary)
+                    AnimationAnnotation(from: "fromOpacity", to: "toOpacity")
+                    AnimationAnnotation(from: "fromOffset", to: "toOffset")
                 }
             }
         }
