@@ -19,9 +19,9 @@ struct SlidesPlayer: View {
             if let currentSlide = slideshow.currentSlide {
                 currentSlide.content
                     .background(Theme.Color.backgroundPrimary)
+                    .episode(slideshow.currentEpisode ?? e00)
                     .id(currentSlide.id)
                     .transition(.opacity)
-                    .episode(slideshow.currentEpisode ?? e00)
             } else {
                 ErrorView("Slide not found at \(slideshow.currentSlideIndex)")
             }
