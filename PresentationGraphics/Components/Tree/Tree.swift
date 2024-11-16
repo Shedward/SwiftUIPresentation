@@ -18,6 +18,7 @@ struct Tree: Identifiable, Withable {
     var color: Color?
     var body: AnyView?
     var annotationId: AnnotationId?
+    var annotations: (() -> [AnyAnnotation])?
 
     var children: [Tree]
 
@@ -75,6 +76,10 @@ struct Tree: Identifiable, Withable {
 
     func annotationId(_ id: String) -> Self {
         with { $0.annotationId = id }
+    }
+
+    func annotate(@ArrayBuilder<AnyAnnotation> _ annotations: @escaping () -> [AnyAnnotation]) -> Self {
+        with { $0.annotations = annotations }
     }
 }
 

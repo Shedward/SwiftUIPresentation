@@ -13,6 +13,7 @@ struct Panel: Identifiable, ShowIfable, Withable {
     let title: String
     let content: AnyView
     var background: Color?
+    var annotations: (() -> [AnyAnnotation])?
 
     init<Content: View>(_ title: String, background: Color? = nil, @ViewBuilder content: @escaping () -> Content) {
         self.title = title
@@ -22,6 +23,10 @@ struct Panel: Identifiable, ShowIfable, Withable {
 
     func background(_ color: Color?) -> Self {
         with { $0.background = color }
+    }
+
+    func annotate(@ArrayBuilder<AnyAnnotation> _ annotations: @escaping () -> [AnyAnnotation]) -> Self {
+        with { $0.annotations = annotations }
     }
 }
 
@@ -53,6 +58,9 @@ struct Panels: View {
                     panel.content
                         .frame(maxHeight: .infinity)
                         .framed(fill: panel.background ?? Theme.Color.backgroundSecondary)
+                        .if(let: panel.annotations) { view, annotations in
+                            view.annotate(annotations)
+                        }
                 }
             }
         }

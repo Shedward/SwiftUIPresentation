@@ -124,6 +124,9 @@ struct TreeView: View {
         }
         .onPreferenceChange(ParrentPositionsKey.self) { parrentPosition = $0 }
         .onPreferenceChange(ChildPositionsKey.self) { childPositions = $0 }
+        .if(let: tree.annotations) { view, value in
+            view.annotate(value)
+        }
         .id(tree.id)
     }
 

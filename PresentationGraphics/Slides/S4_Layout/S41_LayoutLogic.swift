@@ -116,6 +116,20 @@ struct S41_LayoutLogic: View, Slide {
                         )
                     }
                 }
+                .annotate {
+                    TextAnnotation(to: "root", message: "(100, 100)?")
+                        .parentProposeKind()
+                        .showIf(episode, at: e02)
+                    TextAnnotation(to: "padding", message: "(90, 90)?")
+                        .parentProposeKind()
+                        .showIf(episode, at: e03)
+                    TextAnnotation(to: "content", message: "(60, 90)!")
+                        .childResponseKind()
+                        .showIf(episode, in: e04...e06)
+                    TextAnnotation(to: "padding", message: "(70, 100)!")
+                        .childResponseKind()
+                        .showIf(episode, at: e05)
+                }
 
                 Panel.preview {
                     Rectangle()
@@ -125,20 +139,6 @@ struct S41_LayoutLogic: View, Slide {
                         .frame(width: 100, height: 100)
                 }
                 .showIf(episode, at: e08)
-            }
-            .annotate {
-                TextAnnotation(to: "root", message: "(100, 100)?")
-                    .parentProposeKind()
-                    .showIf(episode, at: e02)
-                TextAnnotation(to: "padding", message: "(90, 90)?")
-                    .parentProposeKind()
-                    .showIf(episode, at: e03)
-                TextAnnotation(to: "content", message: "(60, 90)!")
-                    .childResponseKind()
-                    .showIf(episode, in: e04...e06)
-                TextAnnotation(to: "padding", message: "(70, 100)!")
-                    .childResponseKind()
-                    .showIf(episode, at: e05)
             }
         }
     }

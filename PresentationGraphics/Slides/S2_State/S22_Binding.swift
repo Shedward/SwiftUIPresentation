@@ -89,29 +89,27 @@ struct S22_Binding: View, Slide {
                     """
                 }.showIf(episode, at: e03)
 
-                Panel("Render Tree") {
-                    TreeView(
-                        Tree("Main") {
-                            Tree("HStack") {
-                                Tree("Counter", id: "counter1")
-                                    .body {
-                                        BindingLabel(name: "count")
-                                            .annotatable("binding1")
-                                    }
-                                Tree("Counter", id: "counter2")
-                                    .body {
-                                        BindingLabel(name: "count")
-                                            .annotatable("binding2")
-                                    }
-                                Tree("Button")
-                                    .caption("Reset")
-                            }
-                        }.body {
-                            CurrentStateLabel(name: "count", value: "0")
-                                .annotatable("source")
+                Panel.renderTree {
+                    Tree("Main") {
+                        Tree("HStack") {
+                            Tree("Counter", id: "counter1")
+                                .body {
+                                    BindingLabel(name: "count")
+                                        .annotatable("binding1")
+                                }
+                            Tree("Counter", id: "counter2")
+                                .body {
+                                    BindingLabel(name: "count")
+                                        .annotatable("binding2")
+                                }
+                            Tree("Button")
+                                .caption("Reset")
                         }
-                    )
-                    .relation(.viewTree)
+                    }
+                    .body {
+                        CurrentStateLabel(name: "count", value: "0")
+                            .annotatable("source")
+                    }
                     .annotate {
                         if episode >= e02 {
                             LineAnnotation(from: "binding1", to: "source")
@@ -120,7 +118,8 @@ struct S22_Binding: View, Slide {
                                 .bindingKind()
                         }
                     }
-                }.showIf(episode, after: e01)
+                }
+                .showIf(episode, after: e01)
 
                 Panel.preview {
                     BindingCounter()

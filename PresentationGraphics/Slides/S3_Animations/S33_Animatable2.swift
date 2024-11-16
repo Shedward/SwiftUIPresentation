@@ -127,15 +127,16 @@ struct S33_Animatable2: View, Slide {
 
                         Tree("Button")
                     }
-                }.showIf(episode, after: e02)
-            }
-            .annotate {
-                showIf(episode, at: e03) {
-                    LineAnnotation(from: "fromOpacity", to: "toOpacity")
-                        .animationKind()
-                    LineAnnotation(from: "fromOffset", to: "toOffset")
-                        .animationKind()
                 }
+                .showIf(episode, after: e02)
+            }
+        }
+        .annotate {
+            showIf(episode, at: e03) {
+                LineAnnotation(from: "fromOpacity", to: "toOpacity")
+                    .animationKind()
+                LineAnnotation(from: "fromOffset", to: "toOffset")
+                    .animationKind()
             }
         }
     }

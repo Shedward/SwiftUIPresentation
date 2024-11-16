@@ -19,6 +19,15 @@ extension View {
     }
 
     @ViewBuilder
+    public func `if`<Value, ThenView: View>(`let` value: Value?, @ViewBuilder content: (Self, Value) -> ThenView) -> some View {
+        if let value {
+            content(self, value)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
     public func `if`<ThenView: View, ElseView: View>(
         _ condition: Bool,
         @ViewBuilder content: (Self) -> ThenView,
