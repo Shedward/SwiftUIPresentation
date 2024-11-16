@@ -20,3 +20,10 @@ struct PlayerWindow: View {
 #Preview {
     PlayerWindow(slideshow: .mock)
 }
+
+extension EnvironmentValues {
+    @Entry
+    var testValue: Bool = true
+}
+
+

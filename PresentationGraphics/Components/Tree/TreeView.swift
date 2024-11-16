@@ -79,6 +79,7 @@ struct TreeView: View {
                         .style(.body.color(tree.color ?? Theme.Color.contentPrimary))
                         .background(tree.highlight ?? Color.clear)
                         .fixedSize()
+                        .annotatable(tree.annotationId)
                 }
                 if let caption = tree.caption {
                     Text(caption)

@@ -26,6 +26,7 @@ extension TextStyle {
     static let cover = TextStyle(font: Theme.Font.h0, color: Theme.Color.contentPrimary)
     static let body = TextStyle(font: Theme.Font.body, color: Theme.Color.contentPrimary)
     static let code = TextStyle(font: Theme.Font.code, color: Theme.Color.contentPrimary)
+    static let codeSmall = TextStyle(font: Theme.Font.codeSmall, color: Theme.Color.contentPrimary)
     static let title = TextStyle(font: Theme.Font.h1, color: Theme.Color.contentPrimary)
     static let subtitle = TextStyle(font: Theme.Font.h2, color: Theme.Color.contentSecondary)
     static let caption = TextStyle(font: Theme.Font.caption, color: Theme.Color.contentSecondary)

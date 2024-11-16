@@ -13,7 +13,7 @@ protocol AnyAnnotation {
     func body(proxy: GeometryProxy, anchors: [AnnotationAnchor]) -> AnyView
 }
 
-protocol Annotation: Identifiable, AnyAnnotation {
+protocol Annotation: Identifiable, AnyAnnotation, ShowIfable {
     associatedtype Content: View
 
     var id: String { get }

@@ -13,7 +13,7 @@ struct S19_Recap: View, Slide {
         TitleSubtitleLayout(title: "Структура") {
             Panels {
                 Panel("View Tree") {
-                    PointsList {
+                    BulletList {
                         "То что в var body"
                         "Дерево подвьюх"
                         "Описывает View во всех состояниях"
@@ -25,7 +25,7 @@ struct S19_Recap: View, Slide {
                 }
 
                 Panel("Render Tree") {
-                    PointsList {
+                    BulletList {
                         "View Tree + Состояние = Render Tree"
                         "SwiftUI вычисляет Render Tree при каждом изменении состояния"
                         "SwiftUI сравнивает новое Render Tree с текущим и строит разницу"

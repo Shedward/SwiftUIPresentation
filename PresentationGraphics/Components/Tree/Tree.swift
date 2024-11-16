@@ -17,6 +17,7 @@ struct Tree: Identifiable, Withable {
     var highlight: Color?
     var color: Color?
     var body: AnyView?
+    var annotationId: AnnotationId?
 
     var children: [Tree]
 
@@ -70,6 +71,10 @@ struct Tree: Identifiable, Withable {
 
     func body<Content: View>(@ViewBuilder body: () -> Content) -> Self {
         with { $0.body = AnyView(body()) }
+    }
+
+    func annotationId(_ id: String) -> Self {
+        with { $0.annotationId = id }
     }
 }
 

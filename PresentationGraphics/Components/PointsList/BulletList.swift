@@ -1,5 +1,5 @@
 //
-//  PointsList.swift
+//  BulletList.swift
 //  PresentationGraphics
 //
 //  Created by v.maltsev on 25.10.2024.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct PointsList: View {
+struct BulletList: View {
     let style: Style
     let items: [String]
 
     var body: some View {
         SpacedVStack(alignment: .leading) {
-            ForEach(Array(items.enumerated()), id: \.element.self) { item in
+            ForEach(Array(items.enumerated()), id: \.element) { item in
                 Text(description(for: item.offset, content: item.element))
                     .style(.body)
             }

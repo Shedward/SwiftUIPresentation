@@ -86,36 +86,14 @@ extension LineAnnotation {
     }
 }
 
-struct BindingAnnotation: Annotation {
-    let lineAnnotation: LineAnnotation
-
-    var id: String {
-        lineAnnotation.id
-    }
-
-    init(from: AnnotationId, to: AnnotationId, file: StaticString = #fileID, line: UInt = #line) {
-        self.lineAnnotation = LineAnnotation(from: from, to: to, path: LineAnnotation.leftArc, file: file, line: line)
+extension LineAnnotation {
+    func bindingKind() -> LineAnnotation {
+        path(LineAnnotation.leftArc)
             .stroke(Theme.Color.binding)
     }
 
-    func body(anchor: (AnnotationId) -> CGRect?) -> some View {
-        lineAnnotation.body(anchor: anchor)
-    }
-}
-
-struct AnimationAnnotation: Annotation {
-    let lineAnnotation: LineAnnotation
-
-    var id: String {
-        lineAnnotation.id
-    }
-
-    init(from: AnnotationId, to: AnnotationId, file: StaticString = #fileID, line: UInt = #line) {
-        self.lineAnnotation = LineAnnotation(from: from, to: to, path: LineAnnotation.bottomArc, file: file, line: line)
+    func animationKind() -> LineAnnotation {
+        path(LineAnnotation.bottomArc)
             .stroke(Theme.Color.animation)
-    }
-
-    func body(anchor: (AnnotationId) -> CGRect?) -> some View {
-        lineAnnotation.body(anchor: anchor)
     }
 }

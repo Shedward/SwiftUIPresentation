@@ -6,6 +6,7 @@
 //
 
 import CoreGraphics
+import SwiftUI
 
 extension CGRect: Withable {
     var topRight: CGPoint {
@@ -34,6 +35,17 @@ extension CGRect: Withable {
 
     var midBottom: CGPoint {
         CGPoint(x: midX, y: maxY)
+    }
+
+    var center: CGPoint {
+        CGPoint(x: midX, y: midY)
+    }
+
+    func unitPoint(_ unitPoint: UnitPoint) -> CGPoint {
+        CGPoint(
+            x: origin.x + unitPoint.x * width,
+            y: origin.y + unitPoint.y * height
+        )
     }
 }
 
@@ -87,6 +99,14 @@ extension CGVector: Withable {
         CGVector(dx: -dx, dy: -dy)
     }
 
+    func multiplied(_ value: CGFloat) -> CGVector {
+        CGVector(dx: dx * value, dy: dy * value)
+    }
+
+    func size() -> CGSize {
+        CGSize(width: dx, height: dy)
+    }
+
     func rotated(by angle: CGFloat) -> CGVector {
         let radians = angle * .pi / 180
 
@@ -109,5 +129,51 @@ extension CGVector: Withable {
             default:
                 return self
         }
+    }
+}
+
+extension UnitPoint: Withable {
+
+    func inverted() -> UnitPoint {
+        UnitPoint(x: 1 - x, y: 1 - y)
+    }
+
+    static var bottomHalfTrailing: UnitPoint {
+        .init(x: 0.75, y: 1.0)
+    }
+
+    static var halfBottomTrailing: UnitPoint {
+        .init(x: 1.0, y: 0.75)
+    }
+
+    static var halfTopTrailing: UnitPoint {
+        .init(x: 1.0, y: 0.25)
+    }
+
+    static var topHalfTrailing: UnitPoint {
+        .init(x: 0.75, y: 0.0)
+    }
+
+    static var bottomHalfLeading: UnitPoint {
+        .init(x: 0.25, y: 1.0)
+    }
+
+    static var topHalfLeading: UnitPoint {
+        .init(x: 0.25, y: 0.0)
+    }
+
+    static var halfBottomLeading: UnitPoint {
+        .init(x: 0.0, y: 0.75)
+    }
+
+    static var halfTopLeading: UnitPoint {
+        .init(x: 0.0, y: 0.25)
+    }
+
+    func vector(magnitude: CGFloat) -> CGVector {
+        .init(
+            dx: (x - 0.5) * 2.0 * magnitude,
+            dy: (y - 0.5) * 2.0 * magnitude
+        )
     }
 }

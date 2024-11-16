@@ -12,9 +12,9 @@ struct ListLayout: View {
     let subtitle: String?
     let items: [String]
 
-    let style: PointsList.Style
+    let style: BulletList.Style
 
-    init(title: String, subtitle: String? = nil, style: PointsList.Style = .bullet, @ArrayBuilder<String> items: () -> [String]) {
+    init(title: String, subtitle: String? = nil, style: BulletList.Style = .bullet, @ArrayBuilder<String> items: () -> [String]) {
         self.title = title
         self.subtitle = subtitle
         self.style = style
@@ -23,7 +23,7 @@ struct ListLayout: View {
 
     var body: some View {
         TitleSubtitleLayout(title: title, subtitle: subtitle) {
-            PointsList(style: style, items: items)
+            BulletList(style: style, items: items)
                 .frame(maxWidth: .infinity)
         }
     }

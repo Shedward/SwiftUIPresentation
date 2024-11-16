@@ -21,7 +21,7 @@ struct S18_RenderTree5: View, Slide {
         TitleSubtitleLayout(title: "Render Tree", subtitle: "Применяем diff") {
             Panels {
                 Panel("Добавление", background: DiffKind.added.color.opacity(0.3)) {
-                    PointsList {
+                    BulletList {
                         "Добавляет элемент на экран"
                         "Если есть .transiton(), тогда происходит анимация появления"
                         "Вызывает onAppear()"
@@ -30,7 +30,7 @@ struct S18_RenderTree5: View, Slide {
                 }
 
                 Panel("Изменение", background: DiffKind.changed.color.opacity(0.3)) {
-                    PointsList {
+                    BulletList {
                         "Обновляет изменившиеся поля"
                         "Если есть .animation() на изменившиеся поля - происходит анимация изменения"
                         "Вызовет .onChange() на изменившиеся поля"
@@ -38,7 +38,7 @@ struct S18_RenderTree5: View, Slide {
                 }
 
                 Panel("Удаление", background: DiffKind.removed.color.opacity(0.3)) {
-                    PointsList {
+                    BulletList {
                         "Вызывает onDisappear()"
                         "Если есть .transiton(), тогда происходит анимация исчезновения"
                         "Удаляет элемент с экрана"

@@ -28,6 +28,16 @@ extension Panel {
         }
     }
 
+    static func bullets(
+        _ title: String,
+        style: BulletList.Style = .enumerated,
+        @ArrayBuilder<String> _ items: @escaping () -> [String]
+    ) -> Panel {
+        Panel(title) {
+            BulletList(style, items: items)
+        }
+    }
+
     static func preview<Content: View>(_ title: String = "Preview", @ViewBuilder _ content: @escaping () -> Content) -> Panel {
         Panel(title) {
             PreviewView {
