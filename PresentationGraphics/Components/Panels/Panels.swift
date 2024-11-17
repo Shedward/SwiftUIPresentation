@@ -25,6 +25,10 @@ struct Panel: Identifiable, ShowIfable, Withable {
         with { $0.background = color }
     }
 
+    func withoutBackground() -> Self {
+        background(Color.clear)
+    }
+
     func annotate(@ArrayBuilder<AnyAnnotation> _ annotations: @escaping () -> [AnyAnnotation]) -> Self {
         with { $0.annotations = annotations }
     }

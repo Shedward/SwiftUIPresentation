@@ -18,6 +18,8 @@ struct ClickerWindow: View {
         VStack {
             Text(slideshow.currentSlide?.id ?? "-")
                 .style(.debug)
+            Text(slideshow.currentEpisode?.id ?? "-")
+                .style(.debug)
             HStack {
                 Button {
                     slideshow.previous()

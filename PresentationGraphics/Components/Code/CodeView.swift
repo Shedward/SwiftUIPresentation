@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CodeView: View {
+struct CodeView: View, Withable {
     @Environment(\.space)
     var space: Space
 
@@ -39,6 +39,10 @@ struct CodeView: View {
                 }
             }
         }
+    }
+
+    func font(_ font: Font) -> Self {
+        with { $0.font = font }
     }
 }
 

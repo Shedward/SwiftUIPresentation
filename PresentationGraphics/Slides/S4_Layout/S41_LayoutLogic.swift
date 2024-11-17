@@ -88,7 +88,7 @@ struct S41_LayoutLogic: View, Slide {
                     Tree("Root") {
                         Tree("Padding") {
                             Tree("Content")
-                                .annotationId("content")
+                                .annotatable("content")
                                 .body {
                                     ShowIf(after: e07) {
                                         LayoutFrame(
@@ -98,7 +98,7 @@ struct S41_LayoutLogic: View, Slide {
                                     }
                                 }
                         }
-                        .annotationId("padding")
+                        .annotatable("padding")
                         .body {
                             ShowIf(after: e06) {
                                 LayoutFrame(
@@ -108,7 +108,7 @@ struct S41_LayoutLogic: View, Slide {
                             }
                         }
                     }
-                    .annotationId("root")
+                    .annotatable("root")
                     .body {
                         LayoutFrame(
                             size: CGSize(width: 100, height: 100),
@@ -119,10 +119,10 @@ struct S41_LayoutLogic: View, Slide {
                 .annotate {
                     TextAnnotation(to: "root", message: "(100, 100)?")
                         .parentProposeKind()
-                        .showIf(episode, at: e02)
+                        .showIf(episode, in: e02...e05)
                     TextAnnotation(to: "padding", message: "(90, 90)?")
                         .parentProposeKind()
-                        .showIf(episode, at: e03)
+                        .showIf(episode, in: e03...e04)
                     TextAnnotation(to: "content", message: "(60, 90)!")
                         .childResponseKind()
                         .showIf(episode, in: e04...e06)

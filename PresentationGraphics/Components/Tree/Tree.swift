@@ -74,7 +74,7 @@ struct Tree: Identifiable, Withable {
         with { $0.body = AnyView(body()) }
     }
 
-    func annotationId(_ id: String) -> Self {
+    func annotatable(_ id: String) -> Self {
         with { $0.annotationId = id }
     }
 

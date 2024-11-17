@@ -26,7 +26,7 @@ struct SpacedHStack<Content: View>: View {
         HStack(alignment: alignment, spacing: space.innerValue(step)) {
             content()
         }
-        .reduceSpacing()
+        .reduceSpacing(by: step)
     }
 }
 
@@ -49,7 +49,7 @@ struct SpacedVStack<Content: View>: View {
         VStack(alignment: alignment, spacing: space.innerValue(step)) {
             content()
         }
-        .reduceSpacing()
+        .reduceSpacing(by: step)
     }
 }
 
