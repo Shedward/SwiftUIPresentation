@@ -15,6 +15,12 @@ struct S45_GeometryReader: View, Slide {
     var episodes: [Episode] {
         e00(
             """
+            - Еще один из самых полезных инструментов верстки является GeometryReader
+            - Семантически это просто вьюха которая занимает все предложенное пространство
+            - И сообщает своим подвьюхам свой размер
+            - НО - чайлды не учавствуют в расчете размера GeometryReader'а
+            - Он принимает любой предложенный
+            - По своей сути GeometryReader нам нужен там где нам нужно знать размер вьюхи в дереве
             """
         )
     }
@@ -22,6 +28,21 @@ struct S45_GeometryReader: View, Slide {
     var body: some View {
         TitleSubtitleLayout(title: "GeometryReader") {
             Panels {
+                Panel.code {
+                    """
+                    public struct GeometryReaderExample: View {
+                        public var body: some View {
+                            GeometryReader { proxy in
+                                Text("\\(proxy.size)")
+                            }
+                        }
+                    }
+                    """
+                }
+
+                Panel.preview {
+                    GeometryReaderExample()
+                }
             }
         }
     }

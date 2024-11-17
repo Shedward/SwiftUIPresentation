@@ -62,6 +62,10 @@ struct PresentationGraphicsApp: App {
         S43_UnitGeometry()
         S43_LayoutModifiers()
         S44_Alignment()
+        S45_GeometryReader()
+        S45_GeometryReader2()
+        S45_GeometryReader3()
+        S45_GeometryReader4()
     }
 
     var body: some Scene {
