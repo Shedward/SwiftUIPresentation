@@ -20,7 +20,7 @@ struct S52_Preference: View, Slide {
     }
 
     var body: some View {
-        TitleSubtitleLayout(title: "MatchedGeometryEffect") {
+        TitleSubtitleLayout(title: "Preferences") {
             Panels {
             }
         }

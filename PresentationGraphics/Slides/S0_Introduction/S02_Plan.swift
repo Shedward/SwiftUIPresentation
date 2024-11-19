@@ -13,9 +13,9 @@ struct S02_Plan: View, Slide {
         ListLayout(title: "План", subtitle: "О чем расскажу", style: .enumerated) {
             "Структура"
             "Состояние"
+            "Потоки данных"
             "Анимации"
             "Лайаут"
-            "Потоки данных"
         }
     }
 }

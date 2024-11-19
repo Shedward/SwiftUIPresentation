@@ -20,7 +20,7 @@ struct S51_Environment: View, Slide {
     }
 
     var body: some View {
-        TitleSubtitleLayout(title: "MatchedGeometryEffect") {
+        TitleSubtitleLayout(title: "Environment") {
             Panels {
             }
         }

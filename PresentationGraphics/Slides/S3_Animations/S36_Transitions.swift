@@ -78,7 +78,11 @@ struct S36_Transitions: View, Slide {
                 }
 
                 Panel.preview {
-                    TransitionExample(transition: .opacity)
+                    if episode == e00 {
+                        TransitionExample(transition: .identity)
+                    } else {
+                        TransitionExample(transition: .opacity)
+                    }
                 }
             }
         }

@@ -29,7 +29,7 @@ struct S23_Observable3: View, Slide {
     var body: some View {
         TitleSubtitleLayout(title: "@Observable", subtitle: "Не в UI") {
             Panels {
-                Panel.code {
+                Panel.code("Model") {
                     """
                     @Observable
                     final class Model {
@@ -39,7 +39,7 @@ struct S23_Observable3: View, Slide {
                     """
                 }
 
-                Panel.code() {
+                Panel.code("Observant") {
                     """
                     final class ModelObservant {
                         let model: Model
