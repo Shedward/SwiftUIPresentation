@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct S48_Anchors: View, Slide {
+struct S45_GeometryReader5: View, Slide {
 
     @Environment(\.episode)
     var episode: Episode
@@ -26,7 +26,7 @@ struct S48_Anchors: View, Slide {
     }
 
     var body: some View {
-        TitleSubtitleLayout(title: "Anchors") {
+        TitleSubtitleLayout(title: "GeometryReader", subtitle: "Anchors") {
             Panels {
                 Panel.code("PreferenceKay") {
                     """
@@ -72,23 +72,23 @@ struct S48_Anchors: View, Slide {
                         """
                             .highlight()
                         """
-                                AnnotationAnchorsKey.self,
-                                alignment: .topLeading
-                            ) { anchors in
-                                    GeometryReader { proxy in
-                                        ForEach(anchors, id: \\.id) { anchor in
-                                            let frame = proxy[anchor.bounds]
-                                            Rectangle()
-                                                .fill(Color.green.opacity(50))
-                                                .frame(width: 
-                                                    frame.width, 
-                                                    height: frame.height
-                                                )
-                                                .position(frame.origin)
-                                        }
+                            AnnotationAnchorsKey.self,
+                            alignment: .topLeading
+                        ) { anchors in
+                                GeometryReader { proxy in
+                                    ForEach(anchors, id: \\.id) { anchor in
+                                        let frame = proxy[anchor.bounds]
+                                        Rectangle()
+                                            .fill(Color.green.opacity(50))
+                                            .frame(width: 
+                                                frame.width, 
+                                                height: frame.height
+                                            )
+                                            .position(frame.origin)
                                     }
                                 }
                             }
+                        }
                     }
                     """
                 }

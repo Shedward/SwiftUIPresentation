@@ -16,6 +16,11 @@ struct S45_GeometryReader: View, Slide {
         e00(
             """
             - Еще один из самых полезных инструментов верстки является GeometryReader
+            """
+        )
+
+        e01(
+            """
             - Семантически это просто вьюха которая занимает все предложенное пространство
             - И сообщает своим подвьюхам свой размер
             - НО - чайлды не учавствуют в расчете размера GeometryReader'а
@@ -42,7 +47,7 @@ struct S45_GeometryReader: View, Slide {
 
                 Panel.preview {
                     GeometryReaderExample()
-                }
+                }.showIf(episode, at: e01)
             }
         }
     }
