@@ -49,16 +49,17 @@ struct S45_GeometryReader4: View, Slide {
                             content
                                 .overlay {
                                     GeometryReader { proxy in
-                                        let size = proxy.size
                     """
+                    "                   let size = proxy.size"
+                            .highlight(episode == e00)
                     showIf(episode, after: e01) {
                         "                   let frame = proxy.frame(in: .local)"
                             .highlight(episode == e01)
-                        "                   let globalFrame = proxy.frame(in: .local)"
+                        "                   let globalFrame = proxy.frame(in: .global)"
                             .highlight(episode == e01)
                     }
                     showIf(episode, at: e02) {
-                        "                   let globalFrame = proxy.frame(in: .named(\"MyCoordSpace\"))"
+                        "                   let frameInStack = proxy.frame(in: .named(\"MyCoordSpace\"))"
                             .highlight(episode == e02)
                     }
                     """
@@ -74,7 +75,7 @@ struct S45_GeometryReader4: View, Slide {
                     """
                 }
 
-                Panel.code("Declare CooordinateSpace") {
+                Panel.code("Обозначаем CoordinateSpace") {
                     """
                     public struct Content: View {
                         VStack {
@@ -84,7 +85,12 @@ struct S45_GeometryReader4: View, Slide {
                                 Image(name: "icon")
                                 UpdateBySize()
                             }
+                    """
+                    """
                             .coordinateSpace(name: "MyCoordSpace")
+                    """
+                        .highlight()
+                    """
                         }
                     }
                     """

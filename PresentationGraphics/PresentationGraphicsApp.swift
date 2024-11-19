@@ -59,13 +59,15 @@ struct PresentationGraphicsApp: App {
 //        S40_Layout()
 //        S41_LayoutLogic()
 //        S42_LayoutProtocol()
-        S43_UnitGeometry()
-        S43_LayoutModifiers()
-        S44_Alignment()
+//        S43_UnitGeometry()
+//        S43_LayoutModifiers()
+//        S44_Alignment()
+        S44_Alignment2()
         S45_GeometryReader()
         S45_GeometryReader2()
         S45_GeometryReader3()
         S45_GeometryReader4()
+        S48_Anchors()
     }
 
     var body: some Scene {

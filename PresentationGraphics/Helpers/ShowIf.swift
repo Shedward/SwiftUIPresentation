@@ -144,3 +144,13 @@ func hideIf<T>(_ episode: Episode, in range: ClosedRange<Episode>, _ block: () -
         block()
     }
 }
+
+extension String {
+    func collapseIf(episode: Episode, after: Episode) -> String {
+        if episode >= after {
+            "…"
+        } else {
+            self
+        }
+    }
+}

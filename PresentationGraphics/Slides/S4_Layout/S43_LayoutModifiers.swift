@@ -30,8 +30,10 @@ struct S43_LayoutModifiers: View, Slide {
             ) {
                 Table.Row {
                     Table.Cell {
-                        Text(".padding")
-                            .style(.codeSmall)
+                        ModifierDescription(
+                            code: ".padding",
+                            description: "Добавляет отступы"
+                        )
                     }
                     Table.Cell.code {
                         "width: parentWidth - insets"
@@ -45,8 +47,10 @@ struct S43_LayoutModifiers: View, Slide {
 
                 Table.Row {
                     Table.Cell {
-                        Text(".fixedSize()")
-                            .style(.codeSmall)
+                        ModifierDescription(
+                            code: ".fixedSize()",
+                            description: "Игнорирует пропоузал"
+                        )
                     }
                     Table.Cell.code {
                         "width: nil"
@@ -60,8 +64,10 @@ struct S43_LayoutModifiers: View, Slide {
 
                 Table.Row {
                     Table.Cell {
-                        Text(".frame(width: 100, height: 100)")
-                            .style(.codeSmall)
+                        ModifierDescription(
+                            code: ".frame(width: 100, height: 100)",
+                            description: "Игнорирует и пропоузал и размер"
+                        )
                     }
                     Table.Cell.code {
                         "width: 100"
@@ -75,8 +81,10 @@ struct S43_LayoutModifiers: View, Slide {
 
                 Table.Row {
                     Table.Cell {
-                        Text(".frame(min:max:ideal)")
-                            .style(.codeSmall)
+                        ModifierDescription(
+                            code: ".frame(min:max:ideal)",
+                            description: "Принимает пропоузал с ограничениями"
+                        )
                     }
                     Table.Cell.code {
                         "width: (parentWidth ?? idealWidth)"
@@ -91,8 +99,10 @@ struct S43_LayoutModifiers: View, Slide {
 
                 Table.Row {
                     Table.Cell {
-                        Text(".aspectRatio(4/3, mode: .fit)")
-                            .style(.codeSmall)
+                        ModifierDescription(
+                            code: ".aspectRatio(4/3, mode: .fit)",
+                            description: "Вырезает место по пропорции"
+                        )
                     }
                     Table.Cell.code {
                         "parentSize.frame(aspect: 4/3, mode: .fit)"
@@ -102,6 +112,20 @@ struct S43_LayoutModifiers: View, Slide {
                     }
                 }
             }
+        }
+    }
+}
+
+struct ModifierDescription: View {
+    let code: String
+    let description: String
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(code)
+                .style(.codeSmall)
+            Text(description)
+                .style(.caption)
         }
     }
 }

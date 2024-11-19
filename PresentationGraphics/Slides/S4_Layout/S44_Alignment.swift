@@ -78,7 +78,7 @@ struct S44_Alignment: View, Slide {
             Panels {
                 Panel.code("CustomGuide") {
                     """
-                    struct CustomAlignment: AlignmentID {
+                    enum CustomAlignment: AlignmentID {
                         static func defaultValue(
                             in context: ViewDimensions
                         ) -> CGFloat {
@@ -113,7 +113,7 @@ struct S44_Alignment: View, Slide {
                     """
                     """
                         .alignmentGuide(.bottom) { size in
-                            size.width * 0.5
+                            size.height * 0.5
                         }
                     """.showIf(episode, at: e02)
                     """
@@ -123,16 +123,17 @@ struct S44_Alignment: View, Slide {
                 Panel.preview {
                     HStack(alignment: alignment) {
                         Text("Several lines\n of text")
+                            .bordered()
                         Image(systemName: "text.below.photo")
+                            .bordered()
                         VStack {
                             Text("up")
                             Image(systemName: "arrow.up.and.down")
                             Text("down")
                         }
-                        .if(episode == e02) {
-                            $0.alignmentGuide(.bottom) { size in
-                                 size.width * 0.5
-                            }
+                        .bordered()
+                        .alignmentGuide(.bottom) { size in
+                            episode == e02 ? size.height * 0.5 : size.height
                         }
                     }
                 }
