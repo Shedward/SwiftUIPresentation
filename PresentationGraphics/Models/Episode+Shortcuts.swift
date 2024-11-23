@@ -49,3 +49,8 @@ let e08 = Episode("e08")
 func e08(_ notes: String) -> Episode {
     Episode("e08", notes: notes)
 }
+
+let e09 = Episode("e09")
+func e09(_ notes: String) -> Episode {
+    Episode("e09", notes: notes)
+}

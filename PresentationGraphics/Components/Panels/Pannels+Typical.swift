@@ -21,10 +21,11 @@ extension Panel {
         }
     }
 
-    static func renderTree(_ title: String = "Render Tree", content: @escaping () -> Tree) -> Panel {
+    static func renderTree(_ title: String = "Render Tree", font: Font = Theme.Font.body, content: @escaping () -> Tree) -> Panel {
         Panel(title) {
             TreeView(content())
                 .relation(.renderTree)
+                .treeTitleStyle(TextStyle(font: font, color: Theme.Color.contentPrimary))
         }
     }
 

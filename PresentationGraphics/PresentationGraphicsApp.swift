@@ -43,10 +43,11 @@ struct PresentationGraphicsApp: App {
 //        S23_Observable3()
 //        S24_ObservableObject()
 
-        S50_DataFlow()
-        S51_Environment()
-        S51_Environment2()
+//        S50_DataFlow()
+//        S51_Environment()
+//        S51_Environment2()
         S52_Preference()
+        S52_Preference2()
 
         S30_Animations()
         S31_WhatIsAnimation()

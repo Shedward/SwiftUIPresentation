@@ -23,3 +23,20 @@ extension View {
         environment(\.relation, relation)
     }
 }
+
+enum TreeTitleStyleEnvironmentKey: EnvironmentKey {
+    static let defaultValue: TextStyle = .body
+}
+
+extension EnvironmentValues {
+    var treeTitleStyle: TextStyle {
+        get { self[TreeTitleStyleEnvironmentKey.self] }
+        set { self[TreeTitleStyleEnvironmentKey.self] = newValue }
+    }
+}
+
+extension View {
+    func treeTitleStyle(_ treeTitleStyle: TextStyle) -> some View {
+        environment(\.treeTitleStyle, treeTitleStyle)
+    }
+}

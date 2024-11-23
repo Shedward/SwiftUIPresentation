@@ -13,6 +13,7 @@ enum Theme {
         static let h1 = SwiftUI.Font.custom("Helvetica Neue Bold", size: 60)
         static let h2 = SwiftUI.Font.custom("Helvetica Neue Bold", size: 30)
         static let body = SwiftUI.Font.custom("Helvetica Neue", size: 20)
+        static let bodySmall = SwiftUI.Font.custom("Helvetica Neue", size: 16)
         static let code = SwiftUI.Font.custom("JetBrains Mono", size: 18)
         static let codeSmall = SwiftUI.Font.custom("JetBrains Mono", size: 16)
         static let codeExtraSmall = SwiftUI.Font.custom("JetBrains Mono", size: 14)

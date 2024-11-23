@@ -52,6 +52,14 @@ extension ShowIfable {
             nil
         }
     }
+
+    func showIf(_ shouldShow: Bool) -> Self? {
+        if shouldShow {
+            self
+        } else {
+            nil
+        }
+    }
 }
 
 extension String: ShowIfable { }

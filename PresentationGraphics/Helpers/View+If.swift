@@ -31,7 +31,7 @@ extension View {
     public func `if`<ThenView: View, ElseView: View>(
         _ condition: Bool,
         @ViewBuilder content: (Self) -> ThenView,
-        @ViewBuilder elseContent: (Self) -> ElseView
+        @ViewBuilder else elseContent: (Self) -> ElseView
     ) -> some View {
         if condition {
             content(self)

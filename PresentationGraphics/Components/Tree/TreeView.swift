@@ -63,6 +63,9 @@ struct TreeView: View {
     @Environment(\.relation)
     var relation: Relation
 
+    @Environment(\.treeTitleStyle)
+    var treeTitleStyle: TextStyle
+
     var body: some View {
         VStack(alignment: .center, spacing: space.innerValue()) {
             VStack(spacing: Space.min.value) {
@@ -76,7 +79,7 @@ struct TreeView: View {
                 }
                 if !tree.title.isEmpty {
                     Text(tree.title)
-                        .style(.body.color(tree.color ?? Theme.Color.contentPrimary))
+                        .style(treeTitleStyle.color(tree.color ?? Theme.Color.contentPrimary))
                         .background(tree.highlight ?? Color.clear)
                         .fixedSize()
                         .annotatable(tree.annotationId)
