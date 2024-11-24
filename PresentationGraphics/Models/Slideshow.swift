@@ -28,6 +28,13 @@ final class Slideshow {
         return currentSlide?.episodes[currentEpisodeIndex]
     }
 
+    var position: SlideshowPosition {
+        SlideshowPosition(
+            slideId: currentSlide?.id ?? "",
+            episodeId: currentEpisode?.id ?? ""
+        )
+    }
+
     init(@ArrayBuilder<Slide> slides: () -> [Slide]) {
         let slides = slides()
         self.slides = slides
@@ -36,6 +43,18 @@ final class Slideshow {
     func goToBegining() {
         currentSlideIndex = 0
         currentEpisodeIndex = 0
+    }
+
+    func goTo(_ position: SlideshowPosition) {
+        guard let slideIndex = slides.firstIndex(where: { $0.id == position.slideId }) else {
+            return
+        }
+        guard let episodeIndex = slides[slideIndex].episodes.firstIndex(where: { $0.id == position.episodeId }) else {
+            return
+        }
+
+        currentSlideIndex = slideIndex
+        currentEpisodeIndex = episodeIndex
     }
 
     func next() {
@@ -68,4 +87,9 @@ final class Slideshow {
             currentEpisodeIndex = slides[previousSlideIndex].episodes.count - 1
         }
     }
+}
+
+struct SlideshowPosition: Equatable {
+    let slideId: String
+    let episodeId: String
 }

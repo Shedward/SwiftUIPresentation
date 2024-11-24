@@ -25,6 +25,7 @@ extension TextStyle: Withable {
 extension TextStyle {
     static let cover = TextStyle(font: Theme.Font.h0, color: Theme.Color.contentPrimary)
     static let body = TextStyle(font: Theme.Font.body, color: Theme.Color.contentPrimary)
+    static let bodySmall = TextStyle(font: Theme.Font.bodySmall, color: Theme.Color.contentPrimary)
     static let code = TextStyle(font: Theme.Font.code, color: Theme.Color.contentPrimary)
     static let codeSmall = TextStyle(font: Theme.Font.codeSmall, color: Theme.Color.contentPrimary)
     static let codeExtraSmall = TextStyle(font: Theme.Font.codeExtraSmall, color: Theme.Color.contentPrimary)
