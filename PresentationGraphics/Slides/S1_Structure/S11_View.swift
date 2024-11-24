@@ -13,8 +13,12 @@ struct S11_View: View, Slide {
     var episode: Episode
 
     var episodes: [Episode] {
-        e00("- Верстаем мы обычным свифтовым кодом")
-        e01("- Этот код описывает дерево вьюх")
+        e00 {
+            "Верстаем кодом"
+        }
+        e01 {
+            "Код описывает дерево вьюх"
+        }
     }
 
     var body: some View {

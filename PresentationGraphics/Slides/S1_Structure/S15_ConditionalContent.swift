@@ -13,19 +13,35 @@ struct S15_ConditionalContent: View, Slide {
     var episode: Episode
 
     var episodes: [Episode] {
-        e00("- Другая вещь которую мы можем сделать в теле @ViewBuilder'а это написать if")
-        e01(
-            """
-            - Точно так же if у нас будет представлен в дереве
-            - Для if'а без else это будет Optional
-            """
-        )
-        e02("- Для if с else это будет _ConditionalContent")
-        e03("- Заменив на else if - получим Optional в _ConditionalContent")
-        e04("- Цепочки из if'ов превращаются в цепочки _ConditionalContent")
-        e05("- При использовании switch так же получаем цепочки _ConditionalContent")
-        e06("- При использовании switch так же получаем цепочки _ConditionalContent")
-        e07("- При прямом использовании Optional - тоже Optional")
+        e00 {
+            "Еще мы можем в теле @ViewBuilder'а использовать if"
+        }
+        e01 {
+            "В дереве if представлен Optional'ом"
+        }
+        e02 {
+            "Добавим else ветку"
+            "В дереве Optional у нас превратиться в _ConditionalContent"
+        }
+        e03 {
+            "Заменим else на else if"
+            "В дереве появляется Optional"
+        }
+        e04 {
+            "Т.е. цепочки if превращаются в цепочки _ConditionalContent и Optional"
+        }
+        e05 {
+            "Еще мы можем использовать switch"
+            "Он тоже превращается в цепочку _ConditionalContent"
+        }
+        e06 {
+            "Еще мы можем использовать if let"
+            "Он в дереве превращается в Optional"
+        }
+        e07 {
+            "И еще мы можем использовать Optional напрямую"
+            "В дереве это будет очевидно Optional"
+        }
     }
 
     var body: some View {

@@ -10,11 +10,10 @@ import SwiftUI
 struct S18_RenderTree5: View, Slide {
 
     var episodes: [Episode] {
-        e00(
-            """
-            - Затем SwiftUI применит этот диф
-            """
-        )
+        e00 {
+            "Затем SwiftUI применит этот диф"
+            "<описать инфу на экране>"
+        }
     }
 
     var body: some View {

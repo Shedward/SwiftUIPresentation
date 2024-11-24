@@ -31,6 +31,7 @@ extension TextStyle {
     static let codeExtraSmall = TextStyle(font: Theme.Font.codeExtraSmall, color: Theme.Color.contentPrimary)
     static let title = TextStyle(font: Theme.Font.h1, color: Theme.Color.contentPrimary)
     static let subtitle = TextStyle(font: Theme.Font.h2, color: Theme.Color.contentSecondary)
+    static let important = TextStyle(font: Theme.Font.h2, color: Theme.Color.contentPrimary)
     static let caption = TextStyle(font: Theme.Font.caption, color: Theme.Color.contentSecondary)
     static let captionSmall = TextStyle(font: Theme.Font.captionSmall, color: Theme.Color.contentSecondary)
     static let debug = TextStyle(font: Theme.Font.code, color: Theme.Color.debug)

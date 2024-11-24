@@ -24,13 +24,14 @@ struct PresentationGraphicsApp: App {
         S15_ConditionalContent()
         S16_ForEachView()
         S17_ViewBuilderDSL()
-        S18_RenderTree()
+        S17_ViewBuilderDSL2()
+        S61_ViewTree()
         S18_RenderTree2()
         S18_RenderTree3()
         S18_RenderTree4()
         S18_RenderTree5()
-        S18_RenderTree6()
-        S19_Recap()
+        S19_Lifecycle()
+        S62_RenderTree()
 
         S20_State()
         S21_StateModifier()
@@ -76,6 +77,10 @@ struct PresentationGraphicsApp: App {
         S45_GeometryReader5()
         S49_MatchedGeometryEffect()
         S49_MatchedGeometryEffect2()
+
+        S60_Recap()
+        S61_ViewTree()
+        S62_RenderTree()
     }
 
     var body: some Scene {

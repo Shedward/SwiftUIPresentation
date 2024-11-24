@@ -10,11 +10,10 @@ import SwiftUI
 struct S18_RenderTree3: View, Slide {
 
     var episodes: [Episode] {
-        e00(
-            """
-            - Теперь когда мы поменяем любое значение состояния, то SwiftUI создаст новое Render Tree
-            """
-        )
+        e00 {
+            "Теперь допустим в какой то момент состояние поменялось"
+            "При изменении SwiftUI создает новое Render Tree"
+        }
     }
 
     var body: some View {

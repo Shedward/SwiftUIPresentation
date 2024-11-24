@@ -14,14 +14,20 @@ struct S12_ViewTrees: View, Slide {
     var episode: Episode
 
     var episodes: [Episode] {
-        e00(
-            """
-            - Большинство настроек у нас описывается модификаторами
-            - Модификатор это такой же лист в дереве вьюх
-            """
-        )
-        e01("- Модификатор заворачивает контент")
-        e02("- Двигая модификатор модификатор мы меняем область его действия")
+        e00 {
+            "Большинство настроек описываются модификаторами"
+            "Модификатор это такой же лист в дереве"
+        }
+        e01 {
+            "Модификатор заворачивает контент"
+        }
+        e02 {
+            "Двигая модификатор модификатор мы меняем область его действия"
+        }
+        e03 {
+            "Так же мы можем писать свои модификаторы"
+            "Модификатор принимает вьюху и возвращает вьюху"
+        }
     }
 
     var body: some View {
@@ -34,7 +40,7 @@ struct S12_ViewTrees: View, Slide {
                 e00_modifiersView
             case e01:
                 e01_modifierMovedUp
-            case e02:
+            case e02, e03:
                 e02_modifiersMovesUp
             default:
                 EmptyView()
@@ -115,6 +121,27 @@ struct S12_ViewTrees: View, Slide {
 
     var e02_modifiersMovesUp: some View {
         Panels {
+            Panel.code("Модификатор") {
+                """
+                 
+                struct StyleModifier: ViewModifier {
+                    let style: Style
+                     
+                    func body(content: Content) -> some View {
+                        content
+                            .background(style.fill)
+                            .font(style.font)
+                    }
+                }
+                 
+                extension View {
+                    func style(_ style: Style) -> some View {
+                        modifier(StyleModifier(style))
+                    }
+                }
+                """
+            }.showIf(episode, after: e03)
+
             Panel.code {
                 "HStack {"
                 "    Image(systemName: \"house\")"

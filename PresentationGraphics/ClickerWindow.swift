@@ -15,29 +15,52 @@ struct ClickerWindow: View {
     }
 
     var body: some View {
-        List {
-            ForEach(slideshow.slides, id: \.id) { slide in
-                Section {
-                    ForEach(slide.episodes, id: \.id) { episode in
-                        let position = SlideshowPosition(slideId: slide.id, episodeId: episode.id)
-                        EpisodeCell(
-                            episode: episode,
-                            selected: position == slideshow.position
-                        )
-                        .onTapGesture {
-                            slideshow.goTo(position)
+        ScrollViewReader { proxy in
+            List {
+                ForEach(slideshow.slides, id: \.id) { slide in
+                    Section {
+                        ForEach(slide.episodes, id: \.id) { episode in
+                            cell(slide: slide, episode: episode)
                         }
+                    } header: {
+                        header(for: slide)
                     }
-                } header: {
-                    Text(slide.id)
-                        .style(
-                            TextStyle(font: Theme.Font.hSmall, color: Theme.Color.contentPrimary)
-                        )
-                        .padding(EdgeInsets(top: 16, leading: 8, bottom: 4, trailing: 8))
+                }
+                .listStyle(PlainListStyle())
+                .onKeysPress(.downArrow) {
+                    slideshow.next()
+                }
+                .onKeysPress(.upArrow) {
+                    slideshow.previous()
+                }
+            }
+            .onChange(of: slideshow.position) { _, newValue in
+                withAnimation {
+                    proxy.scrollTo(slideshow.position, anchor: .center)
                 }
             }
         }
-        .listStyle(PlainListStyle())
+    }
+
+    func cell(slide: Slide, episode: Episode) -> some View {
+        let position = SlideshowPosition(slideId: slide.id, episodeId: episode.id)
+        return EpisodeCell(
+            episode: episode,
+            selected: position == slideshow.position
+        )
+        .contentShape(Rectangle())
+        .onTapGesture {
+            slideshow.goTo(position)
+        }
+        .id(position)
+    }
+
+    func header(for slide: Slide) -> some View {
+        Text(slide.id)
+            .style(
+                TextStyle(font: Theme.Font.hSmall, color: Theme.Color.contentPrimary)
+            )
+            .padding(EdgeInsets(top: 16, leading: 8, bottom: 4, trailing: 8))
     }
 }
 

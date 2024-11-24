@@ -9,6 +9,12 @@ import SwiftUI
 
 struct S01_Introduction: View, Slide {
 
+    var episodes: [Episode] {
+        e00 {
+            "Для начала, для чего эта преза"
+        }
+    }
+
     var body: some View {
         ListLayout(title: "Для кого", subtitle: "Для чего") {
             "Узнаете матчасть SwiftUI"

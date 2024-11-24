@@ -9,6 +9,12 @@ import SwiftUI
 
 struct S10_Structure: View, Slide {
 
+    var episodes: [Episode] {
+        e00 {
+            "Начнем со структуры"
+        }
+    }
+
     var body: some View {
         SectionTitleLayout(text: "Структура")
     }

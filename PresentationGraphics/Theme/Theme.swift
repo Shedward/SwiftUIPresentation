@@ -12,6 +12,7 @@ enum Theme {
         static let h0 = SwiftUI.Font.custom("Helvetica Neue Bold", size: 100)
         static let h1 = SwiftUI.Font.custom("Helvetica Neue Bold", size: 60)
         static let h2 = SwiftUI.Font.custom("Helvetica Neue Bold", size: 30)
+        static let h3 = SwiftUI.Font.custom("Helvetica Neue Bold", size: 24)
 
         static let hSmall = SwiftUI.Font.custom("Helvetica Neue Bold", size: 18)
         static let body = SwiftUI.Font.custom("Helvetica Neue", size: 20)
@@ -35,6 +36,7 @@ enum Theme {
         static let highlight = SwiftUI.Color.yellow
         static let darkHighlight = SwiftUI.Color(hex: 0xc59f19)
         static let debug = SwiftUI.Color.purple
+        static let important = SwiftUI.Color.orange
 
         static let lifecycleAppear = SwiftUI.Color.green
         static let lifecycleChange = SwiftUI.Color.yellow

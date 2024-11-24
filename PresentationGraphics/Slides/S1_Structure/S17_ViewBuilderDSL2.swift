@@ -7,32 +7,37 @@
 
 import SwiftUI
 
-struct S18_RenderTree: View, Slide {
+struct S17_ViewBuilderDSL2: View, Slide {
 
     @Environment(\.episode)
     var episode: Episode
 
     var episodes: [Episode] {
-        e00(
-            """
-            - Итак, у нас есть вот такая вьюха
-            - И View Tree, описывающее все его состояния, выглядит так
-            """
-        )
-        e01(
-            """
-            - Стоит еще упомянуть про id. Каждый из рассмотренных нами контейнеров
-            - неявно называет присваивает идентификатор каждой своей подьвюхе по которой он их отличает друг от друга.
-            - У тупла вьюху идентифицирует ее положение (0, 1, 2, 3)
-            - У _ConditionalContent различает if ветку и else ветку (true, false)
-            - У ForEach идентификатор мы определяем сами, это ID у Identifiable, либо любое поле по keyPath которое мы указали
-            - У тупла эти айдишники статичны, когда вы написали код, айдишники  уже определены положением вьюх в структуре
-            """
-        )
+        e00 {
+            "Соберем все вместе в одну вьюху"
+            "Получим вот такое ViewTree"
+            "ViewTree по сути описывает все возможные состояния вьюхи под любое состояние"
+            "Все ветки использования сохраняются в ее структуре"
+        }
+        e01 {
+            "Еще стоит упомянуть про id"
+            "Внутри дерева вьюх каждый узел имеет свой явный или неявный id"
+            "Неявный id генерируется автоматически у контейнеров"
+            "- У тупла вьюху идентифицирует ее положение (0, 1, 2, 3)"
+            "- У _ConditionalContent различает if ветку и else ветку (true, false)"
+            "- У ForEach идентификатор определяется id модели"
+        }
+
+        e02 {
+            "Так же мы можем вручную выставить id с помощью модификатора .id"
+            "id может быть любой Hashable"
+            "Идентичность вьюхи определяет путь из id'шников до этой вьюхи"
+            "Одинаковые путь из id-шников - одина и та же вьюха"
+        }
     }
 
     var body: some View {
-        TitleSubtitleLayout(title: "Соберем все вместе") {
+        TitleSubtitleLayout(title: "Идентичность ViewTree") {
             Panels {
                 Panel.code {
                     """
@@ -46,6 +51,10 @@ struct S18_RenderTree: View, Slide {
                         var body: some View {
                             VStack {
                                 Text(title)
+                    """
+                    "               .id(titleId)"
+                        .showIf(episode, after: e02)
+                    """
                                 Text(text)
                                 if showAuthors {
                                     ForEach(authors, id: \\.self) { author in
@@ -62,8 +71,16 @@ struct S18_RenderTree: View, Slide {
 
                 Panel.viewTree {
                     Tree("VStack") {
-                        Tree("Text", id: "title-text")
-                            .overline("0".showIf(episode, after: e01))
+                        if episode < e02 {
+                            Tree("Text", id: "title-text")
+                                .overline("0".showIf(episode, after: e01))
+                        } else {
+                            Tree("id(titleId)") {
+                                Tree("Text", id: "title-text")
+                                    .overline("0".showIf(episode, after: e01))
+                            }
+                            .overline("titleId")
+                        }
                         Tree("Text", id: "body-text")
                             .overline("1".showIf(episode, after: e01))
                         Tree("_ConditionalContent") {

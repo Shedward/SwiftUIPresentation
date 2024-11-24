@@ -27,6 +27,7 @@ struct LifecycleLine<Content: View>: View {
             VerticalText(caption)
                 .style(.caption)
                 .padding(.vertical, Space.min.value)
+                .fixedSize()
                 .gridCellAnchor(.trailing)
 
             Rectangle()
@@ -35,6 +36,7 @@ struct LifecycleLine<Content: View>: View {
                 .gridCellUnsizedAxes(.vertical)
 
             content()
+                .fixedSize()
                 .gridCellAnchor(.leading)
         }
     }

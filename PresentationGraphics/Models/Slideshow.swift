@@ -89,7 +89,7 @@ final class Slideshow {
     }
 }
 
-struct SlideshowPosition: Equatable {
+struct SlideshowPosition: Hashable {
     let slideId: String
     let episodeId: String
 }
