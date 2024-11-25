@@ -21,18 +21,18 @@ struct S18_RenderTree5: View, Slide {
             Panels {
                 Panel("Добавление", background: DiffKind.added.color.opacity(0.3)) {
                     BulletList {
-                        "Добавляет элемент на экран"
                         "Если есть .transiton(), тогда происходит анимация появления"
                         "Вызывает onAppear()"
-                        "Аллоцируется память под хранение состояния"
+                        "Добавит ноды в AttributedGraph"
+                        "Показывает элемент на экране"
                     }
                 }
 
                 Panel("Изменение", background: DiffKind.changed.color.opacity(0.3)) {
                     BulletList {
-                        "Обновляет изменившиеся поля"
                         "Если есть .animation() на изменившиеся поля - происходит анимация изменения"
                         "Вызовет .onChange() на изменившиеся поля"
+                        "Обновляет изменившиеся поля"
                     }
                 }
 
@@ -40,8 +40,8 @@ struct S18_RenderTree5: View, Slide {
                     BulletList {
                         "Вызывает onDisappear()"
                         "Если есть .transiton(), тогда происходит анимация исчезновения"
-                        "Удаляет элемент с экрана"
-                        "Очищается память в которой хранится состояния вьюхи"
+                        "Удаляет ноды из AttributedGraph"
+                        "Убирает элемент с экрана"
                     }
                 }
             }

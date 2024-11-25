@@ -25,13 +25,15 @@ struct PresentationGraphicsApp: App {
         S16_ForEachView()
         S17_ViewBuilderDSL()
         S17_ViewBuilderDSL2()
-        S61_ViewTree()
+        SX1_ViewTree(section: 1)
+        SX2_ViewIdentity(section: 1)
         S18_RenderTree2()
         S18_RenderTree3()
         S18_RenderTree4()
         S18_RenderTree5()
         S19_Lifecycle()
-        S62_RenderTree()
+        SX3_RenderTree(section: 1)
+        S19_Questions()
 
         S20_State()
         S21_StateModifier()
@@ -43,6 +45,7 @@ struct PresentationGraphicsApp: App {
         S23_Observable2()
         S23_Observable3()
         S24_ObservableObject()
+        S29_Questions()
 
         S50_DataFlow()
         S51_Environment()
@@ -79,8 +82,9 @@ struct PresentationGraphicsApp: App {
         S49_MatchedGeometryEffect2()
 
         S60_Recap()
-        S61_ViewTree()
-        S62_RenderTree()
+        SX1_ViewTree(section: 6)
+        SX2_ViewIdentity(section: 6)
+        SX3_RenderTree(section: 6)
     }
 
     var body: some Scene {

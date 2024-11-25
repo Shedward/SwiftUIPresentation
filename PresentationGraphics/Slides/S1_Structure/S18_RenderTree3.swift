@@ -11,8 +11,8 @@ struct S18_RenderTree3: View, Slide {
 
     var episodes: [Episode] {
         e00 {
-            "Теперь допустим в какой то момент состояние поменялось"
-            "При изменении SwiftUI создает новое Render Tree"
+            "Теперь изменим состояние"
+            "При изменении состояния SwiftUI создает новое Render Tree"
         }
     }
 

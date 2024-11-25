@@ -87,6 +87,21 @@ final class Slideshow {
             currentEpisodeIndex = slides[previousSlideIndex].episodes.count - 1
         }
     }
+
+    func validate() {
+        let duplicateIds = Dictionary(grouping: slides, by: \.id)
+            .compactMap { id, slides in
+                if slides.count > 1 {
+                    id
+                } else {
+                    nil
+                }
+            }
+
+        if !duplicateIds.isEmpty {
+            print("⚠️ Обнаружены дубликаты слайдов: \(duplicateIds)")
+        }
+    }
 }
 
 struct SlideshowPosition: Hashable {

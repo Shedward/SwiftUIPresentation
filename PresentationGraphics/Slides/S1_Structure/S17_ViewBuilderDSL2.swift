@@ -53,7 +53,8 @@ struct S17_ViewBuilderDSL2: View, Slide {
                                 Text(title)
                     """
                     "               .id(titleId)"
-                        .showIf(episode, after: e02)
+                        .showIf(episode, after: e02)?
+                        .highlight()
                     """
                                 Text(text)
                                 if showAuthors {

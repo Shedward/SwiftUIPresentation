@@ -7,7 +7,19 @@
 
 import SwiftUI
 
-struct S61_ViewTree: View, Slide {
+struct SX1_ViewTree: View, Slide {
+    let section: Int
+
+    var id: String {
+        "S\(section)1_ViewTree"
+    }
+
+    var episodes: [Episode] {
+        e00 {
+            "⚠️ Важная идея - View Tree"
+        }
+    }
+
     var body: some View {
         ImportantLayout("ViewTree") {
             "Структура body"

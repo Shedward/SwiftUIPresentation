@@ -14,6 +14,9 @@ struct PlayerWindow: View {
     var body: some View {
         SlidesPlayer(slideshow: slideshow)
             .background(Theme.Color.backgroundPrimary)
+            .onAppear {
+                slideshow.validate()
+            }
     }
 }
 

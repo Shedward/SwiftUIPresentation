@@ -7,7 +7,19 @@
 
 import SwiftUI
 
-struct S62_RenderTree: View, Slide {
+struct SX3_RenderTree: View, Slide {
+    let section: Int
+
+    var id: String {
+        "S\(section)2_RenderTree"
+    }
+
+    var episodes: [Episode] {
+        e00 {
+            "⚠️ Важная идея - Render Tree"
+        }
+    }
+
     var body: some View {
         ImportantLayout("RenderTree") {
             "AttributedGraph"

@@ -15,12 +15,12 @@ struct S19_Lifecycle: View, Slide {
     var episodes: [Episode] {
         e00 {
             "И в целом эти 3 действия составляют жизненный цикл любой вьюхи"
-            "Жизненный цикл тут определяется жизнью RenderTree"
-            "При попадании в дерево - вьюха создается"
-            "При изменениях она может обновиться множество раз"
-            "И после удаления из дерева - вьюха исчезает"
+            "Жизненный цикл:"
+            "- При попадании в дерево - вьюха создается"
+            "- При изменениях она может обновиться множество раз"
+            "- После удаления из дерева - вьюха исчезает"
 
-            "При этом ViewTree сохраняется постоянным"
+            "При этом сам View"
             "И создаваться и уничтожаться может много много раз"
             "Время жизни ViewTree эфимерно"
         }
@@ -38,7 +38,7 @@ struct S19_Lifecycle: View, Slide {
     var body: some View {
         TitleSubtitleLayout(title: "Жизненный цикл") {
             Panels {
-                Panel.code("View Tree - код") {
+                Panel.code("View - View Tree") {
                     """
                     struct SomeView: View {
                         let isOnline: Bool
@@ -57,7 +57,7 @@ struct S19_Lifecycle: View, Slide {
                     """
                 }.showIf(episode, at: e01)
 
-                Panel("View Tree") {
+                Panel("View") {
                     LifecycleView {
                         ForEach(0..<5) { _ in
                             LifecycleLine.instance {
@@ -68,7 +68,7 @@ struct S19_Lifecycle: View, Slide {
                     }
                 }
 
-                Panel("Render Tree") {
+                Panel("Attribute Graph") {
                     LifecycleView {
                         LifecycleLine.appear {
                             Text("onAppear")
@@ -97,7 +97,7 @@ struct S19_Lifecycle: View, Slide {
                     }
                 }
 
-                Panel.renderTree("Render Tree - на экране") {
+                Panel.renderTree("Attribute Graph - Render Tree") {
                     Tree("HStack") {
                         Tree("Image")
                         Tree("_ConditionalView") {
