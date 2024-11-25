@@ -39,10 +39,13 @@ struct PresentationGraphicsApp: App {
         S21_StateModifier()
         S21_StateModifier2()
         S21_StateModifier3()
+        SX4_State(section: 2)
         S21_StateModifier4()
         S22_Binding()
+        SX5_Binding(section: 2)
         S23_Observable()
         S23_Observable2()
+        SX5_Observable(section: 2)
         S23_Observable3()
         S24_ObservableObject()
         S29_Questions()
@@ -85,6 +88,9 @@ struct PresentationGraphicsApp: App {
         SX1_ViewTree(section: 6)
         SX2_ViewIdentity(section: 6)
         SX3_RenderTree(section: 6)
+        SX4_State(section: 6)
+        SX5_Binding(section: 6)
+        SX5_Observable(section: 6)
     }
 
     var body: some Scene {

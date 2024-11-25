@@ -13,17 +13,15 @@ struct S23_Observable3: View, Slide {
     var episode: Episode
 
     var episodes: [Episode] {
-        e00(
-            """
-            - Ну и не забываем что Observation не прибит гвоздями к SwiftUI
-            - Его можно использовать и отдельно от UI
-            - Например если вдруг захотим какой то сервис сделать Observable
-            - И другому нужно подписаться на его изменения
-            - То подписка почти всегда будет выглядеть примерно так
-            - onChange сдесь создает отдельную таску из-за того
-            - что onChange вызывается по факту на willChange, т.е. ДО изменения полей
-            """
-        )
+        e00 {
+            "И не забываем что Observation не прибит гвоздями к SwiftUI"
+            "Его можно использовать отдельно от UI"
+            "Например если вдруг захотим какой то сервис сделать Observable"
+            "И другому нужно подписаться на его изменения"
+            "То подписка почти всегда будет выглядеть примерно так"
+            "onChange сдесь создает отдельную таску из-за того что onChange вызывается по факту на willChange, т.е. ДО изменения полей"
+            "И почти всегда будет какой нибудь метод update, который рекурсивно будет вызываться по onChange"
+        }
     }
 
     var body: some View {
@@ -36,6 +34,7 @@ struct S23_Observable3: View, Slide {
                         var title = "Title"
                         var subtitle = "Subtitle"
                         var isOnline: Bool
+                    }
                     """
                 }
 
@@ -44,12 +43,12 @@ struct S23_Observable3: View, Slide {
                     final class ModelObservant {
                         let model: Model
                         var reportHeader: String?
-                    
+                         
                         init(model: Model) {
                             self.model = model
                             updateReportHeader()
                         }
-                    
+                         
                         private func updateReportHeader() {
                             withObservationTracking {
                                 reportHeader = \"""

@@ -10,10 +10,12 @@ import SwiftUI
 struct S24_ObservableObject: View, Slide {
 
     var episodes: [Episode] {
-        e00("""
-            - Еще есть ObservableObject, StateObject и Published
-            - Но так как мы уже закатили @Perceptable/@Observable рассказывать не буду
-            """)
+        e00 {
+            "Еще упомяну про ObservableObject, StateObject и Published которые были до обзервабл"
+            "Но так как мы уже закатили @Perceptable/@Observable"
+            "Я не придумал кейса когда нам пришлось бы его использовать, поэтому подробно рассказывать не буду"
+            "Упомяну только в двух словах что ..."
+        }
     }
 
     var body: some View {

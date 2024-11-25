@@ -9,18 +9,20 @@ import SwiftUI
 
 struct CurrentStateLabel: View {
     let name: String
-    let value: String
+    let value: String?
 
     var body: some View {
         Label {
             HStack {
                 Text("\(name)")
-                Text("=")
-                    .style(
-                        font: Theme.Font.captionSmall,
-                        color: Theme.Color.contentSecondary
-                    )
-                Text("\(value)")
+                if let value {
+                    Text("=")
+                        .style(
+                            font: Theme.Font.captionSmall,
+                            color: Theme.Color.contentSecondary
+                        )
+                    Text("\(value)")
+                }
             }
         } icon: {
             Image(systemName: "shippingbox")
