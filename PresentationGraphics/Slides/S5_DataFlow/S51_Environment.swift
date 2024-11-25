@@ -214,15 +214,15 @@ struct S51_Environment: View, Slide {
                     "            Heart(\(heartParams))"
                     "            Heart(\(heartParams))"
                     "        }"
-                    "        .environment(\\.colorTheme, .dark)"
+                    "        .environment(\\.colorTheme, .light)"
                         .showIf(episode, after: Episode("e06-03"))?
                         .highlight(episode == Episode("e06-03"))
                     "        Heart(\(heartParams))"
                     "    }"
-                    "    .environment(\\.colorTheme, .light)"
+                    "    .environment(\\.colorTheme, .dark)"
                         .showIf(episode, in: e02...e05)?
                         .highlight(episode == e02)
-                    "    .environment(\\.colorTheme, .light)"
+                    "    .environment(\\.colorTheme, .dark)"
                         .showIf(episode, after: Episode("e06-02"))?
                         .highlight(episode == Episode("e06-02"))
                     "}"

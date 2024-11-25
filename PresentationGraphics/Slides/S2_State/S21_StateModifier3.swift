@@ -50,7 +50,7 @@ struct S21_StateModifier3: View, Slide {
                     @propertyWrapper
                     struct State<Value> {
                         let initialValue: Value
-                        private let valueStorage: _Storage
+                        private let valueStorage: _Storage?
                         
                     """
                     """
@@ -66,9 +66,9 @@ struct S21_StateModifier3: View, Slide {
                     " "
                     """
                         var wrappedValue: Value {
-                            get { valueStorage.get() }
+                            get { valueStorage?.get() ?? initialValue }
                             nonmutating set {
-                                valueStorage.update(newValue)
+                                valueStorage?.update(newValue)
                             }
                         }
                     """
