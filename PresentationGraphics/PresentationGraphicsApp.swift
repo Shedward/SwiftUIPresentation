@@ -112,6 +112,8 @@ struct PresentationGraphicsApp: App {
         SX11_LayoutPositioning(section: 6)
         SX12_Alignments(section: 6)
         SX13_GeometryReader(section: 6)
+
+        S99_End()
     }
 
     var body: some Scene {
